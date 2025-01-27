@@ -4,18 +4,24 @@ import { NextRequest, NextResponse } from 'next/server';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+// Connect to the database
 connect();
+
+// Define the type for the request body
+interface LoginRequest {
+  email: string;
+  password: string;
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const reqBody = await request.json();
+    // Parse the request body
+    const reqBody: LoginRequest = await request.json();
     const { email, password } = reqBody;
     console.log(reqBody);
 
     // Check if user exists
-    const user = await User.findOne({
-      email,
-    });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return NextResponse.json(
@@ -42,17 +48,31 @@ export async function POST(request: NextRequest) {
       expiresIn: '1d',
     });
 
+    // Create a response object
     const response = NextResponse.json({
       message: 'Login successful',
       success: true,
     });
 
+    // Set the token in a cookie
     response.cookies.set('token', token, {
       httpOnly: true,
     });
 
     return response;
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    // Use `unknown` instead of `any`
+    // Log the error
+    console.error('Login error:', error);
+
+    // Handle the error safely
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json(
+        { error: 'An unknown error occurred' },
+        { status: 500 },
+      );
+    }
   }
 }

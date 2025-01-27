@@ -26,22 +26,31 @@ export function LoginForm({
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onLogin = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
     try {
-      setLoading(true);
+      setLoading(true); // Set loading state to true
       console.log(loading);
-      
+
+      // Make a POST request to the login API endpoint
       const response = await axios.post('/api/users/login', user);
 
       console.log('Login success', response.data);
-      toast.success('Login successful');
-      router.push('/v1');
-    } catch (error: any) {
-      console.error('Login failed', error);
-      toast.error(error.message);
+      toast.success('Login successful'); // Display a success toast
+      router.push('/v1'); // Redirect to the /v1 page
+    } catch (error: unknown) {
+      // Use `unknown` instead of `any`
+      console.error('Login failed', error); // Log the error
+
+      // Handle the error safely
+      if (error instanceof Error) {
+        toast.error(`Login failed: ${error.message}`); // Display the error message
+      } else {
+        toast.error('Login failed'); // Display a generic error message
+      }
     } finally {
-      setLoading(false);
+      setLoading(false); // Reset the loading state
     }
   };
 
