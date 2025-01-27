@@ -19,7 +19,7 @@ const LoginPage = () => {
 
       console.log('Login success', response.data);
       toast.success('Login successful');
-      router.push('/profile');
+      router.push('/groups');
     } catch (error: any) {
       console.error('Login failed', error);
       toast.error(error.message);
