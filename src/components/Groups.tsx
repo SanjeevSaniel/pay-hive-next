@@ -17,14 +17,14 @@ const Groups = () => {
   const groups = useStore((state) => state.groups);
   const setGroups = useStore((state) => state.setGroups);
 
-  const members = [
-    { memberId: 'm1', name: 'Alice' },
-    { memberId: 'm2', name: 'Bob' },
-    { memberId: 'm3', name: 'Charlie' },
-    { memberId: 'm4', name: 'David' },
-    { memberId: 'm5', name: 'Eva' },
-    // ... other members
-  ];
+  // const members = [
+  //   { memberId: 'm1', name: 'Alice' },
+  //   { memberId: 'm2', name: 'Bob' },
+  //   { memberId: 'm3', name: 'Charlie' },
+  //   { memberId: 'm4', name: 'David' },
+  //   { memberId: 'm5', name: 'Eva' },
+  //   // ... other members
+  // ];
 
   useEffect(() => {
     // Fetch initial groups from an API or any other source
