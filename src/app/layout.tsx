@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Comfortaa } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header';
 
 const comfortaa = Comfortaa({
   weight: ['400', '700'], // specify the weights you need

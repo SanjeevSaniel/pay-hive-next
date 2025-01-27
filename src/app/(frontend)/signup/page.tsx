@@ -19,10 +19,18 @@ const SignupPage = () => {
 
       console.log('Signup success', response.data);
       router.push('/login');
-    } catch (error: any) {
-      console.error('Signup failed', error);
+    } catch (error: unknown) {
+      // Use `unknown` instead of `any`
+      console.error('Signup failed', error); // Log the error
 
-      toast.error(error.message);
+      // Handle the error safely
+      if (error instanceof Error) {
+        // If the error is an instance of Error, display its message
+        toast.error(error.message);
+      } else {
+        // If the error is not an Error object, display a generic message
+        toast.error('Signup failed');
+      }
     } finally {
       setLoading(false);
     }

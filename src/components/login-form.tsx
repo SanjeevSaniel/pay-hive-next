@@ -30,6 +30,8 @@ export function LoginForm({
     e.preventDefault();
     try {
       setLoading(true);
+      console.log(loading);
+      
       const response = await axios.post('/api/users/login', user);
 
       console.log('Login success', response.data);
