@@ -3,9 +3,9 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <div className='flex justify-between items-center px-4 py-2'>
-      <span className='text-sm'>Pay Hive</span>
-      <Bell size={18} />
+    <div className='flex justify-between items-center px-6 pt-4'>
+      <span className='text-lg font-extrabold'>Pay Hive</span>
+      <Bell size={22} />
     </div>
   );
 };

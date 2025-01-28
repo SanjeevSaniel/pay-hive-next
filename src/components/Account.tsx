@@ -10,12 +10,12 @@ import LogoutButton from './LogoutButton';
 
 const Account = () => {
   return (
-    <div className='flex flex-col space-y-3 p-2'>
-      <h1 className='text-lg'>Account</h1>
+    <div className='flex flex-col space-y-2 px-3 py-2'>
+      <div className='text-lg font-semibold'>Account</div>
       <Accordion
         type='single'
         collapsible
-        className='w-full mt-2'>
+        className='w-full'>
         <AccordionItem value='item-1'>
           <AccordionTrigger>Personal Information</AccordionTrigger>
           <AccordionContent className='flex flex-col items-start p-1'>
@@ -82,7 +82,9 @@ const Account = () => {
         </AccordionItem>
       </Accordion>
 
-      <LogoutButton />
+      <div className='flex justify-center'>
+        <LogoutButton />
+      </div>
     </div>
   );
 };

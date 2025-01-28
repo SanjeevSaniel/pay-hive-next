@@ -10,8 +10,8 @@ const TabsContainer = () => {
     <Tabs
       defaultValue='Home'
       className='w-full p-1'>
-      <div className='px-2 py-2 sticky top-0 z-20'>
-        <TabsList className='grid w-full h-full grid-cols-4 p-2'>
+      <div className='px-2 pt-3 sticky top-0 z-20'>
+        <TabsList className='grid w-full h-full grid-cols-4 p-2 border drop-shadow-sm rounded-xl backdrop-blur-xl'>
           <TabsTrigger value='dashboard'>
             <div className='p-1'>
               <House size={22} />

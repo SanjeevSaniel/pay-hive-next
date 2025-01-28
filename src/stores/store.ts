@@ -5,8 +5,8 @@ const useStore = create<StoreState>()((set) => ({
   groups: [],
 
   setGroups: (groups: Group[]) => set({ groups }),
-  addGroup: (group: Group) =>
-    set((state) => ({ groups: [...state.groups, group] })),
+  addGroup: (newGroup: Group) =>
+    set((state) => ({ groups: [newGroup, ...state.groups] })),
   deleteGroup: (groupId: string) =>
     set((state) => ({
       groups: state.groups.filter((group: Group) => group.groupId !== groupId),
