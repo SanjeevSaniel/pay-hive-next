@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { StoreState, Group } from './types';
 
-const useStore = create<StoreState>()((set) => ({
+const useAppStore = create<StoreState>()((set) => ({
   groups: [],
 
   setGroups: (groups: Group[]) => set({ groups }),
@@ -13,4 +13,4 @@ const useStore = create<StoreState>()((set) => ({
     })),
 }));
 
-export default useStore;
+export default useAppStore;

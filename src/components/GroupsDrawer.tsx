@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import useStore from '../stores/store'; // Adjust the import path as needed
+import useAppStore from '../stores/store'; // Adjust the import path as needed
 import { Plus } from 'lucide-react';
 import { z } from 'zod';
 import { Button } from './ui/button';
@@ -42,7 +42,7 @@ type Inputs = z.infer<typeof formSchema>;
 
 const CreateGroup: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const addGroup = useStore((state) => state.addGroup);
+  const addGroup = useAppStore((state) => state.addGroup);
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {

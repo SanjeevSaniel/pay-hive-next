@@ -1,12 +1,13 @@
 'use client';
 
-import { basePath } from '@/app/(frontend)/v1/layout';
+import { useBasePath } from '@/context/BasePathContext';
 import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const pathname = usePathname();
+  const basePath = useBasePath();
 
   const navItems = [
     { key: 'home', icon: <Home size={26} />, href: `${basePath}` },

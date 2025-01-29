@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import useStore from '@/stores/store';
+import useAppStore from '@/stores/store';
 import { Group } from '@/stores/types';
 import { ArrowDownRight, Boxes, Users } from 'lucide-react';
 import { useEffect } from 'react';
@@ -15,8 +15,8 @@ import GroupsDrawer from '@/components/GroupsDrawer';
 import { Separator } from '@/components/ui/separator';
 
 const GroupsPage = () => {
-  const groups = useStore((state) => state.groups);
-  const setGroups = useStore((state) => state.setGroups);
+  const groups = useAppStore((state) => state.groups);
+  const setGroups = useAppStore((state) => state.setGroups);
 
   // const members = [
   //   { memberId: 'm1', name: 'Alice' },
