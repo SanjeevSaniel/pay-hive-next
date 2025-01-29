@@ -8,11 +8,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import useAppStore from '../stores/useAppStore';
 import { Button } from './ui/button';
+import { Checkbox } from './ui/checkbox';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -27,7 +27,6 @@ import {
   FormMessage,
 } from './ui/form';
 import { Input } from './ui/input';
-import { Checkbox } from './ui/checkbox';
 
 const formSchema = z.object({
   groupName: z

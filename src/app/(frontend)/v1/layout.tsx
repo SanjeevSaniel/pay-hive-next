@@ -7,9 +7,9 @@ import { BasePathProvider } from '@/context/BasePathContext';
 const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <BasePathProvider>
-      <div className='min-h-screen mb-24 relative'>
+      <div className='grid grid-rows-layout min-h-screen'>
         <Header />
-        <div className='p-2'>{children}</div>
+        <div className='p-2 mb-14 overflow-auto'>{children}</div>
         <Navbar />
       </div>
     </BasePathProvider>
