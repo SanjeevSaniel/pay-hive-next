@@ -9,8 +9,8 @@ const comfortaa = Comfortaa({
 });
 
 export const metadata: Metadata = {
-  title: 'Pay Hive',
-  description: 'Pay Hive',
+  title: 'Splitly',
+  description: 'Splitly',
 };
 
 export default function RootLayout({
