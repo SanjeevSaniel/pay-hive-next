@@ -1,11 +1,11 @@
-import { connect } from '@/dbConfig/dbConfig';
+import { connectDB } from '@/dbConfig/dbConfig';
 import User from '@/models/userModel';
 import { NextRequest, NextResponse } from 'next/server';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 // Connect to the database
-connect();
+connectDB();
 
 // Define the type for the request body
 interface LoginRequest {
