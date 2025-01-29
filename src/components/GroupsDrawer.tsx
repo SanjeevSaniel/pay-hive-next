@@ -1,22 +1,23 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import useAppStore from '../stores/store'; // Adjust the import path as needed
+import axios from 'axios';
 import { Plus } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import useAppStore from '../stores/useAppStore';
 import { Button } from './ui/button';
 import {
-  DrawerTrigger,
+  Drawer,
+  DrawerClose,
   DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-  DrawerClose,
-  Drawer,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
 } from './ui/drawer';
-import { Input } from './ui/input';
 import {
   Form,
   FormControl,
@@ -25,7 +26,8 @@ import {
   FormLabel,
   FormMessage,
 } from './ui/form';
-import { useState } from 'react';
+import { Input } from './ui/input';
+import { Checkbox } from './ui/checkbox';
 
 const formSchema = z.object({
   groupName: z
@@ -36,11 +38,12 @@ const formSchema = z.object({
     .string()
     .min(5, { message: 'Description must be at least 5 characters long' })
     .max(200, { message: 'Description must be at most 200 characters long' }),
+  isGroup: z.boolean(),
 });
 
 type Inputs = z.infer<typeof formSchema>;
 
-const CreateGroup: React.FC = () => {
+const CreateGroup = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const addGroup = useAppStore((state) => state.addGroup);
   const form = useForm<Inputs>({
@@ -48,27 +51,38 @@ const CreateGroup: React.FC = () => {
     defaultValues: {
       groupName: '',
       description: '',
+      isGroup: true,
     },
   });
 
-  const onSubmit = (data: Inputs) => {
-    const newGroup = {
-      groupId: String(Date.now()),
-      groupName: data.groupName,
-      description: data.description,
-      owedAmount: 0,
-      borrowedAmount: 0,
-      isGroup: true,
-      createdDate: new Date().toISOString(),
-      membersCount: 0,
-      memberIds: [],
-      transactions: [],
-    };
-    console.log('New Group: ', newGroup);
+  const onSubmit = async (data: Inputs) => {
+    try {
+      const response = await axios.post('/api/groups/create', {
+        groupName: data.groupName,
+        description: data.description,
+        memberIds: [],
+        isGroup: data.isGroup,
+      });
 
-    addGroup(newGroup);
-    form.reset(); // Reset the form after submission
-    setIsDrawerOpen(false); // Close the drawer after form submission
+      console.log('Group created successfully', response.data);
+
+      const newGroup = response.data;
+      addGroup(newGroup);
+      form.reset(); // Reset the form after submission
+      setIsDrawerOpen(false); // Close the drawer after form submission
+    } catch (error: unknown) {
+      // Use `unknown` instead of `any`
+      console.error('Failed to create group', error); // Log the error
+
+      // Handle the error safely
+      if (error instanceof Error) {
+        // If the error is an instance of Error, display its message
+        console.error(error.message);
+      } else {
+        // If the error is not an Error object, display a generic message
+        console.error('Failed to create group');
+      }
+    }
   };
 
   return (
@@ -76,16 +90,16 @@ const CreateGroup: React.FC = () => {
       open={isDrawerOpen}
       onOpenChange={setIsDrawerOpen}>
       <DrawerTrigger asChild>
-        <Button className='flex items-center gap-1 py-6 fixed right-6 bottom-48 rounded-full'>
+        <Button className='flex items-center gap-1 py-6 fixed right-6 bottom-32 rounded-full'>
           <Plus />
         </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Create a New Group</DrawerTitle>
-          <DrawerDescription>
+          <DrawerTitle>New Group</DrawerTitle>
+          {/* <DrawerDescription>
             Fill in the details below to create a new group.
-          </DrawerDescription>
+          </DrawerDescription> */}
         </DrawerHeader>
         <Form {...form}>
           <form
@@ -96,9 +110,10 @@ const CreateGroup: React.FC = () => {
               name='groupName'
               render={({ field }) => (
                 <FormItem className='space-y-0.5'>
-                  <FormLabel>Group Name</FormLabel>
+                  {/* <FormLabel>Group Name</FormLabel> */}
                   <FormControl>
                     <Input
+                      className='h-fit text-2xl'
                       placeholder='Group Name'
                       {...field}
                     />
@@ -112,9 +127,10 @@ const CreateGroup: React.FC = () => {
               name='description'
               render={({ field }) => (
                 <FormItem className='space-y-0.5'>
-                  <FormLabel>Description</FormLabel>
+                  {/* <FormLabel>Description</FormLabel> */}
                   <FormControl>
                     <Input
+                      className='h-fit text-2xl'
                       placeholder='Description'
                       {...field}
                     />
@@ -123,7 +139,25 @@ const CreateGroup: React.FC = () => {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name='isGroup'
+              render={({ field }) => (
+                <FormItem className='flex items-center p-2 space-x-3 space-y-0.5'>
+                  <FormControl>
+                    <Checkbox
+                      defaultChecked={field.value}
+                      onChange={(e) => field.onChange(e)}
+                      className='w-5 h-5'
+                    />
+                  </FormControl>
+                  <FormLabel className='text-xl'>Is Group</FormLabel>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button
+              size='lg'
               type='submit'
               className='w-full'>
               Submit
@@ -133,7 +167,8 @@ const CreateGroup: React.FC = () => {
         <DrawerFooter>
           <DrawerClose asChild>
             <Button
-              variant='outline'
+              onClick={() => form.reset()}
+              variant='ghost'
               className='w-full'>
               Cancel
             </Button>
