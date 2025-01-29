@@ -1,11 +1,12 @@
 import TabsContainer from '@/components/TabsContainer';
 
-const ApplicationPage = () => {
+const HomePage = () => {
   return (
     <div>
+      Home Page
       <TabsContainer />
     </div>
   );
 };
 
-export default ApplicationPage;
+export default HomePage;

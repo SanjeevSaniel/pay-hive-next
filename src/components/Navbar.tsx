@@ -1,50 +1,53 @@
 'use client';
 
-import { Tab, Tabs } from '@heroui/tabs'; // Adjust the import according to your library
-import { CircleUserRound, Component, History, Home } from 'lucide-react';
+import { basePath } from '@/app/(frontend)/v1/layout';
+import {
+  CircleUserRound,
+  Component,
+  History,
+  Home,
+  ListTree,
+} from 'lucide-react';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [selected, setSelected] = useState('');
 
-  useEffect(() => {
-    // Set the selected key based on the current pathname
-    const currentPath = pathname.split('/').pop();
-    setSelected(currentPath || 'home');
-  }, [pathname]);
-
-  const tabs = [
-    { key: 'home', icon: <Home />, label: 'Home' },
-    { key: 'groups', icon: <Component />, label: 'Groups' },
-    { key: 'history', icon: <History />, label: 'History' },
-    { key: 'account', icon: <CircleUserRound />, label: 'Account' },
+  const navItems = [
+    { key: 'home', icon: <Home size={26} />, href: `${basePath}` },
+    {
+      key: 'groups',
+      icon: <Component size={26} />,
+      href: `${basePath}/groups`,
+    },
+    {
+      key: 'expenses',
+      icon: <ListTree size={26} />,
+      href: `${basePath}/expenses`,
+    },
+    {
+      key: 'account',
+      icon: <CircleUserRound size={26} />,
+      href: `${basePath}/account`,
+    },
   ];
 
   return (
-    <div className='flex justify-center items-center w-full h-fit bg-gradient-to-t from-slate-300 via-slate-200 to-slate-50 fixed left-0 bottom-0 right-0'>
-      <Tabs
-        className='pt-4 px-4 pb-4'
-        size='lg'
-        aria-label='Options'
-        color='primary'
-        variant='bordered'
-        selectedKey={selected}
-        onSelectionChange={(key) => setSelected(key.toString())}>
-        {tabs.map((tab) => (
-          <Tab
-            key={tab.key}
-            className='px-4 py-5'
-            title={
-              <div className='flex items-center space-x-2'>
-                {tab.icon}
-                {selected === tab.key && <span>{tab.label}</span>}
-              </div>
-            }
-          />
-        ))}
-      </Tabs>
+    <div className='flex justify-evenly items-center bg-[#f1f1f1] fixed left-3 bottom-3 right-3 py-4 border drop-shadow-sm rounded-xl backdrop-blur-xl'>
+      {navItems.map((item) => (
+        <Link
+          key={item.key}
+          href={item.href}>
+          <div
+            className={`flex flex-col items-center ${
+              pathname === item.href ? 'text-blue-500' : 'text-gray-500'
+            }`}>
+            {item.icon}
+            {/* <span className='text-xs'>{item.key.charAt(0).toUpperCase() + item.key.slice(1)}</span> */}
+          </div>
+        </Link>
+      ))}
     </div>
   );
 };
