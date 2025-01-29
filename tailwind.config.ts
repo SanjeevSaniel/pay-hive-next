@@ -81,6 +81,10 @@ const config: Config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      gridTemplateRows: {
+        // Custom grid layout: header takes its height, middle takes available space, footer takes its height
+        layout: 'auto 1fr auto',
+      },
     },
   },
   plugins: [tailwindcssAnimate, heroui()],
