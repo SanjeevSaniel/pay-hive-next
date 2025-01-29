@@ -1,13 +1,7 @@
 'use client';
 
 import { basePath } from '@/app/(frontend)/v1/layout';
-import {
-  CircleUserRound,
-  Component,
-  History,
-  Home,
-  ListTree,
-} from 'lucide-react';
+import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
