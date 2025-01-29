@@ -1,49 +1,45 @@
-'use client';
-
-import { useBasePath } from '@/context/BasePathContext';
-import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import { useBasePath } from '@/context/BasePathContext';
 
 const Navbar = () => {
   const pathname = usePathname();
   const basePath = useBasePath();
 
   const navItems = [
-    { key: 'home', icon: <Home size={26} />, href: `${basePath}` },
-    {
-      key: 'groups',
-      icon: <Component size={26} />,
-      href: `${basePath}/groups`,
-    },
-    {
-      key: 'expenses',
-      icon: <ListTree size={26} />,
-      href: `${basePath}/expenses`,
-    },
-    {
-      key: 'account',
-      icon: <CircleUserRound size={26} />,
-      href: `${basePath}/account`,
-    },
+    { key: 'home', icon: Home, href: `${basePath}` },
+    { key: 'groups', icon: Component, href: `${basePath}/groups` },
+    { key: 'expenses', icon: ListTree, href: `${basePath}/expenses` },
+    { key: 'account', icon: CircleUserRound, href: `${basePath}/account` },
   ];
 
   return (
-    <div className='flex justify-evenly items-center bg-[#f1f1f1] fixed left-3 bottom-3 right-3 py-4 border drop-shadow-sm rounded-xl backdrop-blur-xl'>
-      {navItems.map((item) => (
-        <Link
-          key={item.key}
-          href={item.href}>
-          <div
-            className={`flex flex-col items-center ${
-              pathname === item.href ? 'text-blue-500' : 'text-gray-500'
-            }`}>
-            {item.icon}
-            {/* <span className='text-xs'>{item.key.charAt(0).toUpperCase() + item.key.slice(1)}</span> */}
-          </div>
-        </Link>
-      ))}
-    </div>
+    <Card className='bg-[#f1f1f1] fixed left-3 bottom-3 right-3 drop-shadow-sm rounded-xl backdrop-blur-xl'>
+      <CardContent className='flex justify-evenly items-center px-0 py-3'>
+        {navItems.map((item) => {
+          const isActive =
+            item.href === basePath
+              ? pathname === item.href
+              : pathname.startsWith(item.href) && pathname !== basePath;
+
+          return (
+            <Link
+              key={item.key}
+              href={item.href}>
+              <div
+                className={`flex flex-col items-center ${
+                  isActive ? 'text-gray-900' : 'text-gray-400'
+                }`}>
+                <item.icon size={28} />
+                {/* <span className='text-xs'>{item.key.charAt(0).toUpperCase() + item.key.slice(1)}</span> */}
+              </div>
+            </Link>
+          );
+        })}
+      </CardContent>
+    </Card>
   );
 };
 
