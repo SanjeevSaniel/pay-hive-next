@@ -42,7 +42,7 @@ const useAppStore = create<StoreState>()((set) => ({
   deleteFinancialRecord: (recordId: string) =>
     set((state) => ({
       financialRecords: state.financialRecords.filter(
-        (record: FinancialRecord) => record._id !== recordId,
+        (record: FinancialRecord) => record.recordId !== recordId,
       ),
     })),
 
@@ -52,7 +52,7 @@ const useAppStore = create<StoreState>()((set) => ({
   deletePayment: (paymentId: string) =>
     set((state) => ({
       payments: state.payments.filter(
-        (payment: Payment) => payment._id !== paymentId,
+        (payment: Payment) => payment.paymentId !== paymentId,
       ),
     })),
 
@@ -64,7 +64,8 @@ const useAppStore = create<StoreState>()((set) => ({
   deleteNotification: (notificationId: string) =>
     set((state) => ({
       notifications: state.notifications.filter(
-        (notification: Notification) => notification._id !== notificationId,
+        (notification: Notification) =>
+          notification.notificationId !== notificationId,
       ),
     })),
 
@@ -75,7 +76,7 @@ const useAppStore = create<StoreState>()((set) => ({
   deleteExpenseReport: (reportId: string) =>
     set((state) => ({
       expenseReports: state.expenseReports.filter(
-        (report: ExpenseReport) => report._id !== reportId,
+        (report: ExpenseReport) => report.reportId !== reportId,
       ),
     })),
 }));

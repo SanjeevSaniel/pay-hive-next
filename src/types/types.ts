@@ -89,6 +89,7 @@ export interface Group {
 }
 
 export interface Payment {
+  paymentId: string;
   fromUserId: string; // User ID
   toUserId: string; // User ID
   amount: number;
@@ -99,6 +100,7 @@ export interface Payment {
 }
 
 export interface Notification {
+  notificationId: string;
   userId: string; // User ID
   type: NotificationType;
   message: string;
