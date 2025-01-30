@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import FinancialRecord from '@/models/FinancialRecord';
+import FinancialRecord from '@/models/financialRecord';
 import { connectDB } from '@/dbConfig/dbConfig';
 
 export async function GET() {
