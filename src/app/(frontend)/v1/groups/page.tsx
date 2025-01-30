@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import groupsData from '@/data/groups.json'; // Import the sample groups data
+import { getGroups } from '@/services/groupService';
 import useAppStore from '@/stores/useAppStore';
 import { ArrowDownRight, Boxes, Users } from 'lucide-react';
 import Link from 'next/link';
@@ -19,8 +19,16 @@ const GroupsPage = () => {
   const setGroups = useAppStore((state) => state.setGroups);
 
   useEffect(() => {
-    // Initialize groups with sample data from JSON file
-    setGroups(groupsData);
+    const fetchGroups = async () => {
+      try {
+        const response = await getGroups();
+        setGroups(response.data);
+      } catch (error) {
+        console.error('Failed to fetch groups', error);
+      }
+    };
+
+    fetchGroups();
   }, [setGroups]);
 
   return (
