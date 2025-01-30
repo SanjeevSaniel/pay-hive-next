@@ -12,10 +12,7 @@ const GroupInfo = ({ group }: GroupInfoProps) => {
           <span className='font-bold'>Created Date:</span>
           <span>{new Date(group.createdDate).toLocaleDateString()}</span>
         </div>
-        <div className='flex items-center space-x-2'>
-          <span className='font-bold'>Members Count:</span>
-          <span>{group.membersCount}</span>
-        </div>
+
         {group.borrowedAmount > 0 && (
           <div className='flex items-center space-x-2'>
             <span className='font-bold'>Borrowed Amount:</span>
