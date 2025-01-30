@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { connectDB } from '@/dbConfig/dbConfig';
-import Group from '@/models/GroupModel';
+import Group from '@/models/groupModel';
 
 connectDB();
 
