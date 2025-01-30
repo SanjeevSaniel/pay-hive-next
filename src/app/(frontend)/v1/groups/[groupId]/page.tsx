@@ -1,12 +1,13 @@
 'use client';
 
-import GroupHeader from '@/components/GroupHeader';
-import GroupInfo from '@/components/GroupInfo';
-import MemberAvatars from '@/components/MemberAvatars';
+import GroupHeader from '@/components/Groups/GroupHeader';
+import GroupInfo from '@/components/Groups/GroupInfo';
+import GroupTransactions from '@/components/Groups/GroupTransactions';
+import MemberAvatars from '@/components/Groups/MemberAvatars';
 import { useBasePath } from '@/context/BasePathContext';
 import { getUsers } from '@/services/userService';
 import useAppStore from '@/stores/useAppStore';
-import { Group, User } from '@/types/types';
+import { Group, User, FinancialRecord } from '@/types/types';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -17,9 +18,11 @@ const GroupDetails = () => {
   const groups = useAppStore((state) => state.groups); // Get groups from Zustand state
   const users = useAppStore((state) => state.users); // Get users from Zustand state
   const setUsers = useAppStore((state) => state.setUsers); // Function to set users in Zustand store
+  const financialRecords = useAppStore((state) => state.financialRecords); // Get financial records from Zustand state
 
   const [group, setGroup] = useState<Group | null>(null); // Set initial state to null
   const [members, setMembers] = useState<User[]>([]); // Set initial state for members
+  const [groupRecords, setGroupRecords] = useState<FinancialRecord[]>([]); // Set initial state for group financial records
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -48,11 +51,17 @@ const GroupDetails = () => {
           )
           .filter((user: User | undefined): user is User => user !== undefined);
         setMembers(membersData); // Update members state
+
+        // Filter financial records by group ID
+        const filteredRecords = financialRecords.filter(
+          (record: FinancialRecord) => record.groupId === id,
+        );
+        setGroupRecords(filteredRecords); // Update group financial records state
       } else {
         console.error('Group not found in Zustand store');
       }
     }
-  }, [id, groups, users, setUsers]);
+  }, [id, groups, users, setUsers, financialRecords]);
 
   if (!group) {
     return <div>Loading...</div>;
@@ -61,12 +70,9 @@ const GroupDetails = () => {
   return (
     <div className='flex flex-col justify-normal gap-4 p-2'>
       <GroupHeader basePath={basePath} />
-      <div className='p-2'>
-        <h1 className='text-3xl font-bold'>{group.groupName}</h1>
-        <p className='text-lg'>{group.description}</p>
-      </div>
-      <MemberAvatars members={members} />
       <GroupInfo group={group} />
+      <MemberAvatars members={members} />
+      <GroupTransactions records={groupRecords} />
     </div>
   );
 };

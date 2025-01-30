@@ -16,7 +16,7 @@ const Navbar = () => {
   ];
 
   return (
-    <Card className='bg-[#f1f1f1] fixed left-3 bottom-3 right-3 drop-shadow-sm rounded-xl backdrop-blur-xl'>
+    <Card className='bg-[#f1f1f1] fixed left-3 bottom-3 right-3 drop-shadow-sm rounded-xl backdrop-blur-xl z-30'>
       <CardContent className='flex justify-evenly items-center px-0 py-3'>
         {navItems.map((item) => {
           const isActive =

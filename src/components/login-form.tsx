@@ -19,26 +19,32 @@ import toast from 'react-hot-toast';
 import useAppStore from '@/stores/useAppStore';
 import { getGroups } from '@/services/groupService';
 import { getUsers } from '@/services/userService';
+import { useBasePath } from '@/context/BasePathContext';
+import { getFinancialRecords } from '@/services/financialRecordService';
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
   const router = useRouter();
+  const basePath = useBasePath();
   const [user, setUser] = useState({ email: '', password: '' });
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const setGroups = useAppStore((state) => state.setGroups);
   const setUsers = useAppStore((state) => state.setUsers);
+  const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
 
   const fetchDataAfterLogin = async () => {
     try {
       const groupsResponse = await getGroups();
       const usersResponse = await getUsers();
+      const financialRecordsResponse = await getFinancialRecords(); // Fetch financial records
 
       setGroups(groupsResponse.data);
       setUsers(usersResponse.data);
+      setFinancialRecords(financialRecordsResponse.data); // Store financial records in Zustand
     } catch (error) {
       console.error('Failed to fetch data after login', error);
     }
@@ -59,7 +65,7 @@ export function LoginForm({
 
       await fetchDataAfterLogin(); // Fetch data after successful login
 
-      router.push('/v1'); // Redirect to the /v1 page
+      router.push(basePath); // Redirect to the /v1 page
     } catch (error: unknown) {
       console.error('Login failed', error); // Log the error
 

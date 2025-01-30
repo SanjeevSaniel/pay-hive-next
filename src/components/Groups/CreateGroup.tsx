@@ -1,14 +1,13 @@
 'use client';
 
+import useAppStore from '@/stores/useAppStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import useAppStore from '../stores/useAppStore';
-import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
+import { Checkbox } from '../ui/checkbox';
 import {
   Drawer,
   DrawerClose,
@@ -17,7 +16,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from './ui/drawer';
+} from '../ui/drawer';
 import {
   Form,
   FormControl,
@@ -25,8 +24,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from './ui/form';
-import { Input } from './ui/input';
+} from '../ui/form';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 
 const formSchema = z.object({
   groupName: z
@@ -89,21 +89,23 @@ const CreateGroup = () => {
       open={isDrawerOpen}
       onOpenChange={setIsDrawerOpen}>
       <DrawerTrigger asChild>
-        <Button className='flex items-center gap-1 py-6 fixed right-6 bottom-32 rounded-full'>
-          <Plus />
+        <Button
+          aria-label='New'
+          size='icon'
+          className='p-6 fixed right-6 bottom-32 rounded-2xl'>
+          <Plus size={24} />
         </Button>
       </DrawerTrigger>
-      <DrawerContent>
+      <DrawerContent
+        aria-description='New Group'
+        aria-describedby='New Group'>
         <DrawerHeader>
-          <DrawerTitle>New Group</DrawerTitle>
-          {/* <DrawerDescription>
-            Fill in the details below to create a new group.
-          </DrawerDescription> */}
+          <DrawerTitle>New Group Details</DrawerTitle>
         </DrawerHeader>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='px-4 space-y-4'>
+            className='flex flex-col gap-5 px-5 pt-2'>
             <FormField
               control={form.control}
               name='groupName'
@@ -112,7 +114,7 @@ const CreateGroup = () => {
                   {/* <FormLabel>Group Name</FormLabel> */}
                   <FormControl>
                     <Input
-                      className='h-fit text-2xl'
+                      className='h-fit text-xl'
                       placeholder='Group Name'
                       {...field}
                     />
@@ -129,7 +131,7 @@ const CreateGroup = () => {
                   {/* <FormLabel>Description</FormLabel> */}
                   <FormControl>
                     <Input
-                      className='h-fit text-2xl'
+                      className='h-fit text-xl'
                       placeholder='Description'
                       {...field}
                     />
@@ -150,7 +152,7 @@ const CreateGroup = () => {
                       className='w-5 h-5'
                     />
                   </FormControl>
-                  <FormLabel className='text-xl'>Is Group</FormLabel>
+                  <FormLabel className='text-lg'>Is Group</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}

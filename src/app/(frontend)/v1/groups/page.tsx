@@ -1,34 +1,26 @@
 'use client';
 
-import GroupsDrawer from '@/components/GroupsDrawer';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { getGroups } from '@/services/groupService';
 import useAppStore from '@/stores/useAppStore';
 import { ArrowDownRight, Boxes, Users } from 'lucide-react';
 import Link from 'next/link';
+import groupsData from '@/data/groups.json'; // Import the sample groups data
 import { useEffect } from 'react';
+import CreateGroup from '@/components/Groups/CreateGroup';
+import { Separator } from '@/components/ui/separator';
 
 const GroupsPage = () => {
   const groups = useAppStore((state) => state.groups);
   const setGroups = useAppStore((state) => state.setGroups);
 
   useEffect(() => {
-    const fetchGroups = async () => {
-      try {
-        const response = await getGroups();
-        setGroups(response.data);
-      } catch (error) {
-        console.error('Failed to fetch groups', error);
-      }
-    };
-
-    fetchGroups();
+    // Initialize groups with sample data from JSON file
+    setGroups(groupsData);
   }, [setGroups]);
 
   return (
@@ -39,7 +31,7 @@ const GroupsPage = () => {
           <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
         </div>
         {/* <Button size='sm'>New</Button> */}
-        <GroupsDrawer />
+        <CreateGroup />
       </div>
 
       <div className='grid grid-cols-1 gap-2 p-2'>
@@ -47,14 +39,14 @@ const GroupsPage = () => {
           <Link
             href={`/v1/groups/${group.groupId}`}
             key={index}>
-            <Card className='border border-gray-200 shadow-none rounded-2xl'>
+            <Card className='px-2 pb-2 border border-gray-200 shadow-none rounded-2xl'>
               <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
                 <div className='flex justify-center items-center m-2'>
                   <Boxes />
                 </div>
                 <div className='flex flex-col justify-center space-y-0.5'>
-                  <CardTitle className='flex items-center gap-2'>
-                    <span>{group.groupName}</span>
+                  <CardTitle className='flex items-center gap-2 text-xl'>
+                    {group.groupName}
                     {group.isGroup && (
                       <Users
                         size={18}
@@ -62,7 +54,7 @@ const GroupsPage = () => {
                       />
                     )}
                   </CardTitle>
-                  <CardDescription className='flex items-center space-x-2'>
+                  <CardDescription className='flex items-center space-x-2 text-md'>
                     <div className='flex items-center space-x-2'>
                       {group.borrowedAmount > 0 && (
                         <div>Borrowed: ₹{group.borrowedAmount}</div>

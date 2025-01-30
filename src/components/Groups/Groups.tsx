@@ -9,10 +9,10 @@ import {
 import useAppStore from '@/stores/useAppStore';
 import { ArrowDownRight, Boxes, Users } from 'lucide-react';
 import Link from 'next/link';
-import GroupsDrawer from './GroupsDrawer';
-import { Separator } from './ui/separator';
+import { Separator } from '../ui/separator';
 import groupsData from '@/data/groups.json'; // Import the sample groups data
 import { useEffect } from 'react';
+import CreateGroup from './CreateGroup';
 
 const Groups = () => {
   const groups = useAppStore((state) => state.groups);
@@ -31,7 +31,7 @@ const Groups = () => {
           <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
         </div>
         {/* <Button size='sm'>New</Button> */}
-        <GroupsDrawer />
+        <CreateGroup />
       </div>
 
       <div className='grid grid-cols-1 gap-2 p-2'>

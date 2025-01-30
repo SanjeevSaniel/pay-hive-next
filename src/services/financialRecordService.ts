@@ -6,3 +6,9 @@ export const getFinancialRecords = async (): Promise<{
 }> => {
   return await axios.get('/api/financial-records');
 };
+
+export const getFinancialRecordsByGroupId = async (
+  groupId: string,
+): Promise<{ data: FinancialRecord[] }> => {
+  return await axios.get(`/api/financial-records/${groupId}`);
+};
