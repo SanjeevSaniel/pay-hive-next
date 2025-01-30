@@ -1,5 +1,5 @@
 import { connectDB } from '@/dbConfig/dbConfig';
-import Group from '@/models/groupModel';
+import Group from '@/models/GroupModel';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {

@@ -44,14 +44,14 @@ const categories = [
 const HomePage = () => {
   return (
     <div>
-      <div className='flex justify-between p-2 my-2'>
-        <span className='text-3xl font-extrabold'>Expenses</span>
+      <div className='flex justify-between px-3 py-2 my-2'>
+        <span className='text-2xl font-extrabold'>Expenses</span>
         <Button
           asChild
           size='icon'
           variant='ghost'
           className='p-0'>
-          <Plus size={28} />
+          <Plus size={26} />
         </Button>
       </div>
       <div className='flex overflow-x-scroll scroll-smooth space-x-4 p-2'>
@@ -61,16 +61,16 @@ const HomePage = () => {
             className='flex-shrink-0 w-fit text-card rounded-xl mb-4'
             style={{ backgroundColor: item.bgColor }}>
             <CardHeader
-              className='py-4 rounded-t-xl'
+              className='py-3 rounded-t-xl'
               style={{ backgroundColor: item.headerBgColor }}>
               <div>
-                <CardTitle className='text-2xl'>{item.title}</CardTitle>
+                <CardTitle className='text-xl'>{item.title}</CardTitle>
                 <CardDescription className='text-card'>
                   {item.description}
                 </CardDescription>
               </div>
             </CardHeader>
-            <CardContent className='flex justify-between items-center gap-4 py-4'>
+            <CardContent className='flex justify-between items-center gap-4 py-2'>
               <div>
                 <p className='text-lg'>{item.percentage}%</p>
                 <p className='text-sm'>{item.category}</p>

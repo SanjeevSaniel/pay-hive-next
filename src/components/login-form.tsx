@@ -16,6 +16,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import useAppStore from '@/stores/useAppStore';
+import { getGroups } from '@/services/groupService';
+import { getUsers } from '@/services/userService';
 
 export function LoginForm({
   className,
@@ -25,6 +28,21 @@ export function LoginForm({
   const [user, setUser] = useState({ email: '', password: '' });
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const setGroups = useAppStore((state) => state.setGroups);
+  const setUsers = useAppStore((state) => state.setUsers);
+
+  const fetchDataAfterLogin = async () => {
+    try {
+      const groupsResponse = await getGroups();
+      const usersResponse = await getUsers();
+
+      setGroups(groupsResponse.data);
+      setUsers(usersResponse.data);
+    } catch (error) {
+      console.error('Failed to fetch data after login', error);
+    }
+  };
 
   const onLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -38,12 +56,13 @@ export function LoginForm({
 
       console.log('Login success', response.data);
       toast.success('Login successful'); // Display a success toast
+
+      await fetchDataAfterLogin(); // Fetch data after successful login
+
       router.push('/v1'); // Redirect to the /v1 page
     } catch (error: unknown) {
-      // Use `unknown` instead of `any`
       console.error('Login failed', error); // Log the error
 
-      // Handle the error safely
       if (error instanceof Error) {
         toast.error(`Login failed: ${error.message}`); // Display the error message
       } else {

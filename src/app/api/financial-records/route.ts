@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
+import FinancialRecord from '@/models/FinancialRecord';
 import { connectDB } from '@/dbConfig/dbConfig';
-import Group from '@/models/GroupModel';
-
-connectDB();
 
 export async function GET() {
+  await connectDB();
+
   try {
-    const groups = await Group.find();
-    return NextResponse.json(groups, { status: 200 });
+    const records = await FinancialRecord.find();
+    return NextResponse.json(records, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       {
-        error: 'Failed to fetch groups',
+        error: 'Failed to fetch financial records',
         details:
           error instanceof Error ? error.message : 'An unknown error occurred',
       },

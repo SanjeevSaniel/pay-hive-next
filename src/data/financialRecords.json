@@ -1,6 +1,6 @@
 [
     {
-        "_id": "record1",
+        "recordId": "record1",
         "description": "Group Dinner",
         "amount": 200,
         "date": "2025-01-10T00:00:00Z",
@@ -23,7 +23,7 @@
         "updatedAt": "2025-01-10T00:00:00Z"
     },
     {
-        "_id": "record2",
+        "recordId": "record2",
         "description": "Fuel Payment",
         "amount": 50,
         "date": "2025-01-11T00:00:00Z",
@@ -45,7 +45,7 @@
         "updatedAt": "2025-01-11T00:00:00Z"
     },
     {
-        "_id": "record3",
+        "recordId": "record3",
         "description": "Office Supplies",
         "amount": 100,
         "date": "2025-01-12T00:00:00Z",
@@ -68,7 +68,7 @@
         "updatedAt": "2025-01-12T00:00:00Z"
     },
     {
-        "_id": "record4",
+        "recordId": "record4",
         "description": "Travel Tickets",
         "amount": 300,
         "date": "2025-01-13T00:00:00Z",
@@ -91,7 +91,7 @@
         "updatedAt": "2025-01-13T00:00:00Z"
     },
     {
-        "_id": "record5",
+        "recordId": "record5",
         "description": "Neighborhood BBQ",
         "amount": 200,
         "date": "2025-01-14T00:00:00Z",
@@ -114,7 +114,7 @@
         "updatedAt": "2025-01-14T00:00:00Z"
     },
     {
-        "_id": "record6",
+        "recordId": "record6",
         "description": "Study Materials",
         "amount": 150,
         "date": "2025-01-15T00:00:00Z",
@@ -137,7 +137,7 @@
         "updatedAt": "2025-01-15T00:00:00Z"
     },
     {
-        "_id": "record7",
+        "recordId": "record7",
         "description": "Team Jerseys",
         "amount": 350,
         "date": "2025-01-16T00:00:00Z",
@@ -160,7 +160,7 @@
         "updatedAt": "2025-01-16T00:00:00Z"
     },
     {
-        "_id": "record8",
+        "recordId": "record8",
         "description": "Gym Membership",
         "amount": 100,
         "date": "2025-01-17T00:00:00Z",
@@ -183,7 +183,7 @@
         "updatedAt": "2025-01-17T00:00:00Z"
     },
     {
-        "_id": "record9",
+        "recordId": "record9",
         "description": "Project Contribution",
         "amount": 500,
         "date": "2025-01-18T00:00:00Z",
@@ -206,7 +206,7 @@
         "updatedAt": "2025-01-18T00:00:00Z"
     },
     {
-        "_id": "record10",
+        "recordId": "record10",
         "description": "Startup Funding",
         "amount": 700,
         "date": "2025-01-19T00:00:00Z",
@@ -229,7 +229,7 @@
         "updatedAt": "2025-01-19T00:00:00Z"
     },
     {
-        "_id": "record11",
+        "recordId": "record11",
         "description": "Community Event",
         "amount": 200,
         "date": "2025-01-20T00:00:00Z",
@@ -252,7 +252,7 @@
         "updatedAt": "2025-01-20T00:00:00Z"
     },
     {
-        "_id": "record12",
+        "recordId": "record12",
         "description": "Club Dues",
         "amount": 150,
         "date": "2025-01-21T00:00:00Z",
@@ -275,7 +275,7 @@
         "updatedAt": "2025-01-21T00:00:00Z"
     },
     {
-        "_id": "record13",
+        "recordId": "record13",
         "description": "Book Club Purchase",
         "amount": 100,
         "date": "2025-01-22T00:00:00Z",
@@ -298,7 +298,7 @@
         "updatedAt": "2025-01-22T00:00:00Z"
     },
     {
-        "_id": "record14",
+        "recordId": "record14",
         "description": "Conference Registration",
         "amount": 500,
         "date": "2025-01-23T00:00:00Z",
@@ -321,7 +321,7 @@
         "updatedAt": "2025-01-23T00:00:00Z"
     },
     {
-        "_id": "record15",
+        "recordId": "record15",
         "description": "Craft Supplies",
         "amount": 75,
         "date": "2025-01-24T00:00:00Z",
