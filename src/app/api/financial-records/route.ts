@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server';
 import { connectDB } from '@/dbConfig/dbConfig';
 import FinancialRecord from '@/models/financialRecord';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   await connectDB();
