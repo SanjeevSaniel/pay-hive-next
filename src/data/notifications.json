@@ -1,0 +1,122 @@
+[
+    {
+        "_id": "notification1",
+        "userId": "user1",
+        "type": "ExpenseAdded",
+        "message": "John Doe added a new expense: Group Dinner - $200",
+        "read": false,
+        "createdAt": "2025-01-10T00:00:00Z"
+    },
+    {
+        "_id": "notification2",
+        "userId": "user3",
+        "type": "PaymentMade",
+        "message": "Jane Smith made a payment of $100",
+        "read": true,
+        "createdAt": "2025-01-11T00:00:00Z"
+    },
+    {
+        "_id": "notification3",
+        "userId": "user5",
+        "type": "Reminder",
+        "message": "Michael Johnson, remember to submit your report.",
+        "read": false,
+        "createdAt": "2025-01-12T00:00:00Z"
+    },
+    {
+        "_id": "notification4",
+        "userId": "user7",
+        "type": "ExpenseAdded",
+        "message": "Emily Davis added a new expense: Travel Tickets - $300",
+        "read": true,
+        "createdAt": "2025-01-13T00:00:00Z"
+    },
+    {
+        "_id": "notification5",
+        "userId": "user9",
+        "type": "PaymentMade",
+        "message": "James Wilson made a payment of $50",
+        "read": false,
+        "createdAt": "2025-01-14T00:00:00Z"
+    },
+    {
+        "_id": "notification6",
+        "userId": "user11",
+        "type": "Reminder",
+        "message": "Isabella Martinez, your subscription is due.",
+        "read": true,
+        "createdAt": "2025-01-15T00:00:00Z"
+    },
+    {
+        "_id": "notification7",
+        "userId": "user13",
+        "type": "ExpenseAdded",
+        "message": "William Brown added a new expense: Gym Membership - $100",
+        "read": false,
+        "createdAt": "2025-01-16T00:00:00Z"
+    },
+    {
+        "_id": "notification8",
+        "userId": "user15",
+        "type": "PaymentMade",
+        "message": "Sophia Thomas made a payment of $80",
+        "read": true,
+        "createdAt": "2025-01-17T00:00:00Z"
+    },
+    {
+        "_id": "notification9",
+        "userId": "user2",
+        "type": "Reminder",
+        "message": "Oliver Harris, your membership is expiring soon.",
+        "read": false,
+        "createdAt": "2025-01-18T00:00:00Z"
+    },
+    {
+        "_id": "notification10",
+        "userId": "user4",
+        "type": "ExpenseAdded",
+        "message": "Mia Clark added a new expense: Office Supplies - $100",
+        "read": true,
+        "createdAt": "2025-01-19T00:00:00Z"
+    },
+    {
+        "_id": "notification11",
+        "userId": "user6",
+        "type": "PaymentMade",
+        "message": "Lucas Lewis made a payment of $200",
+        "read": false,
+        "createdAt": "2025-01-20T00:00:00Z"
+    },
+    {
+        "_id": "notification12",
+        "userId": "user8",
+        "type": "Reminder",
+        "message": "Charlotte Walker, please complete your profile.",
+        "read": true,
+        "createdAt": "2025-01-21T00:00:00Z"
+    },
+    {
+        "_id": "notification13",
+        "userId": "user10",
+        "type": "ExpenseAdded",
+        "message": "Henry Young added a new expense: Team Jerseys - $350",
+        "read": false,
+        "createdAt": "2025-01-22T00:00:00Z"
+    },
+    {
+        "_id": "notification14",
+        "userId": "user12",
+        "type": "PaymentMade",
+        "message": "Amelia Hall made a payment of $150",
+        "read": true,
+        "createdAt": "2025-01-23T00:00:00Z"
+    },
+    {
+        "_id": "notification15",
+        "userId": "user15",
+        "type": "Reminder",
+        "message": "Alan Turing, remember to submit your project report.",
+        "read": false,
+        "createdAt": "2025-01-24T00:00:00Z"
+    }
+]

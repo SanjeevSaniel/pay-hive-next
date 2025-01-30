@@ -1,0 +1,346 @@
+[
+    {
+        "_id": "record1",
+        "description": "Group Dinner",
+        "amount": 200,
+        "date": "2025-01-10T00:00:00Z",
+        "category": "DiningOut",
+        "payerId": "user1",
+        "groupId": "group1",
+        "splitMethod": "Equal",
+        "splitDetails": [
+            {
+                "userId": "user1",
+                "amount": 100
+            },
+            {
+                "userId": "user2",
+                "amount": 100
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-10T00:00:00Z",
+        "updatedAt": "2025-01-10T00:00:00Z"
+    },
+    {
+        "_id": "record2",
+        "description": "Fuel Payment",
+        "amount": 50,
+        "date": "2025-01-11T00:00:00Z",
+        "category": "Fuel",
+        "payerId": "user3",
+        "splitMethod": "Custom",
+        "splitDetails": [
+            {
+                "userId": "user3",
+                "amount": 25
+            },
+            {
+                "userId": "user4",
+                "amount": 25
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-11T00:00:00Z",
+        "updatedAt": "2025-01-11T00:00:00Z"
+    },
+    {
+        "_id": "record3",
+        "description": "Office Supplies",
+        "amount": 100,
+        "date": "2025-01-12T00:00:00Z",
+        "category": "Work",
+        "payerId": "user5",
+        "groupId": "group3",
+        "splitMethod": "Percentage",
+        "splitDetails": [
+            {
+                "userId": "user5",
+                "amount": 50
+            },
+            {
+                "userId": "user6",
+                "amount": 50
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-12T00:00:00Z",
+        "updatedAt": "2025-01-12T00:00:00Z"
+    },
+    {
+        "_id": "record4",
+        "description": "Travel Tickets",
+        "amount": 300,
+        "date": "2025-01-13T00:00:00Z",
+        "category": "Travel",
+        "payerId": "user7",
+        "groupId": "group4",
+        "splitMethod": "Equal",
+        "splitDetails": [
+            {
+                "userId": "user7",
+                "amount": 150
+            },
+            {
+                "userId": "user8",
+                "amount": 150
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-13T00:00:00Z",
+        "updatedAt": "2025-01-13T00:00:00Z"
+    },
+    {
+        "_id": "record5",
+        "description": "Neighborhood BBQ",
+        "amount": 200,
+        "date": "2025-01-14T00:00:00Z",
+        "category": "Groceries",
+        "payerId": "user9",
+        "groupId": "group5",
+        "splitMethod": "Percentage",
+        "splitDetails": [
+            {
+                "userId": "user9",
+                "amount": 100
+            },
+            {
+                "userId": "user10",
+                "amount": 100
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-14T00:00:00Z",
+        "updatedAt": "2025-01-14T00:00:00Z"
+    },
+    {
+        "_id": "record6",
+        "description": "Study Materials",
+        "amount": 150,
+        "date": "2025-01-15T00:00:00Z",
+        "category": "Education",
+        "payerId": "user11",
+        "groupId": "group6",
+        "splitMethod": "Equal",
+        "splitDetails": [
+            {
+                "userId": "user11",
+                "amount": 75
+            },
+            {
+                "userId": "user12",
+                "amount": 75
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-15T00:00:00Z",
+        "updatedAt": "2025-01-15T00:00:00Z"
+    },
+    {
+        "_id": "record7",
+        "description": "Team Jerseys",
+        "amount": 350,
+        "date": "2025-01-16T00:00:00Z",
+        "category": "Sports",
+        "payerId": "user13",
+        "groupId": "group7",
+        "splitMethod": "Custom",
+        "splitDetails": [
+            {
+                "userId": "user13",
+                "amount": 175
+            },
+            {
+                "userId": "user14",
+                "amount": 175
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-16T00:00:00Z",
+        "updatedAt": "2025-01-16T00:00:00Z"
+    },
+    {
+        "_id": "record8",
+        "description": "Gym Membership",
+        "amount": 100,
+        "date": "2025-01-17T00:00:00Z",
+        "category": "HealthFitness",
+        "payerId": "user15",
+        "groupId": "group8",
+        "splitMethod": "Percentage",
+        "splitDetails": [
+            {
+                "userId": "user15",
+                "amount": 50
+            },
+            {
+                "userId": "user1",
+                "amount": 50
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-17T00:00:00Z",
+        "updatedAt": "2025-01-17T00:00:00Z"
+    },
+    {
+        "_id": "record9",
+        "description": "Project Contribution",
+        "amount": 500,
+        "date": "2025-01-18T00:00:00Z",
+        "category": "Work",
+        "payerId": "user2",
+        "groupId": "group9",
+        "splitMethod": "Equal",
+        "splitDetails": [
+            {
+                "userId": "user2",
+                "amount": 250
+            },
+            {
+                "userId": "user3",
+                "amount": 250
+            }
+        ],
+        "type": "credit",
+        "createdAt": "2025-01-18T00:00:00Z",
+        "updatedAt": "2025-01-18T00:00:00Z"
+    },
+    {
+        "_id": "record10",
+        "description": "Startup Funding",
+        "amount": 700,
+        "date": "2025-01-19T00:00:00Z",
+        "category": "Finance",
+        "payerId": "user4",
+        "groupId": "group10",
+        "splitMethod": "Custom",
+        "splitDetails": [
+            {
+                "userId": "user4",
+                "amount": 350
+            },
+            {
+                "userId": "user5",
+                "amount": 350
+            }
+        ],
+        "type": "credit",
+        "createdAt": "2025-01-19T00:00:00Z",
+        "updatedAt": "2025-01-19T00:00:00Z"
+    },
+    {
+        "_id": "record11",
+        "description": "Community Event",
+        "amount": 200,
+        "date": "2025-01-20T00:00:00Z",
+        "category": "Community",
+        "payerId": "user6",
+        "groupId": "group11",
+        "splitMethod": "Percentage",
+        "splitDetails": [
+            {
+                "userId": "user6",
+                "amount": 100
+            },
+            {
+                "userId": "user7",
+                "amount": 100
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-20T00:00:00Z",
+        "updatedAt": "2025-01-20T00:00:00Z"
+    },
+    {
+        "_id": "record12",
+        "description": "Club Dues",
+        "amount": 150,
+        "date": "2025-01-21T00:00:00Z",
+        "category": "Entertainment",
+        "payerId": "user8",
+        "groupId": "group12",
+        "splitMethod": "Equal",
+        "splitDetails": [
+            {
+                "userId": "user8",
+                "amount": 75
+            },
+            {
+                "userId": "user9",
+                "amount": 75
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-21T00:00:00Z",
+        "updatedAt": "2025-01-21T00:00:00Z"
+    },
+    {
+        "_id": "record13",
+        "description": "Book Club Purchase",
+        "amount": 100,
+        "date": "2025-01-22T00:00:00Z",
+        "category": "Education",
+        "payerId": "user10",
+        "groupId": "group13",
+        "splitMethod": "Percentage",
+        "splitDetails": [
+            {
+                "userId": "user10",
+                "amount": 50
+            },
+            {
+                "userId": "user11",
+                "amount": 50
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-22T00:00:00Z",
+        "updatedAt": "2025-01-22T00:00:00Z"
+    },
+    {
+        "_id": "record14",
+        "description": "Conference Registration",
+        "amount": 500,
+        "date": "2025-01-23T00:00:00Z",
+        "category": "Travel",
+        "payerId": "user12",
+        "groupId": "group14",
+        "splitMethod": "Custom",
+        "splitDetails": [
+            {
+                "userId": "user12",
+                "amount": 250
+            },
+            {
+                "userId": "user13",
+                "amount": 250
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-23T00:00:00Z",
+        "updatedAt": "2025-01-23T00:00:00Z"
+    },
+    {
+        "_id": "record15",
+        "description": "Craft Supplies",
+        "amount": 75,
+        "date": "2025-01-24T00:00:00Z",
+        "category": "Groceries",
+        "payerId": "user14",
+        "groupId": "group15",
+        "splitMethod": "Equal",
+        "splitDetails": [
+            {
+                "userId": "user14",
+                "amount": 37.5
+            },
+            {
+                "userId": "user15",
+                "amount": 37.5
+            }
+        ],
+        "type": "debit",
+        "createdAt": "2025-01-24T00:00:00Z",
+        "updatedAt": "2025-01-24T00:00:00Z"
+    }
+]

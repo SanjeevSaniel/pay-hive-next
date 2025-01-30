@@ -1,0 +1,212 @@
+[
+    {
+        "userId": "JohnDoeAB1234",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "password": "hashedpassword1",
+        "profileImageUrl": "https://example.com/johndoe1.jpg",
+        "createdAt": "2025-01-01T00:00:00Z",
+        "updatedAt": "2025-01-01T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": false,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "JaneSmithXYZ123",
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "password": "hashedpassword2",
+        "profileImageUrl": "https://example.com/janesmith1.jpg",
+        "createdAt": "2025-01-02T00:00:00Z",
+        "updatedAt": "2025-01-02T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    },
+    {
+        "userId": "MichaelJohnsonJKL567",
+        "name": "Michael Johnson",
+        "email": "michael.johnson@example.com",
+        "password": "hashedpassword3",
+        "profileImageUrl": "https://example.com/michaeljohnson.jpg",
+        "createdAt": "2025-01-03T00:00:00Z",
+        "updatedAt": "2025-01-03T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": false,
+            "pushNotifications": true,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "EmilyDavisGHI890",
+        "name": "Emily Davis",
+        "email": "emily.davis@example.com",
+        "password": "hashedpassword4",
+        "profileImageUrl": "https://example.com/emilydavis.jpg",
+        "createdAt": "2025-01-04T00:00:00Z",
+        "updatedAt": "2025-01-04T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "JamesWilsonDEF345",
+        "name": "James Wilson",
+        "email": "james.wilson@example.com",
+        "password": "hashedpassword5",
+        "profileImageUrl": "https://example.com/jameswilson.jpg",
+        "createdAt": "2025-01-05T00:00:00Z",
+        "updatedAt": "2025-01-05T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": false,
+            "pushNotifications": false,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "SarahJohnsonMNO234",
+        "name": "Sarah Johnson",
+        "email": "sarah.johnson@example.com",
+        "password": "hashedpassword6",
+        "profileImageUrl": "https://example.com/sarahjohnson.jpg",
+        "createdAt": "2025-01-06T00:00:00Z",
+        "updatedAt": "2025-01-06T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    },
+    {
+        "userId": "DavidBrownABC789",
+        "name": "David Brown",
+        "email": "david.brown@example.com",
+        "password": "hashedpassword7",
+        "profileImageUrl": "https://example.com/davidbrown.jpg",
+        "createdAt": "2025-01-07T00:00:00Z",
+        "updatedAt": "2025-01-07T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    },
+    {
+        "userId": "LauraGreenXYZ567",
+        "name": "Laura Green",
+        "email": "laura.green@example.com",
+        "password": "hashedpassword8",
+        "profileImageUrl": "https://example.com/lauragreen.jpg",
+        "createdAt": "2025-01-08T00:00:00Z",
+        "updatedAt": "2025-01-08T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": false,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "RobertWhiteDEF678",
+        "name": "Robert White",
+        "email": "robert.white@example.com",
+        "password": "hashedpassword9",
+        "profileImageUrl": "https://example.com/robertwhite.jpg",
+        "createdAt": "2025-01-09T00:00:00Z",
+        "updatedAt": "2025-01-09T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    },
+    {
+        "userId": "JessicaLeeMNO890",
+        "name": "Jessica Lee",
+        "email": "jessica.lee@example.com",
+        "password": "hashedpassword10",
+        "profileImageUrl": "https://example.com/jessicalee.jpg",
+        "createdAt": "2025-01-10T00:00:00Z",
+        "updatedAt": "2025-01-10T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": false,
+            "pushNotifications": true,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "TomHarrisABC123",
+        "name": "Tom Harris",
+        "email": "tom.harris@example.com",
+        "password": "hashedpassword11",
+        "profileImageUrl": "https://example.com/tomharris.jpg",
+        "createdAt": "2025-01-11T00:00:00Z",
+        "updatedAt": "2025-01-11T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": false,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "KateMartinXYZ345",
+        "name": "Kate Martin",
+        "email": "kate.martin@example.com",
+        "password": "hashedpassword12",
+        "profileImageUrl": "https://example.com/katemartin.jpg",
+        "createdAt": "2025-01-12T00:00:00Z",
+        "updatedAt": "2025-01-12T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    },
+    {
+        "userId": "DanielClarkDEF456",
+        "name": "Daniel Clark",
+        "email": "daniel.clark@example.com",
+        "password": "hashedpassword13",
+        "profileImageUrl": "https://example.com/danielclark.jpg",
+        "createdAt": "2025-01-13T00:00:00Z",
+        "updatedAt": "2025-01-13T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    },
+    {
+        "userId": "EmmaTaylorMNO567",
+        "name": "Emma Taylor",
+        "email": "emma.taylor@example.com",
+        "password": "hashedpassword14",
+        "profileImageUrl": "https://example.com/emmataylor.jpg",
+        "createdAt": "2025-01-14T00:00:00Z",
+        "updatedAt": "2025-01-14T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": false,
+            "smsNotifications": true
+        }
+    },
+    {
+        "userId": "ChrisDavisABC890",
+        "name": "Chris Davis",
+        "email": "chris.davis@example.com",
+        "password": "hashedpassword15",
+        "profileImageUrl": "https://example.com/chrisdavis.jpg",
+        "createdAt": "2025-01-15T00:00:00Z",
+        "updatedAt": "2025-01-15T00:00:00Z",
+        "notificationPreferences": {
+            "emailNotifications": true,
+            "pushNotifications": true,
+            "smsNotifications": false
+        }
+    }
+]

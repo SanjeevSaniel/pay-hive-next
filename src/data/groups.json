@@ -1,0 +1,213 @@
+[
+    {
+        "groupId": "group1",
+        "groupName": "Friends",
+        "description": "Expenses with Friends",
+        "owedAmount": 1500,
+        "borrowedAmount": 0,
+        "isGroup": true,
+        "createdDate": "2024-01-15T00:00:00Z",
+        "membersCount": 3,
+        "memberIds": [
+            "JohnDoeAB1234",
+            "JaneSmithXYZ123",
+            "EmilyDavisGHI890"
+        ]
+    },
+    {
+        "groupId": "group2",
+        "groupName": "Family",
+        "description": "Family expenses",
+        "owedAmount": 1000,
+        "borrowedAmount": 500,
+        "isGroup": true,
+        "createdDate": "2024-02-15T00:00:00Z",
+        "membersCount": 4,
+        "memberIds": [
+            "MichaelJohnsonJKL567",
+            "EmilyDavisGHI890"
+        ]
+    },
+    {
+        "groupId": "group3",
+        "groupName": "Colleagues",
+        "description": "Work-related expenses",
+        "owedAmount": 250,
+        "borrowedAmount": 100,
+        "isGroup": true,
+        "createdDate": "2024-03-20T00:00:00Z",
+        "membersCount": 6,
+        "memberIds": [
+            "JamesWilsonDEF345",
+            "SarahJohnsonMNO234"
+        ]
+    },
+    {
+        "groupId": "group4",
+        "groupName": "Travel Buddies",
+        "description": "Travel expenses",
+        "owedAmount": 800,
+        "borrowedAmount": 300,
+        "isGroup": true,
+        "createdDate": "2024-04-10T00:00:00Z",
+        "membersCount": 7,
+        "memberIds": [
+            "DavidBrownABC789",
+            "LauraGreenXYZ567"
+        ]
+    },
+    {
+        "groupId": "group5",
+        "groupName": "Neighbors",
+        "description": "Neighborhood activities",
+        "owedAmount": 450,
+        "borrowedAmount": 150,
+        "isGroup": true,
+        "createdDate": "2024-05-05T00:00:00Z",
+        "membersCount": 4,
+        "memberIds": [
+            "RobertWhiteDEF678",
+            "JessicaLeeMNO890"
+        ]
+    },
+    {
+        "groupId": "group6",
+        "groupName": "Study Group",
+        "description": "Study-related expenses",
+        "owedAmount": 600,
+        "borrowedAmount": 250,
+        "isGroup": true,
+        "createdDate": "2024-06-15T00:00:00Z",
+        "membersCount": 8,
+        "memberIds": [
+            "TomHarrisABC123",
+            "KateMartinXYZ345"
+        ]
+    },
+    {
+        "groupId": "group7",
+        "groupName": "Sports Team",
+        "description": "Sports activities",
+        "owedAmount": 700,
+        "borrowedAmount": 200,
+        "isGroup": true,
+        "createdDate": "2024-07-25T00:00:00Z",
+        "membersCount": 5,
+        "memberIds": [
+            "DanielClarkDEF456",
+            "EmmaTaylorMNO567"
+        ]
+    },
+    {
+        "groupId": "group8",
+        "groupName": "Gym Buddies",
+        "description": "Fitness expenses",
+        "owedAmount": 300,
+        "borrowedAmount": 100,
+        "isGroup": true,
+        "createdDate": "2024-08-10T00:00:00Z",
+        "membersCount": 6,
+        "memberIds": [
+            "ChrisDavisABC890",
+            "JohnDoeAB1234"
+        ]
+    },
+    {
+        "groupId": "group9",
+        "groupName": "Project Team",
+        "description": "Project-related expenses",
+        "owedAmount": 550,
+        "borrowedAmount": 300,
+        "isGroup": true,
+        "createdDate": "2024-09-05T00:00:00Z",
+        "membersCount": 7,
+        "memberIds": [
+            "JaneSmithXYZ123",
+            "MichaelJohnsonJKL567"
+        ]
+    },
+    {
+        "groupId": "group10",
+        "groupName": "Startup Team",
+        "description": "Startup expenses",
+        "owedAmount": 1000,
+        "borrowedAmount": 700,
+        "isGroup": true,
+        "createdDate": "2024-10-15T00:00:00Z",
+        "membersCount": 10,
+        "memberIds": [
+            "EmilyDavisGHI890",
+            "JamesWilsonDEF345"
+        ]
+    },
+    {
+        "groupId": "group11",
+        "groupName": "Community Volunteers",
+        "description": "Community service expenses",
+        "owedAmount": 400,
+        "borrowedAmount": 150,
+        "isGroup": true,
+        "createdDate": "2024-11-20T00:00:00Z",
+        "membersCount": 12,
+        "memberIds": [
+            "SarahJohnsonMNO234",
+            "DavidBrownABC789"
+        ]
+    },
+    {
+        "groupId": "group12",
+        "groupName": "Club Members",
+        "description": "Club activities",
+        "owedAmount": 750,
+        "borrowedAmount": 200,
+        "isGroup": true,
+        "createdDate": "2024-12-10T00:00:00Z",
+        "membersCount": 9,
+        "memberIds": [
+            "LauraGreenXYZ567",
+            "RobertWhiteDEF678"
+        ]
+    },
+    {
+        "groupId": "group13",
+        "groupName": "Reading Circle",
+        "description": "Book club expenses",
+        "owedAmount": 350,
+        "borrowedAmount": 100,
+        "isGroup": true,
+        "createdDate": "2025-01-05T00:00:00Z",
+        "membersCount": 5,
+        "memberIds": [
+            "JessicaLeeMNO890",
+            "TomHarrisABC123"
+        ]
+    },
+    {
+        "groupId": "group14",
+        "groupName": "Conference Attendees",
+        "description": "Conference expenses",
+        "owedAmount": 900,
+        "borrowedAmount": 600,
+        "isGroup": true,
+        "createdDate": "2025-02-10T00:00:00Z",
+        "membersCount": 10,
+        "memberIds": [
+            "KateMartinXYZ345",
+            "DanielClarkDEF456"
+        ]
+    },
+    {
+        "groupId": "group15",
+        "groupName": "Craft Enthusiasts",
+        "description": "Craft activities",
+        "owedAmount": 200,
+        "borrowedAmount": 50,
+        "isGroup": true,
+        "createdDate": "2025-03-05T00:00:00Z",
+        "membersCount": 6,
+        "memberIds": [
+            "EmmaTaylorMNO567",
+            "ChrisDavisABC890"
+        ]
+    }
+]

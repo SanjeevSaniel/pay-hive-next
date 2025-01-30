@@ -1,0 +1,287 @@
+[
+    {
+        "id": "report1",
+        "userId": "user1",
+        "groupId": "group1",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 300,
+        "categoryBreakdown": [
+            {
+                "category": "DiningOut",
+                "totalAmount": 200
+            },
+            {
+                "category": "Fuel",
+                "totalAmount": 100
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report2",
+        "userId": "user2",
+        "groupId": "group2",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 400,
+        "categoryBreakdown": [
+            {
+                "category": "Travel",
+                "totalAmount": 250
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report3",
+        "userId": "user3",
+        "groupId": "group3",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 350,
+        "categoryBreakdown": [
+            {
+                "category": "Work",
+                "totalAmount": 200
+            },
+            {
+                "category": "HealthFitness",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report4",
+        "userId": "user4",
+        "groupId": "group4",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 500,
+        "categoryBreakdown": [
+            {
+                "category": "Entertainment",
+                "totalAmount": 300
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 200
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report5",
+        "userId": "user5",
+        "groupId": "group5",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 250,
+        "categoryBreakdown": [
+            {
+                "category": "Education",
+                "totalAmount": 150
+            },
+            {
+                "category": "DiningOut",
+                "totalAmount": 100
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report6",
+        "userId": "user6",
+        "groupId": "group6",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 400,
+        "categoryBreakdown": [
+            {
+                "category": "HealthFitness",
+                "totalAmount": 250
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report7",
+        "userId": "user7",
+        "groupId": "group7",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 350,
+        "categoryBreakdown": [
+            {
+                "category": "Travel",
+                "totalAmount": 200
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report8",
+        "userId": "user8",
+        "groupId": "group8",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 300,
+        "categoryBreakdown": [
+            {
+                "category": "DiningOut",
+                "totalAmount": 200
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 100
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report9",
+        "userId": "user9",
+        "groupId": "group9",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 450,
+        "categoryBreakdown": [
+            {
+                "category": "Work",
+                "totalAmount": 250
+            },
+            {
+                "category": "Entertainment",
+                "totalAmount": 200
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report10",
+        "userId": "user10",
+        "groupId": "group10",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 500,
+        "categoryBreakdown": [
+            {
+                "category": "Travel",
+                "totalAmount": 300
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 200
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report11",
+        "userId": "user11",
+        "groupId": "group11",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 300,
+        "categoryBreakdown": [
+            {
+                "category": "Education",
+                "totalAmount": 200
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 100
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report12",
+        "userId": "user12",
+        "groupId": "group12",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 400,
+        "categoryBreakdown": [
+            {
+                "category": "HealthFitness",
+                "totalAmount": 250
+            },
+            {
+                "category": "DiningOut",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report13",
+        "userId": "user13",
+        "groupId": "group13",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 350,
+        "categoryBreakdown": [
+            {
+                "category": "Work",
+                "totalAmount": 200
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report14",
+        "userId": "user14",
+        "groupId": "group14",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 450,
+        "categoryBreakdown": [
+            {
+                "category": "Work",
+                "totalAmount": 300
+            },
+            {
+                "category": "DiningOut",
+                "totalAmount": 150
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    },
+    {
+        "id": "report15",
+        "userId": "user15",
+        "groupId": "group15",
+        "startDate": "2025-01-01T00:00:00Z",
+        "endDate": "2025-01-31T00:00:00Z",
+        "totalExpenses": 500,
+        "categoryBreakdown": [
+            {
+                "category": "Education",
+                "totalAmount": 300
+            },
+            {
+                "category": "Groceries",
+                "totalAmount": 200
+            }
+        ],
+        "createdAt": "2025-02-01T00:00:00Z"
+    }
+]

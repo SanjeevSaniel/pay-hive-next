@@ -1,0 +1,152 @@
+[
+    {
+        "_id": "payment1",
+        "fromUserId": "user2",
+        "toUserId": "user1",
+        "amount": 50,
+        "date": "2025-01-15T00:00:00Z",
+        "groupId": "group1",
+        "createdAt": "2025-01-15T00:00:00Z",
+        "updatedAt": "2025-01-15T00:00:00Z"
+    },
+    {
+        "_id": "payment2",
+        "fromUserId": "user4",
+        "toUserId": "user3",
+        "amount": 100,
+        "date": "2025-01-16T00:00:00Z",
+        "groupId": "group2",
+        "createdAt": "2025-01-16T00:00:00Z",
+        "updatedAt": "2025-01-16T00:00:00Z"
+    },
+    {
+        "_id": "payment3",
+        "fromUserId": "user6",
+        "toUserId": "user5",
+        "amount": 75,
+        "date": "2025-01-17T00:00:00Z",
+        "groupId": "group3",
+        "createdAt": "2025-01-17T00:00:00Z",
+        "updatedAt": "2025-01-17T00:00:00Z"
+    },
+    {
+        "_id": "payment4",
+        "fromUserId": "user8",
+        "toUserId": "user7",
+        "amount": 200,
+        "date": "2025-01-18T00:00:00Z",
+        "groupId": "group4",
+        "createdAt": "2025-01-18T00:00:00Z",
+        "updatedAt": "2025-01-18T00:00:00Z"
+    },
+    {
+        "_id": "payment5",
+        "fromUserId": "user10",
+        "toUserId": "user9",
+        "amount": 50,
+        "date": "2025-01-19T00:00:00Z",
+        "groupId": "group5",
+        "createdAt": "2025-01-19T00:00:00Z",
+        "updatedAt": "2025-01-19T00:00:00Z"
+    },
+    {
+        "_id": "payment6",
+        "fromUserId": "user12",
+        "toUserId": "user11",
+        "amount": 150,
+        "date": "2025-01-20T00:00:00Z",
+        "groupId": "group6",
+        "createdAt": "2025-01-20T00:00:00Z",
+        "updatedAt": "2025-01-20T00:00:00Z"
+    },
+    {
+        "_id": "payment7",
+        "fromUserId": "user14",
+        "toUserId": "user13",
+        "amount": 100,
+        "date": "2025-01-21T00:00:00Z",
+        "groupId": "group7",
+        "createdAt": "2025-01-21T00:00:00Z",
+        "updatedAt": "2025-01-21T00:00:00Z"
+    },
+    {
+        "_id": "payment8",
+        "fromUserId": "user15",
+        "toUserId": "user1",
+        "amount": 80,
+        "date": "2025-01-22T00:00:00Z",
+        "groupId": "group8",
+        "createdAt": "2025-01-22T00:00:00Z",
+        "updatedAt": "2025-01-22T00:00:00Z"
+    },
+    {
+        "_id": "payment9",
+        "fromUserId": "user3",
+        "toUserId": "user2",
+        "amount": 120,
+        "date": "2025-01-23T00:00:00Z",
+        "groupId": "group9",
+        "createdAt": "2025-01-23T00:00:00Z",
+        "updatedAt": "2025-01-23T00:00:00Z"
+    },
+    {
+        "_id": "payment10",
+        "fromUserId": "user5",
+        "toUserId": "user4",
+        "amount": 250,
+        "date": "2025-01-24T00:00:00Z",
+        "groupId": "group10",
+        "createdAt": "2025-01-24T00:00:00Z",
+        "updatedAt": "2025-01-24T00:00:00Z"
+    },
+    {
+        "_id": "payment11",
+        "fromUserId": "user7",
+        "toUserId": "user6",
+        "amount": 200,
+        "date": "2025-01-25T00:00:00Z",
+        "groupId": "group11",
+        "createdAt": "2025-01-25T00:00:00Z",
+        "updatedAt": "2025-01-25T00:00:00Z"
+    },
+    {
+        "_id": "payment12",
+        "fromUserId": "user9",
+        "toUserId": "user8",
+        "amount": 90,
+        "date": "2025-01-26T00:00:00Z",
+        "groupId": "group12",
+        "createdAt": "2025-01-26T00:00:00Z",
+        "updatedAt": "2025-01-26T00:00:00Z"
+    },
+    {
+        "_id": "payment13",
+        "fromUserId": "user11",
+        "toUserId": "user10",
+        "amount": 150,
+        "date": "2025-01-27T00:00:00Z",
+        "groupId": "group13",
+        "createdAt": "2025-01-27T00:00:00Z",
+        "updatedAt": "2025-01-27T00:00:00Z"
+    },
+    {
+        "_id": "payment14",
+        "fromUserId": "user13",
+        "toUserId": "user12",
+        "amount": 100,
+        "date": "2025-01-28T00:00:00Z",
+        "groupId": "group14",
+        "createdAt": "2025-01-28T00:00:00Z",
+        "updatedAt": "2025-01-28T00:00:00Z"
+    },
+    {
+        "_id": "payment15",
+        "fromUserId": "user15",
+        "toUserId": "user14",
+        "amount": 200,
+        "date": "2025-01-30T00:00:00Z",
+        "groupId": "group15",
+        "createdAt": "2025-01-30T00:00:00Z",
+        "updatedAt": "2025-01-30T00:00:00Z"
+    }
+]
