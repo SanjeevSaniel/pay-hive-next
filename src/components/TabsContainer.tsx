@@ -3,7 +3,7 @@ import { Component, House, ListTree, User } from 'lucide-react';
 import Account from './Account';
 import Expenses from './Expenses';
 import Groups from './Groups/Groups';
-import Home from './Home';
+import Home from './Home/Home';
 
 const TabsContainer = () => {
   return (
