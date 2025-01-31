@@ -11,18 +11,18 @@ const GroupHeader = ({ basePath }: GroupHeaderProps) => {
     <div className='flex justify-between items-center'>
       <Button
         asChild
-        size='lg'
+        size='default'
         variant='secondary'
-        className='px-4 rounded-xl'>
+        className='rounded-xl'>
         <Link href={`${basePath}/groups`}>
           <ChevronLeft /> Back
         </Link>
       </Button>
 
       <Button
-        size='lg'
-        variant='outline'
-        className='px-4 text-md rounded-xl'>
+        size='default'
+        variant='default'
+        className='rounded-xl'>
         <Plus />
         Add Expense
       </Button>
