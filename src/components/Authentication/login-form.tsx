@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -11,32 +10,44 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import Link from 'next/link';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import toast from 'react-hot-toast';
-import useAppStore from '@/stores/useAppStore';
+import { useBasePath } from '@/context/BasePathContext';
+import { cn } from '@/lib/utils';
+import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
 import { getUsers } from '@/services/userService';
-import { useBasePath } from '@/context/BasePathContext';
-import { getFinancialRecords } from '@/services/financialRecordService';
+import useAppStore from '@/stores/useAppStore';
+import { Group } from '@/types/types';
+import axios from 'axios';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-export function LoginForm({
+// Default Group Definition
+const createDefaultGroup = (userId: string) => ({
+  groupName: 'General Expenses',
+  description: 'Expenses not associated with any specific group',
+  groupType: 'default',
+  createdDate: new Date().toISOString(),
+  memberIds: [userId],
+});
+
+const LoginForm = ({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+}: React.ComponentPropsWithoutRef<'div'>) => {
   const router = useRouter();
   const basePath = useBasePath();
   const [user, setUser] = useState({ email: '', password: '' });
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  // const [loading, setLoading] = useState(false);
 
+  const addGroup = useAppStore((state) => state.addGroup);
   const setGroups = useAppStore((state) => state.setGroups);
   const setUsers = useAppStore((state) => state.setUsers);
   const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
 
-  const fetchDataAfterLogin = async () => {
+  const fetchDataAfterLogin = async (userId: string) => {
     try {
       const groupsResponse = await getGroups();
       const usersResponse = await getUsers();
@@ -45,6 +56,23 @@ export function LoginForm({
       setGroups(groupsResponse.data);
       setUsers(usersResponse.data);
       setFinancialRecords(financialRecordsResponse.data); // Store financial records in Zustand
+
+      // Check if the default group exists
+      const defaultGroupExists = groupsResponse.data.some(
+        (group: Group) => group.groupType === 'default',
+      );
+
+      // Create default group if it doesn't exist
+      if (!defaultGroupExists) {
+        const defaultGroup = createDefaultGroup(userId);
+        try {
+          const response = await axios.post('/api/groups/create', defaultGroup);
+          addGroup(response.data); // Use addGroup method to add the group
+          console.log('Default group created:', response.data);
+        } catch (createError) {
+          console.error('Failed to create default group:', createError);
+        }
+      }
     } catch (error) {
       console.error('Failed to fetch data after login', error);
     }
@@ -54,16 +82,17 @@ export function LoginForm({
     e.preventDefault(); // Prevent the default form submission behavior
 
     try {
-      setLoading(true); // Set loading state to true
-      console.log(loading);
+      // setLoading(true); // Set loading state to true
 
       // Make a POST request to the login API endpoint
       const response = await axios.post('/api/users/login', user);
 
+      const userId = response.data.userId; // Extract the userId from the response
+
       console.log('Login success', response.data);
       toast.success('Login successful'); // Display a success toast
 
-      await fetchDataAfterLogin(); // Fetch data after successful login
+      await fetchDataAfterLogin(userId); // Fetch data after successful login
 
       router.push(basePath); // Redirect to the /v1 page
     } catch (error: unknown) {
@@ -74,9 +103,10 @@ export function LoginForm({
       } else {
         toast.error('Login failed'); // Display a generic error message
       }
-    } finally {
-      setLoading(false); // Reset the loading state
     }
+    // finally {
+    //   setLoading(false); // Reset the loading state
+    // }
   };
 
   useEffect(() => {
@@ -177,4 +207,6 @@ export function LoginForm({
       </div>
     </div>
   );
-}
+};
+
+export default LoginForm;
