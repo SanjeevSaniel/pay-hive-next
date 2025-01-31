@@ -24,7 +24,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ group }) => (
           <Boxes />
         </div>
         <div className='flex flex-col justify-center space-y-0.5'>
-          <CardTitle className='flex items-center gap-2 text-xl'>
+          <CardTitle className='flex items-center gap-2 text-lg'>
             {group.groupName}
           </CardTitle>
           <CardDescription className='flex items-center space-x-2 text-md'>
