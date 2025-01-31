@@ -1,13 +1,18 @@
 'use client';
 
-import CreateGroup from '@/components/Groups/CreateGroup';
+import AddGroup from '@/components/Groups/AddGroup';
 import { getGroups } from '@/services/groupService';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import useAppStore from '@/stores/useAppStore';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import GroupCard from '@/components/Groups/GroupCard';
 import TotalGroupSpendCard from '@/components/Groups/TotalGroupSpendCard';
 import { Group, FinancialRecord } from '@/types/types';
+
+// Function to get the default group
+const getDefaultGroup = (groups: Group[]) => {
+  return groups.find((group: Group) => group.groupType === 'default') || null;
+};
 
 const GroupsPage = () => {
   const groups = useAppStore((state) => state.groups as Group[]);
@@ -16,12 +21,16 @@ const GroupsPage = () => {
     (state) => state.financialRecords as FinancialRecord[],
   );
   const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
+  const [defaultGroup, setDefaultGroup] = useState<Group | null>(null);
 
   useEffect(() => {
     const fetchGroups = async () => {
       try {
         const response = await getGroups();
         setGroups(response.data); // Initialize groups from the server
+        // Check for the default group and update state
+        const defaultGroup = getDefaultGroup(response.data);
+        setDefaultGroup(defaultGroup);
       } catch (error) {
         console.error('Failed to fetch groups:', error);
       }
@@ -38,20 +47,27 @@ const GroupsPage = () => {
 
     if (groups.length === 0) {
       fetchGroups(); // Fetch groups if the list is empty
+    } else {
+      // Check for the default group and update state
+      const defaultGroup = getDefaultGroup(groups);
+      setDefaultGroup(defaultGroup);
     }
 
     if (financialRecords.length === 0) {
       fetchFinancialRecords(); // Fetch financial records if the list is empty
     }
-  }, [setGroups, setFinancialRecords, groups.length, financialRecords.length]);
+  }, [groups, setGroups, setFinancialRecords, financialRecords]);
 
-  // Sort groups by creation date
+  // Sort groups by creation date and filter out the default group
   const sortedGroups = useMemo(
     () =>
-      [...groups].sort(
-        (a, b) =>
-          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
-      ),
+      [...groups]
+        .filter((group) => group.groupType !== 'default')
+        .sort(
+          (a, b) =>
+            new Date(b.createdDate).getTime() -
+            new Date(a.createdDate).getTime(),
+        ),
     [groups],
   );
 
@@ -79,7 +95,7 @@ const GroupsPage = () => {
             {sortedGroups.length}
           </span>
         </div>
-        <CreateGroup />
+        <AddGroup />
       </div>
 
       {/* Total Group Spend Card */}
@@ -88,6 +104,14 @@ const GroupsPage = () => {
       </div>
 
       <div className='grid grid-cols-1 gap-2 p-2'>
+        {/* Default Group Card */}
+        {defaultGroup && (
+          <GroupCard
+            key={defaultGroup.groupId}
+            group={defaultGroup}
+          />
+        )}
+
         {sortedGroups.map((group) => (
           <GroupCard
             key={group.groupId}
