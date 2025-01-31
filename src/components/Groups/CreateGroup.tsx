@@ -1,5 +1,12 @@
 'use client';
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import useAppStore from '@/stores/useAppStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -7,7 +14,7 @@ import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Checkbox } from '../ui/checkbox';
+import { Button } from '../ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -22,11 +29,9 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import { Button } from '../ui/button';
 
 const formSchema = z.object({
   groupName: z
@@ -35,9 +40,9 @@ const formSchema = z.object({
     .max(50, { message: 'Group name must be at most 50 characters long' }),
   description: z
     .string()
-    .min(5, { message: 'Description must be at least 5 characters long' })
+    .min(0, { message: 'Description must be at least 5 characters long' })
     .max(200, { message: 'Description must be at most 200 characters long' }),
-  isGroup: z.boolean(),
+  groupType: z.string().min(2, 'Group type must be choosen.'),
 });
 
 type Inputs = z.infer<typeof formSchema>;
@@ -50,7 +55,7 @@ const CreateGroup = () => {
     defaultValues: {
       groupName: '',
       description: '',
-      isGroup: true,
+      groupType: '',
     },
   });
 
@@ -60,7 +65,7 @@ const CreateGroup = () => {
         groupName: data.groupName,
         description: data.description,
         memberIds: [],
-        isGroup: data.isGroup,
+        groupType: data.groupType,
       });
 
       console.log('Group created successfully', response.data);
@@ -114,7 +119,8 @@ const CreateGroup = () => {
                   {/* <FormLabel>Group Name</FormLabel> */}
                   <FormControl>
                     <Input
-                      className='h-fit text-xl'
+                      required
+                      className='h-fit text-lg'
                       placeholder='Group Name'
                       {...field}
                     />
@@ -131,7 +137,7 @@ const CreateGroup = () => {
                   {/* <FormLabel>Description</FormLabel> */}
                   <FormControl>
                     <Input
-                      className='h-fit text-xl'
+                      className='h-fit text-lg'
                       placeholder='Description'
                       {...field}
                     />
@@ -142,17 +148,37 @@ const CreateGroup = () => {
             />
             <FormField
               control={form.control}
-              name='isGroup'
+              name='groupType'
               render={({ field }) => (
-                <FormItem className='flex items-center p-2 space-x-3 space-y-0.5'>
-                  <FormControl>
-                    <Checkbox
-                      defaultChecked={field.value}
-                      onChange={(e) => field.onChange(e)}
-                      className='w-5 h-5'
-                    />
-                  </FormControl>
-                  <FormLabel className='text-lg'>Is Group</FormLabel>
+                <FormItem>
+                  {/* <FormLabel>Type</FormLabel> */}
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger className='text-lg'>
+                        <SelectValue placeholder='Select a group type' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem
+                        value='m@example.com'
+                        className='text-lg'>
+                        m@example.com
+                      </SelectItem>
+                      <SelectItem
+                        value='m@google.com'
+                        className='text-lg'>
+                        m@google.com
+                      </SelectItem>
+                      <SelectItem
+                        value='m@support.com'
+                        className='text-lg'>
+                        m@support.com
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+
                   <FormMessage />
                 </FormItem>
               )}
