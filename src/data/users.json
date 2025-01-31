@@ -4,182 +4,235 @@
         "name": "John Doe",
         "email": "john.doe@example.com",
         "password": "hashedpassword1",
-        "profileImageUrl": "https://example.com/johndoe1.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
         "createdAt": "2025-01-01T00:00:00Z",
         "updatedAt": "2025-01-01T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": false,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group1",
+            "group3"
+        ]
     },
     {
         "userId": "JaneSmithXYZ123",
         "name": "Jane Smith",
         "email": "jane.smith@example.com",
         "password": "hashedpassword2",
-        "profileImageUrl": "https://example.com/janesmith1.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
         "createdAt": "2025-01-02T00:00:00Z",
         "updatedAt": "2025-01-02T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group1",
+            "group9"
+        ]
     },
     {
         "userId": "MichaelJohnsonJKL567",
         "name": "Michael Johnson",
         "email": "michael.johnson@example.com",
         "password": "hashedpassword3",
-        "profileImageUrl": "https://example.com/michaeljohnson.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
         "createdAt": "2025-01-03T00:00:00Z",
         "updatedAt": "2025-01-03T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": false,
             "pushNotifications": true,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group2",
+            "group9"
+        ]
     },
     {
         "userId": "EmilyDavisGHI890",
         "name": "Emily Davis",
         "email": "emily.davis@example.com",
         "password": "hashedpassword4",
-        "profileImageUrl": "https://example.com/emilydavis.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg",
         "createdAt": "2025-01-04T00:00:00Z",
         "updatedAt": "2025-01-04T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group1",
+            "group2",
+            "group10"
+        ]
     },
     {
         "userId": "JamesWilsonDEF345",
         "name": "James Wilson",
         "email": "james.wilson@example.com",
         "password": "hashedpassword5",
-        "profileImageUrl": "https://example.com/jameswilson.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/428321/pexels-photo-428321.jpeg",
         "createdAt": "2025-01-05T00:00:00Z",
         "updatedAt": "2025-01-05T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": false,
             "pushNotifications": false,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group3",
+            "group10"
+        ]
     },
     {
         "userId": "SarahJohnsonMNO234",
         "name": "Sarah Johnson",
         "email": "sarah.johnson@example.com",
         "password": "hashedpassword6",
-        "profileImageUrl": "https://example.com/sarahjohnson.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
         "createdAt": "2025-01-06T00:00:00Z",
         "updatedAt": "2025-01-06T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group3",
+            "group11"
+        ]
     },
     {
         "userId": "DavidBrownABC789",
         "name": "David Brown",
         "email": "david.brown@example.com",
         "password": "hashedpassword7",
-        "profileImageUrl": "https://example.com/davidbrown.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
         "createdAt": "2025-01-07T00:00:00Z",
         "updatedAt": "2025-01-07T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group4",
+            "group11"
+        ]
     },
     {
         "userId": "LauraGreenXYZ567",
         "name": "Laura Green",
         "email": "laura.green@example.com",
         "password": "hashedpassword8",
-        "profileImageUrl": "https://example.com/lauragreen.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
         "createdAt": "2025-01-08T00:00:00Z",
         "updatedAt": "2025-01-08T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": false,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group4",
+            "group12"
+        ]
     },
     {
         "userId": "RobertWhiteDEF678",
         "name": "Robert White",
         "email": "robert.white@example.com",
         "password": "hashedpassword9",
-        "profileImageUrl": "https://example.com/robertwhite.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/428321/pexels-photo-428321.jpeg",
         "createdAt": "2025-01-09T00:00:00Z",
         "updatedAt": "2025-01-09T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group5",
+            "group12"
+        ]
     },
     {
         "userId": "JessicaLeeMNO890",
         "name": "Jessica Lee",
         "email": "jessica.lee@example.com",
         "password": "hashedpassword10",
-        "profileImageUrl": "https://example.com/jessicalee.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
         "createdAt": "2025-01-10T00:00:00Z",
         "updatedAt": "2025-01-10T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": false,
             "pushNotifications": true,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group5",
+            "group13"
+        ]
     },
     {
         "userId": "TomHarrisABC123",
         "name": "Tom Harris",
         "email": "tom.harris@example.com",
         "password": "hashedpassword11",
-        "profileImageUrl": "https://example.com/tomharris.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
         "createdAt": "2025-01-11T00:00:00Z",
         "updatedAt": "2025-01-11T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": false,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group6",
+            "group13"
+        ]
     },
     {
         "userId": "KateMartinXYZ345",
         "name": "Kate Martin",
         "email": "kate.martin@example.com",
         "password": "hashedpassword12",
-        "profileImageUrl": "https://example.com/katemartin.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
         "createdAt": "2025-01-12T00:00:00Z",
         "updatedAt": "2025-01-12T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group6",
+            "group14"
+        ]
     },
     {
         "userId": "DanielClarkDEF456",
         "name": "Daniel Clark",
         "email": "daniel.clark@example.com",
         "password": "hashedpassword13",
-        "profileImageUrl": "https://example.com/danielclark.jpg",
+        "profileImageUrl": "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
         "createdAt": "2025-01-13T00:00:00Z",
         "updatedAt": "2025-01-13T00:00:00Z",
         "notificationPreferences": {
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group7",
+            "group14"
+        ]
     },
     {
         "userId": "EmmaTaylorMNO567",
@@ -193,7 +246,11 @@
             "emailNotifications": true,
             "pushNotifications": false,
             "smsNotifications": true
-        }
+        },
+        "groupIds": [
+            "group7",
+            "group14"
+        ]
     },
     {
         "userId": "ChrisDavisABC890",
@@ -207,6 +264,10 @@
             "emailNotifications": true,
             "pushNotifications": true,
             "smsNotifications": false
-        }
+        },
+        "groupIds": [
+            "group8",
+            "group14"
+        ]
     }
 ]

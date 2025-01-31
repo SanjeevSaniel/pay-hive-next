@@ -48,6 +48,7 @@ export interface UserDocument extends Document {
   forgotPasswordTokenExpires?: Date;
   verifyEmailToken?: string;
   verifyEmailTokenExpires?: Date;
+  groupIds: string[]; // List of group IDs the user belongs to
 }
 
 const notificationPreferencesSchema = new Schema<NotificationPreferences>({
@@ -109,6 +110,10 @@ const userSchema = new Schema<UserDocument>({
   },
   verifyEmailTokenExpires: {
     type: Date,
+  },
+  groupIds: {
+    type: [String], // List of group IDs
+    default: [],
   },
 });
 

@@ -5,7 +5,7 @@
         "description": "Expenses with Friends",
         "owedAmount": 1500,
         "borrowedAmount": 0,
-        "isGroup": true,
+        "groupType": "Friends",
         "createdDate": "2024-01-15T00:00:00Z",
         "membersCount": 3,
         "memberIds": [
@@ -20,7 +20,7 @@
         "description": "Family expenses",
         "owedAmount": 1000,
         "borrowedAmount": 500,
-        "isGroup": true,
+        "groupType": "Family",
         "createdDate": "2024-02-15T00:00:00Z",
         "membersCount": 4,
         "memberIds": [
@@ -34,7 +34,7 @@
         "description": "Work-related expenses",
         "owedAmount": 250,
         "borrowedAmount": 100,
-        "isGroup": true,
+        "groupType": "Work",
         "createdDate": "2024-03-20T00:00:00Z",
         "membersCount": 6,
         "memberIds": [
@@ -48,7 +48,7 @@
         "description": "Travel expenses",
         "owedAmount": 800,
         "borrowedAmount": 300,
-        "isGroup": true,
+        "groupType": "Travel",
         "createdDate": "2024-04-10T00:00:00Z",
         "membersCount": 7,
         "memberIds": [
@@ -62,7 +62,7 @@
         "description": "Neighborhood activities",
         "owedAmount": 450,
         "borrowedAmount": 150,
-        "isGroup": true,
+        "groupType": "Neighbors",
         "createdDate": "2024-05-05T00:00:00Z",
         "membersCount": 4,
         "memberIds": [
@@ -76,7 +76,7 @@
         "description": "Study-related expenses",
         "owedAmount": 600,
         "borrowedAmount": 250,
-        "isGroup": true,
+        "groupType": "Study Group",
         "createdDate": "2024-06-15T00:00:00Z",
         "membersCount": 8,
         "memberIds": [
@@ -90,7 +90,7 @@
         "description": "Sports activities",
         "owedAmount": 700,
         "borrowedAmount": 200,
-        "isGroup": true,
+        "groupType": "Sports",
         "createdDate": "2024-07-25T00:00:00Z",
         "membersCount": 5,
         "memberIds": [
@@ -104,7 +104,7 @@
         "description": "Fitness expenses",
         "owedAmount": 300,
         "borrowedAmount": 100,
-        "isGroup": true,
+        "groupType": "Fitness Group",
         "createdDate": "2024-08-10T00:00:00Z",
         "membersCount": 6,
         "memberIds": [
@@ -118,7 +118,7 @@
         "description": "Project-related expenses",
         "owedAmount": 550,
         "borrowedAmount": 300,
-        "isGroup": true,
+        "groupType": "Work",
         "createdDate": "2024-09-05T00:00:00Z",
         "membersCount": 7,
         "memberIds": [
@@ -132,7 +132,7 @@
         "description": "Startup expenses",
         "owedAmount": 1000,
         "borrowedAmount": 700,
-        "isGroup": true,
+        "groupType": "Work",
         "createdDate": "2024-10-15T00:00:00Z",
         "membersCount": 10,
         "memberIds": [
@@ -146,7 +146,7 @@
         "description": "Community service expenses",
         "owedAmount": 400,
         "borrowedAmount": 150,
-        "isGroup": true,
+        "groupType": "Volunteers",
         "createdDate": "2024-11-20T00:00:00Z",
         "membersCount": 12,
         "memberIds": [
@@ -160,7 +160,7 @@
         "description": "Club activities",
         "owedAmount": 750,
         "borrowedAmount": 200,
-        "isGroup": true,
+        "groupType": "Club Members",
         "createdDate": "2024-12-10T00:00:00Z",
         "membersCount": 9,
         "memberIds": [
@@ -174,7 +174,7 @@
         "description": "Book club expenses",
         "owedAmount": 350,
         "borrowedAmount": 100,
-        "isGroup": true,
+        "groupType": "Book Club",
         "createdDate": "2025-01-05T00:00:00Z",
         "membersCount": 5,
         "memberIds": [
@@ -188,7 +188,7 @@
         "description": "Conference expenses",
         "owedAmount": 900,
         "borrowedAmount": 600,
-        "isGroup": true,
+        "groupType": "Conference",
         "createdDate": "2025-02-10T00:00:00Z",
         "membersCount": 10,
         "memberIds": [
@@ -202,7 +202,7 @@
         "description": "Craft activities",
         "owedAmount": 200,
         "borrowedAmount": 50,
-        "isGroup": true,
+        "groupType": "Hobbyists",
         "createdDate": "2025-03-05T00:00:00Z",
         "membersCount": 6,
         "memberIds": [

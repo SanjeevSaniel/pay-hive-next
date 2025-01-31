@@ -5,9 +5,7 @@ export interface GroupDocument extends Document {
   groupId: string;
   groupName: string;
   description: string;
-  owedAmount: number;
-  borrowedAmount: number;
-  isGroup: boolean;
+  groupType: string;
   createdDate: Date;
   memberIds: string[];
 }
@@ -25,17 +23,9 @@ const groupSchema = new Schema<GroupDocument>({
   description: {
     type: String,
   },
-  owedAmount: {
-    type: Number,
-    default: 0,
-  },
-  borrowedAmount: {
-    type: Number,
-    default: 0,
-  },
-  isGroup: {
-    type: Boolean,
-    default: true,
+  groupType: {
+    type: String,
+    required: true,
   },
   createdDate: {
     type: Date,
