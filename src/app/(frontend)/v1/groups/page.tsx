@@ -32,9 +32,15 @@ const GroupsPage = () => {
     }
   }, [setGroups, groups.length]);
 
+  // Sort groups by creation date
+  const sortedGroups = [...groups].sort(
+    (a, b) =>
+      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
+  );
+
   return (
     <div className='flex flex-col gap-0 w-full relative'>
-      <div className='flex justify-between items-center px-4 py-2 sticky top-0'>
+      <div className='flex justify-between items-center px-4 py-2'>
         <div className='flex items-center space-x-2 my-2'>
           <span className='text-2xl font-extrabold'>Groups</span>
           <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
@@ -43,7 +49,7 @@ const GroupsPage = () => {
       </div>
 
       <div className='grid grid-cols-1 gap-2 p-2'>
-        {groups.map((group, index) => (
+        {sortedGroups.map((group, index) => (
           <Link
             href={`/v1/groups/${group.groupId}`}
             key={index}>
