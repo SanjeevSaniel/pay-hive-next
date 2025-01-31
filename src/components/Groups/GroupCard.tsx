@@ -18,7 +18,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ group }) => (
   <Link
     href={`/v1/groups/${group.groupId}`}
     key={group.groupId}>
-    <Card className='px-2 pb-2 border border-gray-200 shadow-none rounded-2xl'>
+    <Card className='px-2 pb-2 border border-gray-50 shadow-md rounded-2xl'>
       <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
         <div className='flex justify-center items-center m-2'>
           <Boxes />
