@@ -8,7 +8,7 @@ connectDB();
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { groupName, description, memberIds, isGroup } = body;
+  const { groupName, description, memberIds, groupType } = body;
 
   // Validate input
   if (!groupName || !memberIds || !Array.isArray(memberIds)) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       groupName,
       description,
       memberIds,
-      isGroup,
+      groupType,
     });
 
     // Save the new group to the database
