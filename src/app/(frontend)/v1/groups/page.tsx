@@ -4,7 +4,7 @@ import AddGroup from '@/components/Groups/AddGroup';
 import { getGroups } from '@/services/groupService';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import useAppStore from '@/stores/useAppStore';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import GroupCard from '@/components/Groups/GroupCard';
 import TotalGroupSpendCard from '@/components/Groups/TotalGroupSpendCard';
 import { Group, FinancialRecord } from '@/types/types';
@@ -16,21 +16,28 @@ const getDefaultGroup = (groups: Group[]) => {
 
 const GroupsPage = () => {
   const groups = useAppStore((state) => state.groups as Group[]);
+  const defaultGroup = useAppStore(
+    (state) => state.defaultGroup as Group | null,
+  );
   const setGroups = useAppStore((state) => state.setGroups);
+  const setDefaultGroup = useAppStore((state) => state.setDefaultGroup);
   const financialRecords = useAppStore(
     (state) => state.financialRecords as FinancialRecord[],
   );
   const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
-  const [defaultGroup, setDefaultGroup] = useState<Group | null>(null);
 
   useEffect(() => {
     const fetchGroups = async () => {
       try {
         const response = await getGroups();
-        setGroups(response.data); // Initialize groups from the server
-        // Check for the default group and update state
-        const defaultGroup = getDefaultGroup(response.data);
-        setDefaultGroup(defaultGroup);
+        setGroups(response.data);
+        // setGroups(
+        //   response.data.filter((group: Group) => group.groupType !== 'default'),
+        // );
+        const defaultGroupData = getDefaultGroup(response.data);
+        if (defaultGroupData) {
+          setDefaultGroup(defaultGroupData);
+        }
       } catch (error) {
         console.error('Failed to fetch groups:', error);
       }
@@ -45,29 +52,17 @@ const GroupsPage = () => {
       }
     };
 
-    if (groups.length === 0) {
-      fetchGroups(); // Fetch groups if the list is empty
-    } else {
-      // Check for the default group and update state
-      const defaultGroup = getDefaultGroup(groups);
-      setDefaultGroup(defaultGroup);
-    }
+    fetchGroups();
+    fetchFinancialRecords();
+  }, [setGroups, setDefaultGroup, setFinancialRecords]);
 
-    if (financialRecords.length === 0) {
-      fetchFinancialRecords(); // Fetch financial records if the list is empty
-    }
-  }, [groups, setGroups, setFinancialRecords, financialRecords]);
-
-  // Sort groups by creation date and filter out the default group
+  // Sort groups by creation date
   const sortedGroups = useMemo(
     () =>
-      [...groups]
-        .filter((group) => group.groupType !== 'default')
-        .sort(
-          (a, b) =>
-            new Date(b.createdDate).getTime() -
-            new Date(a.createdDate).getTime(),
-        ),
+      [...groups].sort(
+        (a, b) =>
+          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
+      ),
     [groups],
   );
 
