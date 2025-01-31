@@ -44,12 +44,16 @@ const GroupDetails = () => {
       if (groupData) {
         setGroup(groupData); // Update state if groupData is found
 
-        // Fetch members based on member IDs
+        // Fetch members based on member IDs, check if memberIds is defined
         const membersData = groupData.memberIds
-          .map((memberId: string) =>
-            users.find((user: User) => user.userId === memberId),
-          )
-          .filter((user: User | undefined): user is User => user !== undefined);
+          ? groupData.memberIds
+              .map((memberId: string) =>
+                users.find((user: User) => user.userId === memberId),
+              )
+              .filter(
+                (user: User | undefined): user is User => user !== undefined,
+              )
+          : [];
         setMembers(membersData); // Update members state
 
         // Filter financial records by group ID
@@ -63,16 +67,16 @@ const GroupDetails = () => {
     }
   }, [id, groups, users, setUsers, financialRecords]);
 
-  if (!group) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className='flex flex-col justify-normal gap-4 p-2'>
       <GroupHeader basePath={basePath} />
-      <GroupInfo group={group} />
-      <MemberAvatars members={members} />
-      <GroupTransactions records={groupRecords} />
+      {group && <GroupInfo group={group} />}
+      {group?.memberIds && <MemberAvatars members={members} />}
+      {group ? (
+        <GroupTransactions records={groupRecords} />
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 };
