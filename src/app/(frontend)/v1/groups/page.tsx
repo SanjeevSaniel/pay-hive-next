@@ -1,27 +1,36 @@
 'use client';
 
+import CreateGroup from '@/components/Groups/CreateGroup';
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { getGroups } from '@/services/groupService';
 import useAppStore from '@/stores/useAppStore';
-import { ArrowDownRight, Boxes, Users } from 'lucide-react';
+import { ArrowDownRight, Boxes } from 'lucide-react';
 import Link from 'next/link';
-import groupsData from '@/data/groups.json'; // Import the sample groups data
 import { useEffect } from 'react';
-import CreateGroup from '@/components/Groups/CreateGroup';
-import { Separator } from '@/components/ui/separator';
 
 const GroupsPage = () => {
   const groups = useAppStore((state) => state.groups);
   const setGroups = useAppStore((state) => state.setGroups);
 
   useEffect(() => {
-    // Initialize groups with sample data from JSON file
-    setGroups(groupsData);
-  }, [setGroups]);
+    const fetchGroups = async () => {
+      try {
+        const response = await getGroups();
+        setGroups(response.data); // Initialize groups from the server
+      } catch (error) {
+        console.error('Failed to fetch groups:', error);
+      }
+    };
+
+    if (groups.length === 0) {
+      fetchGroups(); // Fetch groups if the list is empty
+    }
+  }, [setGroups, groups.length]);
 
   return (
     <div className='flex flex-col gap-0 w-full relative'>
@@ -30,7 +39,6 @@ const GroupsPage = () => {
           <span className='text-2xl font-extrabold'>Groups</span>
           <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
         </div>
-        {/* <Button size='sm'>New</Button> */}
         <CreateGroup />
       </div>
 
@@ -47,15 +55,15 @@ const GroupsPage = () => {
                 <div className='flex flex-col justify-center space-y-0.5'>
                   <CardTitle className='flex items-center gap-2 text-xl'>
                     {group.groupName}
-                    {group.isGroup && (
+                    {/* {group.isGroup && (
                       <Users
                         size={18}
                         className='border border-gray-300 rounded-full p-0.5 mb-0.5'
                       />
-                    )}
+                    )} */}
                   </CardTitle>
                   <CardDescription className='flex items-center space-x-2 text-md'>
-                    <div className='flex items-center space-x-2'>
+                    {/* <div className='flex items-center space-x-2'>
                       {group.borrowedAmount > 0 && (
                         <div>Borrowed: ₹{group.borrowedAmount}</div>
                       )}
@@ -68,7 +76,7 @@ const GroupsPage = () => {
                       {group.owedAmount > 0 && (
                         <div>Owed: ₹{group.owedAmount}</div>
                       )}
-                    </div>
+                    </div> */}
                   </CardDescription>
                 </div>
                 <div className='flex justify-center items-center'>
