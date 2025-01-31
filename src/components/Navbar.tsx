@@ -1,12 +1,16 @@
-import { usePathname } from 'next/navigation';
+'use client';
+
+import { usePathname, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
-import { useBasePath } from '@/context/BasePathContext';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const basePath = useBasePath();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get('userId'); // Extract userId from the URL
+
+  const basePath = `/v1/${userId}`;
 
   const navItems = [
     { key: 'home', icon: Home, href: `${basePath}` },
