@@ -10,7 +10,7 @@ import useAppStore from '@/stores/useAppStore';
 import { ArrowDownRight, Boxes } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import CreateGroup from './CreateGroup';
+import AddGroup from './AddGroup';
 import { getGroups } from '@/services/groupService';
 
 const Groups = () => {
@@ -39,7 +39,7 @@ const Groups = () => {
           <span className='text-2xl font-extrabold'>Groups</span>
           <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
         </div>
-        <CreateGroup />
+        <AddGroup />
       </div>
 
       <div className='grid grid-cols-1 gap-2 p-2'>
