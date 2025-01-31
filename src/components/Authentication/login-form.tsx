@@ -24,11 +24,10 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 // Default Group Definition
-const createDefaultGroup = (userId: string) => ({
+export const createDefaultGroup = (userId: string) => ({
   groupName: 'General Expenses',
   description: 'Expenses not associated with any specific group',
   groupType: 'default',
-  createdDate: new Date().toISOString(),
   memberIds: [userId],
 });
 
@@ -44,6 +43,7 @@ const LoginForm = ({
 
   const addGroup = useAppStore((state) => state.addGroup);
   const setGroups = useAppStore((state) => state.setGroups);
+  const setDefaultGroup = useAppStore((state) => state.setDefaultGroup);
   const setUsers = useAppStore((state) => state.setUsers);
   const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
 
@@ -64,10 +64,14 @@ const LoginForm = ({
 
       // Create default group if it doesn't exist
       if (!defaultGroupExists) {
-        const defaultGroup = createDefaultGroup(userId);
+        const newDefaultGroup = createDefaultGroup(userId);
         try {
-          const response = await axios.post('/api/groups/create', defaultGroup);
+          const response = await axios.post(
+            '/api/groups/create',
+            newDefaultGroup,
+          );
           addGroup(response.data); // Use addGroup method to add the group
+          setDefaultGroup(response.data);
           console.log('Default group created:', response.data);
         } catch (createError) {
           console.error('Failed to create default group:', createError);
