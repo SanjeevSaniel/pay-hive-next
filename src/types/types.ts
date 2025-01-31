@@ -84,7 +84,6 @@ export interface Group {
   groupId: string;
   groupName: string;
   description: string;
-
   groupType: string;
   createdDate: string;
   memberIds: string[];
