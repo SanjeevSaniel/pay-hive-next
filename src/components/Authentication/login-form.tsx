@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useBasePath } from '@/context/BasePathContext';
 import { cn } from '@/lib/utils';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
@@ -36,7 +35,6 @@ const LoginForm = ({
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) => {
   const router = useRouter();
-  const basePath = useBasePath();
   const [user, setUser] = useState({ email: '', password: '' });
   const [buttonDisabled, setButtonDisabled] = useState(true);
   // const [loading, setLoading] = useState(false);
@@ -86,8 +84,6 @@ const LoginForm = ({
     e.preventDefault(); // Prevent the default form submission behavior
 
     try {
-      // setLoading(true); // Set loading state to true
-
       // Make a POST request to the login API endpoint
       const response = await axios.post('/api/users/login', user);
 
@@ -98,7 +94,8 @@ const LoginForm = ({
 
       await fetchDataAfterLogin(userId); // Fetch data after successful login
 
-      router.push(basePath); // Redirect to the /v1 page
+      // Redirect to the user-specific page
+      router.push(`/v1/${userId}`);
     } catch (error: unknown) {
       console.error('Login failed', error); // Log the error
 
@@ -108,9 +105,6 @@ const LoginForm = ({
         toast.error('Login failed'); // Display a generic error message
       }
     }
-    // finally {
-    //   setLoading(false); // Reset the loading state
-    // }
   };
 
   useEffect(() => {
@@ -195,11 +189,15 @@ const LoginForm = ({
               </div>
               <div className='text-center text-sm'>
                 Don&apos;t have an account?
-                <Link
-                  href='/signup'
-                  className='underline underline-offset-4'>
-                  Sign up
-                </Link>
+                <Button
+                  asChild
+                  variant='link'>
+                  <Link
+                    href='/v1/signup'
+                    className='underline underline-offset-4'>
+                    Sign up
+                  </Link>
+                </Button>
               </div>
             </div>
           </form>
