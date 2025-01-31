@@ -1,12 +1,16 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, Plus } from 'lucide-react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-interface GroupHeaderProps {
-  basePath: string;
-}
+const GroupHeader = () => {
+  const searchParams = useSearchParams();
+  const userId = searchParams.get('userId'); // Extract userId from the query parameters
 
-const GroupHeader = ({ basePath }: GroupHeaderProps) => {
+  const basePath = `/v1/${userId}`;
+
   return (
     <div className='flex justify-between items-center'>
       <Button
