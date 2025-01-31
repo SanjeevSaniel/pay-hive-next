@@ -24,7 +24,7 @@ const GroupHeader = ({ basePath }: GroupHeaderProps) => {
         variant='outline'
         className='px-4 text-md rounded-xl'>
         <Plus />
-        New Expense
+        Add Expense
       </Button>
     </div>
   );
