@@ -2,6 +2,7 @@ import {
   ExpenseReport,
   FinancialRecord,
   Group,
+  GroupType,
   Notification,
   Payment,
   StoreState,
@@ -16,6 +17,7 @@ const useAppStore = create<StoreState>()((set) => ({
   payments: [],
   notifications: [],
   expenseReports: [],
+  groupTypes: [],
 
   setGroups: (groups: Group[]) => set({ groups }),
   addGroup: (newGroup: Group) =>
@@ -27,7 +29,7 @@ const useAppStore = create<StoreState>()((set) => ({
 
   setUsers: (users: User[]) => set({ users }),
   addUser: (newUser: User) =>
-    set((state) => ({ users: [newUser, ...state.users] })),
+    set((state) => ({ users: [...state.users, newUser] })),
   deleteUser: (userId: string) =>
     set((state) => ({
       users: state.users.filter((user: User) => user.userId !== userId),
@@ -77,6 +79,16 @@ const useAppStore = create<StoreState>()((set) => ({
     set((state) => ({
       expenseReports: state.expenseReports.filter(
         (report: ExpenseReport) => report.reportId !== reportId,
+      ),
+    })),
+
+  setGroupTypes: (groupTypes: GroupType[]) => set({ groupTypes }),
+  addGroupType: (newGroupType: GroupType) =>
+    set((state) => ({ groupTypes: [...state.groupTypes, newGroupType] })),
+  deleteGroupType: (typeId: string) =>
+    set((state) => ({
+      groupTypes: state.groupTypes.filter(
+        (groupType: GroupType) => groupType.typeId !== typeId,
       ),
     })),
 }));
