@@ -145,6 +145,7 @@ export interface GroupType {
 export interface StoreState {
   users: User[];
   groups: Group[];
+  defaultGroup: Group | null;
   financialRecords: FinancialRecord[];
   payments: Payment[];
   notifications: Notification[];
@@ -154,6 +155,7 @@ export interface StoreState {
   setGroups: (groups: Group[]) => void;
   addGroup: (newGroup: Group) => void;
   deleteGroup: (groupId: string) => void;
+  setDefaultGroup: (defaultGroup: Group) => void;
 
   setUsers: (users: User[]) => void;
   addUser: (newUser: User) => void;
