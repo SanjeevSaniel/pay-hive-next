@@ -20,6 +20,8 @@ export enum SplitMethod {
 export enum TransactionType {
   Debit = 'debit',
   Credit = 'credit',
+  Settlement = 'settlement',
+  Transfer = 'transfer',
 }
 
 export interface SplitDetail {
@@ -69,6 +71,7 @@ export interface User {
   forgotPasswordTokenExpires?: Date;
   verifyEmailToken?: string;
   verifyEmailTokenExpires?: Date;
+  groupIds: string[]; // List of group IDs the user belongs to
 }
 
 export interface NotificationPreferences {
@@ -81,9 +84,8 @@ export interface Group {
   groupId: string;
   groupName: string;
   description: string;
-  owedAmount: number;
-  borrowedAmount: number;
-  isGroup: boolean;
+
+  groupType: string;
   createdDate: string;
   memberIds: string[];
 }
@@ -131,6 +133,16 @@ export interface CategoryBreakdown {
   totalAmount: number;
 }
 
+// New interface for GroupType
+export interface GroupType {
+  typeId: string;
+  typeName: string;
+  description: string;
+  createdDate: Date;
+  updatedDate: Date;
+}
+
+// Store state interface
 export interface StoreState {
   users: User[];
   groups: Group[];
@@ -138,6 +150,7 @@ export interface StoreState {
   payments: Payment[];
   notifications: Notification[];
   expenseReports: ExpenseReport[];
+  groupTypes: GroupType[];
 
   setGroups: (groups: Group[]) => void;
   addGroup: (newGroup: Group) => void;
@@ -162,4 +175,8 @@ export interface StoreState {
   setExpenseReports: (reports: ExpenseReport[]) => void;
   addExpenseReport: (newReport: ExpenseReport) => void;
   deleteExpenseReport: (reportId: string) => void;
+
+  setGroupTypes: (groupTypes: GroupType[]) => void;
+  addGroupType: (newGroupType: GroupType) => void;
+  deleteGroupType: (typeId: string) => void;
 }
