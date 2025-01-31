@@ -17,3 +17,14 @@ export const getGroupById = (groupId: string) => {
   const { groups } = useAppStore.getState();
   return groups.find((group: Group) => group.groupId === groupId);
 };
+
+export const createGroup = async (group: Group) => {
+  try {
+    const response = await axios.post('/api/groups/create', group);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to create group:', error);
+    throw error;
+  }
+};
+
