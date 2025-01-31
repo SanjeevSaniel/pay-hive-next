@@ -1,18 +1,20 @@
-import { Button, ButtonGroup } from '@heroui/react';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-export default function Home() {
+const Home = () => {
   return (
     <div className='flex flex-col justify-center items-center gap-4 min-h-screen'>
-      Pay Hive
-      <ButtonGroup className='flex flex-col gap-2'>
-        <Link href='/v1/login'>
-          <Button>Login</Button>
-        </Link>
-        <Link href='/v1/signup'>
-          <Button>Sign Up</Button>
-        </Link>
-      </ButtonGroup>
+      Splitly
+      <div className='flex flex-col gap-2'>
+        <Button asChild>
+          <Link href='/v1/login'>Login</Link>
+        </Button>
+        <Button asChild>
+          <Link href='/v1/signup'>Sign Up</Link>
+        </Button>
+      </div>
     </div>
   );
-}
+};
+
+export default Home;
