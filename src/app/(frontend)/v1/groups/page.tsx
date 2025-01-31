@@ -1,21 +1,21 @@
 'use client';
 
 import CreateGroup from '@/components/Groups/CreateGroup';
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { getGroups } from '@/services/groupService';
+import { getFinancialRecords } from '@/services/financialRecordService';
 import useAppStore from '@/stores/useAppStore';
-import { ArrowDownRight, Boxes } from 'lucide-react';
-import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import GroupCard from '@/components/Groups/GroupCard';
+import TotalGroupSpendCard from '@/components/Groups/TotalGroupSpendCard';
+import { Group, FinancialRecord } from '@/types/types';
 
 const GroupsPage = () => {
-  const groups = useAppStore((state) => state.groups);
+  const groups = useAppStore((state) => state.groups as Group[]);
   const setGroups = useAppStore((state) => state.setGroups);
+  const financialRecords = useAppStore(
+    (state) => state.financialRecords as FinancialRecord[],
+  );
+  const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
 
   useEffect(() => {
     const fetchGroups = async () => {
@@ -27,70 +27,72 @@ const GroupsPage = () => {
       }
     };
 
+    const fetchFinancialRecords = async () => {
+      try {
+        const response = await getFinancialRecords();
+        setFinancialRecords(response.data); // Initialize financial records from the server
+      } catch (error) {
+        console.error('Failed to fetch financial records:', error);
+      }
+    };
+
     if (groups.length === 0) {
       fetchGroups(); // Fetch groups if the list is empty
     }
-  }, [setGroups, groups.length]);
+
+    if (financialRecords.length === 0) {
+      fetchFinancialRecords(); // Fetch financial records if the list is empty
+    }
+  }, [setGroups, setFinancialRecords, groups.length, financialRecords.length]);
 
   // Sort groups by creation date
-  const sortedGroups = [...groups].sort(
-    (a, b) =>
-      new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
+  const sortedGroups = useMemo(
+    () =>
+      [...groups].sort(
+        (a, b) =>
+          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
+      ),
+    [groups],
   );
+
+  // Calculate total spend
+  const totalSpend = useMemo(() => {
+    const groupSpendMap = financialRecords.reduce((acc, record) => {
+      if (record.groupId) {
+        acc[record.groupId] = (acc[record.groupId] || 0) + record.amount;
+      }
+      return acc;
+    }, {} as Record<string, number>);
+
+    return Object.values(groupSpendMap).reduce(
+      (total, spend) => total + spend,
+      0,
+    );
+  }, [financialRecords]);
 
   return (
     <div className='flex flex-col gap-0 w-full relative'>
-      <div className='flex justify-between items-center px-4 py-2'>
+      <div className='flex justify-between items-center px-4 py-2 sticky top-0'>
         <div className='flex items-center space-x-2 my-2'>
           <span className='text-2xl font-extrabold'>Groups</span>
-          <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
+          <span className='text-sm border p-1 rounded-lg'>
+            {sortedGroups.length}
+          </span>
         </div>
         <CreateGroup />
       </div>
 
+      {/* Total Group Spend Card */}
+      <div className='p-2'>
+        <TotalGroupSpendCard totalSpend={totalSpend} />
+      </div>
+
       <div className='grid grid-cols-1 gap-2 p-2'>
-        {sortedGroups.map((group, index) => (
-          <Link
-            href={`/v1/groups/${group.groupId}`}
-            key={index}>
-            <Card className='px-2 pb-2 border border-gray-200 shadow-none rounded-2xl'>
-              <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
-                <div className='flex justify-center items-center m-2'>
-                  <Boxes />
-                </div>
-                <div className='flex flex-col justify-center space-y-0.5'>
-                  <CardTitle className='flex items-center gap-2 text-xl'>
-                    {group.groupName}
-                    {/* {group.isGroup && (
-                      <Users
-                        size={18}
-                        className='border border-gray-300 rounded-full p-0.5 mb-0.5'
-                      />
-                    )} */}
-                  </CardTitle>
-                  <CardDescription className='flex items-center space-x-2 text-md'>
-                    {/* <div className='flex items-center space-x-2'>
-                      {group.borrowedAmount > 0 && (
-                        <div>Borrowed: ₹{group.borrowedAmount}</div>
-                      )}
-                      {group.borrowedAmount > 0 && group.owedAmount > 0 && (
-                        <Separator
-                          orientation='vertical'
-                          className='h-4'
-                        />
-                      )}
-                      {group.owedAmount > 0 && (
-                        <div>Owed: ₹{group.owedAmount}</div>
-                      )}
-                    </div> */}
-                  </CardDescription>
-                </div>
-                <div className='flex justify-center items-center'>
-                  <ArrowDownRight color='#c9c9c7' />
-                </div>
-              </CardHeader>
-            </Card>
-          </Link>
+        {sortedGroups.map((group) => (
+          <GroupCard
+            key={group.groupId}
+            group={group}
+          />
         ))}
       </div>
     </div>
