@@ -1,5 +1,5 @@
 import { GalleryVerticalEnd } from 'lucide-react';
-import { LoginForm } from '@/components/Authentication/login-form';
+import LoginForm from '@/components/Authentication/login-form';
 import Link from 'next/link';
 
 const LoginPage = () => {
