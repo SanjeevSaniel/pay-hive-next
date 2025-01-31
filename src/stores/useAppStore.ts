@@ -1,3 +1,4 @@
+import { create } from 'zustand';
 import {
   ExpenseReport,
   FinancialRecord,
@@ -8,25 +9,35 @@ import {
   StoreState,
   User,
 } from '@/types/types';
-import { create } from 'zustand';
 
-const useAppStore = create<StoreState>()((set) => ({
+const useAppStore = create<StoreState>((set) => ({
   users: [],
   groups: [],
+  defaultGroup: null as Group | null,
   financialRecords: [],
   payments: [],
   notifications: [],
   expenseReports: [],
   groupTypes: [],
 
+  // Group management
   setGroups: (groups: Group[]) => set({ groups }),
   addGroup: (newGroup: Group) =>
-    set((state) => ({ groups: [newGroup, ...state.groups] })),
+    set((state) => ({
+      groups:
+        newGroup.groupType === 'default'
+          ? state.groups
+          : [newGroup, ...state.groups],
+      defaultGroup:
+        newGroup.groupType === 'default' ? newGroup : state.defaultGroup,
+    })),
   deleteGroup: (groupId: string) =>
     set((state) => ({
       groups: state.groups.filter((group: Group) => group.groupId !== groupId),
     })),
+  setDefaultGroup: (defaultGroup: Group) => set(() => ({ defaultGroup })),
 
+  // User management
   setUsers: (users: User[]) => set({ users }),
   addUser: (newUser: User) =>
     set((state) => ({ users: [...state.users, newUser] })),
@@ -35,6 +46,7 @@ const useAppStore = create<StoreState>()((set) => ({
       users: state.users.filter((user: User) => user.userId !== userId),
     })),
 
+  // Financial record management
   setFinancialRecords: (financialRecords: FinancialRecord[]) =>
     set({ financialRecords }),
   addFinancialRecord: (newFinancialRecord: FinancialRecord) =>
@@ -48,6 +60,7 @@ const useAppStore = create<StoreState>()((set) => ({
       ),
     })),
 
+  // Payment management
   setPayments: (payments: Payment[]) => set({ payments }),
   addPayment: (newPayment: Payment) =>
     set((state) => ({ payments: [newPayment, ...state.payments] })),
@@ -58,6 +71,7 @@ const useAppStore = create<StoreState>()((set) => ({
       ),
     })),
 
+  // Notification management
   setNotifications: (notifications: Notification[]) => set({ notifications }),
   addNotification: (newNotification: Notification) =>
     set((state) => ({
@@ -71,6 +85,7 @@ const useAppStore = create<StoreState>()((set) => ({
       ),
     })),
 
+  // Expense report management
   setExpenseReports: (reports: ExpenseReport[]) =>
     set({ expenseReports: reports }),
   addExpenseReport: (newReport: ExpenseReport) =>
@@ -82,6 +97,7 @@ const useAppStore = create<StoreState>()((set) => ({
       ),
     })),
 
+  // Group type management
   setGroupTypes: (groupTypes: GroupType[]) => set({ groupTypes }),
   addGroupType: (newGroupType: GroupType) =>
     set((state) => ({ groupTypes: [...state.groupTypes, newGroupType] })),
