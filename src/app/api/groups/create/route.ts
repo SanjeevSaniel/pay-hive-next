@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const { groupName, description, memberIds, groupType } = body;
 
   // Validate input
-  if (!groupName || !memberIds || !Array.isArray(memberIds)) {
+  if (!groupName || !groupType) {
     return NextResponse.json({ error: 'Invalid input data' }, { status: 400 });
   }
 
@@ -20,7 +20,7 @@ export async function POST(request: Request) {
       groupId: uuidv4(), // Generate a unique ID for the group
       groupName,
       description,
-      memberIds,
+      memberIds: memberIds || [], // Use an empty array if memberIds is undefined
       groupType,
     });
 
@@ -39,5 +39,4 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
-
 }
