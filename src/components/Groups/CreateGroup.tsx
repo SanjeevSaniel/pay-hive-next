@@ -96,12 +96,12 @@ const CreateGroup = () => {
       <DrawerTrigger asChild>
         <Button
           aria-label='New'
-          size='lg'
+          size='default'
           variant='default'
-          className='px-2'
+          className='rounded-xl'
           // className='p-6 fixed right-6 bottom-32 rounded-2xl'
         >
-          <Plus size={24} /> Add Group
+          <Plus /> Add Group
         </Button>
       </DrawerTrigger>
       <DrawerContent
