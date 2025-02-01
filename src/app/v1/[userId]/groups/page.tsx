@@ -64,10 +64,15 @@ const GroupsPage = () => {
     financialRecords.length,
   ]);
 
-  // Sort groups by creation date
+  // Function to filter out the default group
+  const filterDefaultGroup = (groups: Group[]) => {
+    return groups.filter((group) => group.groupType !== 'default');
+  };
+
+  // Sort groups by creation date, excluding the default group
   const sortedGroups = useMemo(
     () =>
-      [...groups].sort(
+      filterDefaultGroup(groups).sort(
         (a, b) =>
           new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
       ),
@@ -91,7 +96,12 @@ const GroupsPage = () => {
 
   return (
     <div className='flex flex-col gap-0 w-full relative'>
-      <div className='flex justify-between items-center px-4 py-2 sticky top-0'>
+      {/* Total Group Spend Card */}
+      <div className='p-2'>
+        <TotalGroupSpendCard totalSpend={totalSpend} />
+      </div>
+
+      <div className='flex justify-between items-center pl-4 pr-2 py-2 sticky top-0'>
         <div className='flex items-center space-x-2 my-2'>
           <span className='text-2xl font-extrabold'>Groups</span>
           <span className='text-sm border p-1 rounded-lg'>
@@ -99,11 +109,6 @@ const GroupsPage = () => {
           </span>
         </div>
         <AddGroup />
-      </div>
-
-      {/* Total Group Spend Card */}
-      <div className='p-2'>
-        <TotalGroupSpendCard totalSpend={totalSpend} />
       </div>
 
       <div className='grid grid-cols-1 gap-2 p-2'>
