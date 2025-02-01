@@ -1,10 +1,12 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import useBasePath from '@/hooks/useBasePath';
+import { Component, Home, ListTree } from 'lucide-react'; // Updated to use MoneyBag
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { GiCash } from 'react-icons/gi';
+import { TiUserOutline } from 'react-icons/ti';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -18,7 +20,8 @@ const Navbar = () => {
     { key: 'home', icon: Home, href: `${basePath}` },
     { key: 'groups', icon: Component, href: `${basePath}/groups` },
     { key: 'expenses', icon: ListTree, href: `${basePath}/expenses` },
-    { key: 'account', icon: CircleUserRound, href: `${basePath}/account` },
+    { key: 'budgeting', icon: GiCash, href: `${basePath}/budgeting` }, // Updated to use MoneyBag
+    { key: 'account', icon: TiUserOutline, href: `${basePath}/account` },
   ];
 
   return (
@@ -39,7 +42,6 @@ const Navbar = () => {
                   isActive ? 'text-gray-900' : 'text-gray-400'
                 }`}>
                 <item.icon size={28} />
-                {/* <span className='text-xs'>{item.key.charAt(0).toUpperCase() + item.key.slice(1)}</span> */}
               </div>
             </Link>
           );
