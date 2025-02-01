@@ -1,16 +1,18 @@
 'use client';
 
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { CircleUserRound, Component, Home, ListTree } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import useBasePath from '@/hooks/useBasePath';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const userId = searchParams.get('userId'); // Extract userId from the URL
+  const basePath = useBasePath(); // Use custom hook
 
-  const basePath = `/v1/${userId}`;
+  if (!basePath) {
+    return <div>Loading...</div>; // Display loading indicator until basePath is available
+  }
 
   const navItems = [
     { key: 'home', icon: Home, href: `${basePath}` },
