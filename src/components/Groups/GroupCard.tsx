@@ -9,17 +9,18 @@ import {
 import { Boxes, ArrowDownRight } from 'lucide-react';
 import Link from 'next/link';
 import { Group } from '@/types/types';
-import { useSearchParams } from 'next/navigation';
+import useBasePath from '@/hooks/useBasePath';
 
 interface GroupCardProps {
   group: Group;
 }
 
 const GroupCard: React.FC<GroupCardProps> = ({ group }) => {
-  const searchParams = useSearchParams();
-  const userId = searchParams.get('userId'); // Extract userId from the query parameters
+  const basePath = useBasePath(); // Use custom hook
 
-  const basePath = `/v1/${userId}`;
+  if (!basePath) {
+    return <div>Loading...</div>; // Display loading indicator until basePath is available
+  }
 
   return (
     <Link
