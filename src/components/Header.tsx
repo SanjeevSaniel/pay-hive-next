@@ -14,11 +14,11 @@ const Header = () => {
 
   return (
     <div className='flex justify-between items-center px-6 py-3 bg-[#424141] text-white rounded-xl sticky top-0 z-20'>
-      <span className={`${neodaFont.className} text-xl mb-1`}>S</span>
       <Link
         href={basePath}
-        className='text-lg font-extrabold'>
-        Splitly
+        className='flex items-center text-lg font-extrabold'>
+        <span className={`${neodaFont.className} text-xl mb-1.5`}>S</span>
+        <span className='ml-2'>Splitly</span>
       </Link>
       <Bell size={22} />
     </div>
