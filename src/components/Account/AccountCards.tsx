@@ -72,14 +72,14 @@ const AccountCards = () => {
 
   return (
     <div className='flex flex-col space-y-4 p-2'>
-      <div className='text-2xl font-extrabold mb-4 px-2'>Account</div>
+      <div className='text-2xl font-extrabold px-2'>Account</div>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
         {TABS.map((tab) => (
           <Link
             key={tab.key}
             href={`${basePath}/account${tab.path}`}
             passHref>
-            <Card className='px-2 pb-2 border border-gray-50 shadow-md rounded-2xl'>
+            <Card className='px-2 pb-2 border border-gray-50 shadow-sm rounded-2xl'>
               <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
                 <div className='flex justify-center items-center m-2'>
                   <tab.icon />
