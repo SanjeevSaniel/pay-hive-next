@@ -12,7 +12,7 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
       <div className='p-2 sticky top-0 z-30'>
         <Header />
       </div>
-      <div className='p-2 mb-14 overflow-auto'>{children}</div>
+      <div className='p-2 mb-20 overflow-auto'>{children}</div>
       <Navbar />
     </div>
   );
