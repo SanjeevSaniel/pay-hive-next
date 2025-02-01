@@ -15,7 +15,7 @@ interface GroupCardProps {
   group: Group;
 }
 
-const GroupCard: React.FC<GroupCardProps> = ({ group }) => {
+const GroupCard = ({ group }: GroupCardProps) => {
   const basePath = useBasePath(); // Use custom hook
 
   if (!basePath) {
