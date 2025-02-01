@@ -8,6 +8,7 @@ import { getUsers } from '@/services/userService';
 import useAppStore from '@/stores/useAppStore';
 import { Group, User, FinancialRecord } from '@/types/types';
 import { useParams } from 'next/navigation';
+import useBasePath from '@/hooks/useBasePath';
 import { useEffect, useState } from 'react';
 
 const GroupDetails = () => {
@@ -65,9 +66,15 @@ const GroupDetails = () => {
     }
   }, [id, groups, users, setUsers, financialRecords]);
 
+  const basePath = useBasePath(); // Use custom hook
+
+  if (!basePath) {
+    return <div>Loading...</div>; // Display loading indicator until basePath is available
+  }
+
   return (
     <div className='flex flex-col justify-normal gap-4 p-2'>
-      <GroupHeader />
+      <GroupHeader basePath={basePath} />
       {group && <GroupInfo group={group} />}
       {group?.memberIds && <MemberAvatars members={members} />}
       {group ? (
