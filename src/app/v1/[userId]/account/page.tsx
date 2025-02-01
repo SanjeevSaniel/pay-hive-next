@@ -1,9 +1,9 @@
 'use client';
 
-import Account from '@/components/Account';
+import AccountCards from '@/components/Account/AccountCards';
 
 const AccountPage = () => {
-  return <Account />;
+  return <AccountCards />;
 };
 
 export default AccountPage;
