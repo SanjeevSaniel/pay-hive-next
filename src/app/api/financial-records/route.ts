@@ -1,4 +1,4 @@
-import { connectDB } from '@/dbConfig/dbConfig';
+import { connectDB } from '@/lib/mongodb';
 import FinancialRecord from '@/models/FinancialRecord';
 import { NextResponse } from 'next/server';
 
