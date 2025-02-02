@@ -18,6 +18,9 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import LogoutButton from '../LogoutButton';
+import { Avatar } from '@heroui/avatar';
+import useAppStore from '@/stores/useAppStore';
+import { useParams } from 'next/navigation';
 
 const TABS = [
   {
@@ -66,6 +69,14 @@ const TABS = [
 
 const AccountCards = () => {
   const basePath = useBasePath(); // Use custom hook
+  const params = useParams(); // Use Next.js useParams hook
+  const users = useAppStore((state) => state.users); // Get users from Zustand store
+
+  // Extract userId from the URL params
+  const { userId } = params;
+
+  // Fetch the current user based on userId
+  const user = users.find((user) => user.userId === userId);
 
   if (!basePath) {
     return <div>Loading...</div>; // Display loading indicator until basePath is available
@@ -73,7 +84,31 @@ const AccountCards = () => {
 
   return (
     <div className='flex flex-col space-y-4 p-2'>
-      <div className='text-2xl font-extrabold px-2'>Account</div>
+      <div className='text-center text-2xl font-extrabold px-2'>Account</div>
+      {user && (
+        <div className='flex flex-col gap-2 items-center'>
+          <Avatar
+            className='w-20 h-20'
+            src={
+              user.profileImageUrl ||
+              'https://i.pravatar.cc/150?u=a04258114e29026708c'
+            }
+          />
+          <div className='flex flex-col items-center gap-0'>
+            <div className='flex items-center gap-1 flex-wrap'>
+              <span className='text-lg font-semibold'>{user.name}</span>
+              <span className='text-xs text-gray-400 font-semibold'>
+                [@{user.userId}]
+              </span>
+            </div>
+
+            <span className='text-sm text-gray-400 font-semibold'>
+              {user.email}
+            </span>
+          </div>
+        </div>
+      )}
+
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
         {TABS.map((tab) => (
           <Link
