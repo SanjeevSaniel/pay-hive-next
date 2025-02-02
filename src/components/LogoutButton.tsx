@@ -15,7 +15,7 @@ const LogoutButton = () => {
       const response = await axios.get('/api/users/logout');
       console.log('Logout success', response.data);
       toast.success('Logout successful');
-      router.push('/login');
+      router.push('/v1/login');
     } catch (error: unknown) {
       // error is now `unknown`
       // Check if the error is an instance of Error
@@ -34,7 +34,7 @@ const LogoutButton = () => {
   return (
     <Button
       onClick={onLogout}
-      className='w-fit'
+      className='rounded-xl'
       variant='destructive'>
       <LogOut />
       Logout
