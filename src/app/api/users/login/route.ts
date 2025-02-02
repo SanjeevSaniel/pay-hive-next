@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     // Create token data
     const tokenData = {
-      id: user._id,
+      id: user.userId,
       name: user.name,
       email: user.email,
     };
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({
       message: 'Login successful',
       success: true,
-      userId: user._id, // Include the userId in the response
+      userId: user.userId, // Include the userId in the response
     });
 
     // Set the token in a cookie
