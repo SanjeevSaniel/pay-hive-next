@@ -1,4 +1,4 @@
-import { connectDB } from '@/dbConfig/dbConfig';
+import { connectDB } from '@/lib/mongodb';
 import Group from '@/models/groupModel';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
