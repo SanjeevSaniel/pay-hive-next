@@ -17,6 +17,7 @@ import {
   User,
 } from 'lucide-react';
 import Link from 'next/link';
+import LogoutButton from '../LogoutButton';
 
 const TABS = [
   {
@@ -99,6 +100,10 @@ const AccountCards = () => {
             </Card>
           </Link>
         ))}
+      </div>
+
+      <div className='flex justify-center'>
+        <LogoutButton />
       </div>
     </div>
   );
