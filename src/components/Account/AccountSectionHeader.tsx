@@ -29,12 +29,12 @@ const AccountSectionHeader = ({ heading }: AccountSectionHeaderProps) => {
           </Link>
         </Button>
 
-        {/* <Button
+        <Button
           size='default'
           variant='default'
           className='rounded-xl'>
           <Pencil /> Edit
-        </Button> */}
+        </Button>
       </div>
       <h1 className='text-2xl font-bold'>{heading}</h1>
     </div>
