@@ -19,6 +19,7 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
@@ -105,10 +106,13 @@ const AddGroup = () => {
         </Button>
       </DrawerTrigger>
       <DrawerContent
-        aria-description='New Group'
-        aria-describedby='New Group'>
+        aria-labelledby='drawer-title'
+        aria-describedby='drawer-description'>
         <DrawerHeader>
           <DrawerTitle>New Group Details</DrawerTitle>
+          <DrawerDescription>
+            Please provide the details to create a new group.
+          </DrawerDescription>
         </DrawerHeader>
         <Form {...form}>
           <form
