@@ -18,6 +18,10 @@ const Header = () => {
         href={basePath}
         className='flex items-center text-lg font-extrabold'>
         <span className={`${neodaFont.className} text-xl mb-1.5`}>S</span>
+      </Link>
+      <Link
+        href={basePath}
+        className='flex items-center text-lg font-extrabold'>
         <span className='ml-2'>Splitly</span>
       </Link>
       <Bell size={22} />
