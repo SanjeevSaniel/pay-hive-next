@@ -95,11 +95,10 @@ const GroupsPage = () => {
   }, [financialRecords]);
 
   return (
-    <div className='flex flex-col gap-0 w-full relative'>
+    <div className='flex flex-col gap-0 py-4 w-full relative'>
       {/* Total Group Spend Card */}
-      <div className='p-2'>
-        <TotalGroupSpendCard totalSpend={totalSpend} />
-      </div>
+
+      <TotalGroupSpendCard totalSpend={totalSpend} />
 
       <div className='flex justify-between items-center pl-4 pr-2 py-2 sticky top-0'>
         <div className='flex items-center space-x-2 my-2'>
