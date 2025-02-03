@@ -60,9 +60,10 @@ const GroupDetails = () => {
           (record: FinancialRecord) => record.groupId === id,
         );
         setGroupRecords(filteredRecords); // Update group financial records state
-      } else {
-        console.error('Group not found in Zustand store');
       }
+      // else {
+      //   console.error('Group not found in Zustand store');
+      // }
     }
   }, [id, groups, users, setUsers, financialRecords]);
 
@@ -75,7 +76,12 @@ const GroupDetails = () => {
   return (
     <div className='flex flex-col justify-normal gap-4 p-2'>
       <GroupHeader basePath={basePath} />
-      {group && <GroupInfo group={group} />}
+      {group && (
+        <GroupInfo
+          basePath={basePath}
+          group={group}
+        />
+      )}
       {group?.memberIds && <MemberAvatars members={members} />}
       {group ? (
         <GroupTransactions records={groupRecords} />
