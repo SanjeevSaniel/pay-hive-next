@@ -155,6 +155,7 @@ export interface StoreState {
   setGroups: (groups: Group[]) => void;
   addGroup: (newGroup: Group) => void;
   deleteGroup: (groupId: string) => void;
+  restoreGroup: (group: Group) => void;
   setDefaultGroup: (defaultGroup: Group) => void;
 
   setUsers: (users: User[]) => void;
