@@ -45,6 +45,10 @@ const useAppStore = create<StoreState>((set) => ({
     set((state) => ({
       users: state.users.filter((user: User) => user.userId !== userId),
     })),
+  restoreGroup: (group: Group) =>
+    set((state) => ({
+      groups: [...state.groups, group],
+    })),
 
   // Financial record management
   setFinancialRecords: (financialRecords: FinancialRecord[]) =>
