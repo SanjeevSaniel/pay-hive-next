@@ -17,7 +17,7 @@ const GroupHeader = ({ basePath }: GroupHeaderProps) => {
         variant='secondary'
         className='rounded-xl'>
         <Link href={`${basePath}/groups`}>
-          <ChevronLeft /> Back
+          <ChevronLeft />
         </Link>
       </Button>
 
