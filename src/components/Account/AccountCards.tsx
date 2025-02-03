@@ -21,6 +21,8 @@ import LogoutButton from '../LogoutButton';
 import { Avatar } from '@heroui/avatar';
 import useAppStore from '@/stores/useAppStore';
 import { useParams } from 'next/navigation';
+import { Button } from '@heroui/react';
+import { FaEdit } from 'react-icons/fa';
 
 const TABS = [
   {
@@ -74,9 +76,11 @@ const AccountCards = () => {
 
   // Extract userId from the URL params
   const { userId } = params;
+  console.log(userId);
 
   // Fetch the current user based on userId
   const user = users.find((user) => user.userId === userId);
+  console.log(user);
 
   if (!basePath) {
     return <div>Loading...</div>; // Display loading indicator until basePath is available
@@ -106,6 +110,13 @@ const AccountCards = () => {
               {user.email}
             </span>
           </div>
+          <Button
+            startContent={<FaEdit size={18} />}
+            size='sm'
+            color='default'
+            variant='flat'>
+            Edit Profile
+          </Button>
         </div>
       )}
 
