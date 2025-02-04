@@ -11,12 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { getFinancialRecords } from '@/services/financialRecordService';
-import { getGroups } from '@/services/groupService';
-import { fetchGroupTypes } from '@/services/groupTypeService';
-import { getUsers } from '@/services/userService';
 import useAppStore from '@/stores/useAppStore';
-import { Group } from '@/types/types';
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -41,27 +36,15 @@ const LoginForm = ({
   // const [loading, setLoading] = useState(false);
 
   const addGroup = useAppStore((state) => state.addGroup);
-  const setGroups = useAppStore((state) => state.setGroups);
-  const setGroupTypes = useAppStore((state) => state.setGroupTypes);
   const setDefaultGroup = useAppStore((state) => state.setDefaultGroup);
-  const setUsers = useAppStore((state) => state.setUsers);
-  const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
 
   const fetchDataAfterLogin = async (userId: string) => {
     try {
-      const groupsResponse = await getGroups();
-      const usersResponse = await getUsers();
-      const groupTypesResponse = await fetchGroupTypes(); // Fetch group types
-      const financialRecordsResponse = await getFinancialRecords(); // Fetch financial records
-
-      setGroups(groupsResponse.data);
-      setUsers(usersResponse.data);
-      setGroupTypes(groupTypesResponse); // Store group types in Zustand
-      setFinancialRecords(financialRecordsResponse.data); // Store financial records in Zustand
+      const groupsResponse = await axios.get('/api/groups'); // Fetch groups from API
 
       // Check if the default group exists
       const defaultGroupExists = groupsResponse.data.some(
-        (group: Group) => group.groupType === 'default',
+        (group: { groupType: string }) => group.groupType === 'default',
       );
 
       // Create default group if it doesn't exist
