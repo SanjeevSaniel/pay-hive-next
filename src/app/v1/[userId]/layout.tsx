@@ -9,7 +9,7 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   useLenis();
 
   return (
-    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-t from-stone-800 via-stone-600 to-stone-600 dark'>
+    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-t from-stone-200 via-stone-200 to-stone-50'>
       <div className='top-0 z-30'>
         <Header />
       </div>
