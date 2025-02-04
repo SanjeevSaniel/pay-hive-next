@@ -94,7 +94,7 @@ const AccountCards = () => {
   }
 
   return (
-    <div className='flex flex-col space-y-4 p-2 text-stone-100'>
+    <div className='flex flex-col space-y-4 p-2 text-stone-600'>
       <div className='text-center text-2xl font-extrabold mt-4 px-2'>
         Account
       </div>
@@ -135,7 +135,7 @@ const AccountCards = () => {
             key={tab.key}
             href={`${basePath}/account${tab.path}`}
             passHref>
-            <Card className='px-2 pb-2 bg-stone-700 text-stone-100 border-stone-700 shadow-sm rounded-2xl'>
+            <Card className='px-2 pb-2 bg-stone-100 text-stone-800 border-stone-100 drop-shadow rounded-2xl'>
               <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
                 <div className='flex justify-center items-center m-2'>
                   <tab.icon />
@@ -144,7 +144,7 @@ const AccountCards = () => {
                   <CardTitle className='flex items-center gap-2 text-lg'>
                     {tab.label}
                   </CardTitle>
-                  <CardDescription className='flex items-center space-x-2 text-md text-stone-400'>
+                  <CardDescription className='flex items-center space-x-2 text-md text-stone-600'>
                     {tab.description}
                   </CardDescription>
                 </div>
