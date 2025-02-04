@@ -1,6 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@heroui/react';
+// import { Button } from '@/components/ui/button';
 import { ChevronLeft, Plus } from 'lucide-react';
 import Link from 'next/link';
 
@@ -12,18 +13,20 @@ const GroupHeader = ({ basePath }: GroupHeaderProps) => {
   return (
     <div className='flex justify-between items-center'>
       <Button
-        asChild
-        size='default'
-        variant='secondary'
-        className='rounded-xl'>
-        <Link href={`${basePath}/groups`}>
-          <ChevronLeft />
-        </Link>
+        isIconOnly
+        as={Link}
+        size='md'
+        variant='flat'
+        className='rounded-xl'
+        href={`${basePath}/groups`}>
+        {/* <Link > */}
+        <ChevronLeft />
+        {/* </Link> */}
       </Button>
 
       <Button
-        size='default'
-        variant='default'
+        size='md'
+        variant='solid'
         className='rounded-xl'>
         <Plus />
         Add Expense
