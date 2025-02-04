@@ -114,7 +114,7 @@ const GroupDetails = () => {
   }
 
   return (
-    <div className='flex flex-col justify-normal gap-4 my-2 p-2 text-stone-100'>
+    <div className='flex flex-col justify-normal gap-4 my-2 p-2 text-stone-600'>
       <GroupHeader basePath={basePath} />
       {group && (
         <GroupInfo
@@ -135,13 +135,13 @@ const GroupDetails = () => {
           <Tab
             key={item.id}
             title={
-              <div className='flex items-center space-x-2'>
+              <div className='flex items-center space-x-1'>
                 {item.icon}
                 <span>{item.label}</span>
               </div>
             }
             className='w-full py-0'>
-            <Card className='border shadow-sm'>
+            <Card className='bg-transparent shadow-none'>
               <CardBody className='p-0'>{item.content}</CardBody>
             </Card>
           </Tab>
