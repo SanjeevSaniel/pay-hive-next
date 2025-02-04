@@ -5,7 +5,7 @@ import useBasePath from '@/hooks/useBasePath';
 import { Component, Home, ListTree } from 'lucide-react'; // Updated to use MoneyBag
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { GiCash } from 'react-icons/gi';
+// import { GiCash } from 'react-icons/gi';
 import { TiUserOutline } from 'react-icons/ti';
 
 const Navbar = () => {
@@ -20,12 +20,12 @@ const Navbar = () => {
     { key: 'home', icon: Home, href: `${basePath}` },
     { key: 'groups', icon: Component, href: `${basePath}/groups` },
     { key: 'expenses', icon: ListTree, href: `${basePath}/expenses` },
-    { key: 'budgeting', icon: GiCash, href: `${basePath}/budgeting` }, // Updated to use MoneyBag
+    // { key: 'budgeting', icon: GiCash, href: `${basePath}/budgeting` }, // Updated to use MoneyBag
     { key: 'account', icon: TiUserOutline, href: `${basePath}/account` },
   ];
 
   return (
-    <Card className='bg-[#f1f1f1] fixed left-3 bottom-3 right-3 drop-shadow-sm rounded-xl backdrop-blur-xl z-30'>
+    <Card className='bg-[#f1f1f1] fixed left-10 bottom-2 right-10 drop-shadow-sm rounded-xl backdrop-blur-xl z-30'>
       <CardContent className='flex justify-evenly items-center px-0 py-3'>
         {navItems.map((item) => {
           const isActive =
