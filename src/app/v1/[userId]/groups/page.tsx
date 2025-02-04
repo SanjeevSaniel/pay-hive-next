@@ -97,11 +97,12 @@ const GroupsPage = () => {
   return (
     <div className='flex flex-col gap-0 py-4 w-full relative'>
       {/* Total Group Spend Card */}
-
-      <TotalGroupSpendCard totalSpend={totalSpend} />
+      <div className='p-2'>
+        <TotalGroupSpendCard totalSpend={totalSpend} />
+      </div>
 
       <div className='flex justify-between items-center pl-4 pr-2 py-2 sticky top-0'>
-        <div className='flex items-center space-x-2 my-2'>
+        <div className='flex items-center space-x-2 my-2 text-foreground'>
           <span className='text-2xl font-extrabold'>Groups</span>
           <span className='text-sm border p-1 rounded-lg'>{groups.length}</span>
         </div>
