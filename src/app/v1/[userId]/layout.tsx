@@ -12,14 +12,7 @@ import { getUsers } from '@/services/userService';
 import useAppStore from '@/stores/useAppStore';
 import { Group } from '@/types/types';
 import axios from 'axios';
-
-// Default Group Definition
-export const createDefaultGroup = (userId: string) => ({
-  groupName: 'General Expenses',
-  description: 'Expenses not associated with any specific group',
-  groupType: 'default',
-  memberIds: [userId],
-});
+import { createDefaultGroup } from '@/utils/groupUtils'; // Import the function
 
 const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   useLenis();
