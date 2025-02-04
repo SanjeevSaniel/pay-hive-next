@@ -9,7 +9,12 @@ import useAppStore from '@/stores/useAppStore';
 import { Group, User, FinancialRecord } from '@/types/types';
 import { useParams } from 'next/navigation';
 import useBasePath from '@/hooks/useBasePath';
-import { useEffect, useState } from 'react';
+import { Key, useEffect, useState } from 'react';
+import { Tab, Tabs } from '@heroui/tabs';
+import { Card, CardBody } from '@heroui/card';
+import GroupActivities from '@/components/Groups/GroupActivities';
+import GroupSummary from '@/components/Groups/GroupSummary';
+import { FiFileText, FiActivity, FiBarChart2 } from 'react-icons/fi';
 
 const GroupDetails = () => {
   const { groupId } = useParams();
@@ -22,6 +27,41 @@ const GroupDetails = () => {
   const [group, setGroup] = useState<Group | null>(null); // Set initial state to null
   const [members, setMembers] = useState<User[]>([]); // Set initial state for members
   const [groupRecords, setGroupRecords] = useState<FinancialRecord[]>([]); // Set initial state for group financial records
+  const [selected, setSelected] = useState('transactions');
+
+  const tabs = [
+    {
+      id: 'transactions',
+      label: 'Transactions',
+      content: (
+        <>
+          {group ? (
+            <GroupTransactions records={groupRecords} />
+          ) : (
+            <div>Loading...</div>
+          )}
+        </>
+      ),
+      icon: <FiFileText />,
+    },
+    {
+      id: 'activities',
+      label: 'Activities',
+      content: <GroupActivities />,
+      icon: <FiActivity />,
+    },
+    {
+      id: 'summary',
+      label: 'Summary',
+      content: <GroupSummary />,
+      icon: <FiBarChart2 />,
+    },
+  ];
+
+  // Wrapper function to handle selection change
+  const handleSelectionChange = (key: Key) => {
+    setSelected(key.toString()); // Ensure the key is converted to a string
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -74,7 +114,7 @@ const GroupDetails = () => {
   }
 
   return (
-    <div className='flex flex-col justify-normal gap-4 my-2 p-2'>
+    <div className='flex flex-col justify-normal gap-4 my-2 p-2 text-stone-100'>
       <GroupHeader basePath={basePath} />
       {group && (
         <GroupInfo
@@ -83,11 +123,30 @@ const GroupDetails = () => {
         />
       )}
       {group?.memberIds && <MemberAvatars members={members} />}
-      {group ? (
-        <GroupTransactions records={groupRecords} />
-      ) : (
-        <div>Loading...</div>
-      )}
+
+      <Tabs
+        aria-label='Group Information tabs'
+        items={tabs}
+        selectedKey={selected}
+        onSelectionChange={handleSelectionChange}
+        size='md'
+        className='flex justify-evenly mb-0'>
+        {(item) => (
+          <Tab
+            key={item.id}
+            title={
+              <div className='flex items-center space-x-2'>
+                {item.icon}
+                <span>{item.label}</span>
+              </div>
+            }
+            className='w-full py-0'>
+            <Card className='border shadow-sm'>
+              <CardBody className='p-0'>{item.content}</CardBody>
+            </Card>
+          </Tab>
+        )}
+      </Tabs>
     </div>
   );
 };
