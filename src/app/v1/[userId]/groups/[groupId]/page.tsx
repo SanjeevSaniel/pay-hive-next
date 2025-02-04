@@ -74,7 +74,7 @@ const GroupDetails = () => {
   }
 
   return (
-    <div className='flex flex-col justify-normal gap-4 p-2'>
+    <div className='flex flex-col justify-normal gap-4 my-2 p-2'>
       <GroupHeader basePath={basePath} />
       {group && (
         <GroupInfo
