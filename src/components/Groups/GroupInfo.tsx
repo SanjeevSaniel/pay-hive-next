@@ -70,16 +70,17 @@ const GroupInfo = ({ group, basePath }: GroupInfoProps) => {
             />
           </Button>
           <Button
+            as={Link}
             isIconOnly
             size='sm'
             variant='flat'
+            href={`${basePath}/groups/${group.groupId}/settings`}
             className='p-1 rounded-xl'>
-            <Link href={`${basePath}/groups/${group.groupId}/settings`}>
-              <Settings
-                size={20}
-                className='rounded-xl'
-              />
-            </Link>
+            <Settings
+              size={20}
+              className='rounded-xl'
+            />
+            {/* <Link></Link> */}
           </Button>
         </div>
       </div>
