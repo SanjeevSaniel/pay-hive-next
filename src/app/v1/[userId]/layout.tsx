@@ -4,14 +4,12 @@ import Header from '@/components/Header';
 import Navbar from '@/components/Navbar';
 import useLenis from '@/hooks/useLenis';
 import { Toaster } from 'react-hot-toast';
-// import ReactQueryProvider from '@/providers/ReactQueryProvider';
 
 const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   useLenis();
 
   return (
-    // <ReactQueryProvider>
-    <div className='grid grid-rows-layout min-h-screen p-2'>
+    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-t from-stone-800 via-stone-600 to-stone-600 dark'>
       <div className='top-0 z-30'>
         <Header />
       </div>
@@ -19,7 +17,6 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       <Toaster />
     </div>
-    // </ReactQueryProvider>
   );
 };
 
