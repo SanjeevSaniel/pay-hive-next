@@ -14,7 +14,7 @@ import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Button } from '../ui/button';
+// import { Button } from '../ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -33,6 +33,7 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
+import { Button } from '@heroui/react';
 
 const formSchema = z.object({
   groupName: z
@@ -97,8 +98,8 @@ const AddGroup = () => {
       <DrawerTrigger asChild>
         <Button
           aria-label='New'
-          size='default'
-          variant='default'
+          size='md'
+          variant='solid'
           className='rounded-xl'
           // className='p-6 fixed right-6 bottom-32 rounded-2xl'
         >
