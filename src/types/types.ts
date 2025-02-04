@@ -1,14 +1,36 @@
 export enum ExpenseCategory {
+  // Expense Categories
   Shopping = 'Shopping',
   Fuel = 'Fuel',
   Bills = 'Bills',
   Travel = 'Travel',
-  DiningOut = 'DiningOut',
+  DiningOut = 'Dining Out',
   Entertainment = 'Entertainment',
-  HealthFitness = 'HealthFitness',
+  HealthFitness = 'Health Fitness',
   Education = 'Education',
   Groceries = 'Groceries',
   Work = 'Work',
+  Insurance = 'Insurance',
+  Investment = 'Investment',
+  Loans = 'Loans',
+  Rent = 'Rent',
+  Savings = 'Savings',
+  Utilities = 'Utilities',
+  Medical = 'Medical',
+  Miscellaneous = 'Miscellaneous',
+
+  // Credit Categories
+  Salary = 'Salary',
+  Freelance = 'Freelance',
+  Interest = 'Interest',
+  Cashback = 'Cashback',
+  Refund = 'Refund',
+  Bonus = 'Bonus',
+  Gifts = 'Gifts',
+  Investments = 'Investments',
+  Rentals = 'Rentals',
+  Royalties = 'Royalties',
+  Reimbursements = 'Reimbursements',
 }
 
 export enum SplitMethod {
