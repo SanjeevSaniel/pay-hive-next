@@ -14,7 +14,6 @@ import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-// import { Button } from '../ui/button';
 import {
   Drawer,
   DrawerClose,
@@ -24,15 +23,15 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '../ui/drawer';
+} from '@/components/ui/drawer';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import { Button } from '@heroui/react';
 
 const formSchema = z.object({
@@ -44,7 +43,7 @@ const formSchema = z.object({
     .string()
     .min(0, { message: 'Description must be at least 5 characters long' })
     .max(200, { message: 'Description must be at most 200 characters long' }),
-  groupType: z.string().min(2, 'Group type must be choosen.'),
+  groupType: z.string().min(2, 'Group type must be chosen.'),
 });
 
 type Inputs = z.infer<typeof formSchema>;
@@ -77,7 +76,6 @@ const AddGroup = () => {
       form.reset(); // Reset the form after submission
       setIsDrawerOpen(false); // Close the drawer after form submission
     } catch (error: unknown) {
-      // Use `unknown` instead of `any`
       console.error('Failed to create group', error); // Log the error
 
       // Handle the error safely
@@ -101,7 +99,7 @@ const AddGroup = () => {
           size='md'
           variant='solid'
           className='rounded-xl'
-          // className='p-6 fixed right-6 bottom-32 rounded-2xl'
+          onPress={() => setIsDrawerOpen(true)} // Use onPress instead of onClick
         >
           <Plus /> Add Group
         </Button>
@@ -124,7 +122,6 @@ const AddGroup = () => {
               name='groupName'
               render={({ field }) => (
                 <FormItem className='space-y-0.5'>
-                  {/* <FormLabel>Group Name</FormLabel> */}
                   <FormControl>
                     <Input
                       required
@@ -142,7 +139,6 @@ const AddGroup = () => {
               name='description'
               render={({ field }) => (
                 <FormItem className='space-y-0.5'>
-                  {/* <FormLabel>Description</FormLabel> */}
                   <FormControl>
                     <Input
                       className='h-fit text-lg'
@@ -159,7 +155,6 @@ const AddGroup = () => {
               name='groupType'
               render={({ field }) => (
                 <FormItem>
-                  {/* <FormLabel>Type</FormLabel> */}
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}>
@@ -170,23 +165,22 @@ const AddGroup = () => {
                     </FormControl>
                     <SelectContent>
                       <SelectItem
-                        value='m@example.com'
+                        value='type1'
                         className='text-lg'>
-                        m@example.com
+                        Type 1
                       </SelectItem>
                       <SelectItem
-                        value='m@google.com'
+                        value='type2'
                         className='text-lg'>
-                        m@google.com
+                        Type 2
                       </SelectItem>
                       <SelectItem
-                        value='m@support.com'
+                        value='type3'
                         className='text-lg'>
-                        m@support.com
+                        Type 3
                       </SelectItem>
                     </SelectContent>
                   </Select>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -202,7 +196,7 @@ const AddGroup = () => {
         <DrawerFooter>
           <DrawerClose asChild>
             <Button
-              onClick={() => form.reset()}
+              onPress={() => form.reset()} // Use onPress instead of onClick
               variant='ghost'
               className='w-full'>
               Cancel
