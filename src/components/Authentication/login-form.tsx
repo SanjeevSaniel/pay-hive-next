@@ -13,6 +13,7 @@ import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
+import { fetchGroupTypes } from '@/services/groupTypeService';
 import { getUsers } from '@/services/userService';
 import useAppStore from '@/stores/useAppStore';
 import { Group } from '@/types/types';
@@ -41,6 +42,7 @@ const LoginForm = ({
 
   const addGroup = useAppStore((state) => state.addGroup);
   const setGroups = useAppStore((state) => state.setGroups);
+  const setGroupTypes = useAppStore((state) => state.setGroupTypes);
   const setDefaultGroup = useAppStore((state) => state.setDefaultGroup);
   const setUsers = useAppStore((state) => state.setUsers);
   const setFinancialRecords = useAppStore((state) => state.setFinancialRecords);
@@ -49,10 +51,12 @@ const LoginForm = ({
     try {
       const groupsResponse = await getGroups();
       const usersResponse = await getUsers();
+      const groupTypesResponse = await fetchGroupTypes(); // Fetch group types
       const financialRecordsResponse = await getFinancialRecords(); // Fetch financial records
 
       setGroups(groupsResponse.data);
       setUsers(usersResponse.data);
+      setGroupTypes(groupTypesResponse); // Store group types in Zustand
       setFinancialRecords(financialRecordsResponse.data); // Store financial records in Zustand
 
       // Check if the default group exists
