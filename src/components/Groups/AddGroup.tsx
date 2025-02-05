@@ -99,7 +99,7 @@ const AddGroup = () => {
           size='md'
           variant='solid'
           className='rounded-xl'
-          onPress={() => setIsDrawerOpen(true)} // Use onPress instead of onClick
+          // onPress={() => setIsDrawerOpen(true)} // Use onPress instead of onClick
         >
           <Plus /> Add Group
         </Button>
@@ -185,24 +185,29 @@ const AddGroup = () => {
                 </FormItem>
               )}
             />
-            <Button
-              size='lg'
-              type='submit'
-              className='w-full'>
-              Submit
-            </Button>
+
+            <DrawerFooter className='grid grid-cols-2'>
+              <DrawerClose asChild>
+                <Button
+                  size='md'
+                  onPress={() => form.reset()} // Use onPress instead of onClick
+                  variant='light'
+                  className='w-full'>
+                  Cancel
+                </Button>
+              </DrawerClose>
+              <Button
+                size='md'
+                type='submit'
+                variant='solid'
+                className='w-full'>
+                Submit
+              </Button>
+
+              {/* <DrawerClose asChild></DrawerClose> */}
+            </DrawerFooter>
           </form>
         </Form>
-        <DrawerFooter>
-          <DrawerClose asChild>
-            <Button
-              onPress={() => form.reset()} // Use onPress instead of onClick
-              variant='ghost'
-              className='w-full'>
-              Cancel
-            </Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
