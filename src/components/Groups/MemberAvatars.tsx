@@ -7,6 +7,7 @@ interface MemberAvatarsProps {
 }
 
 const MemberAvatars = ({ members }: MemberAvatarsProps) => {
+
   return (
     <div className='flex items-center gap-4 px-2 my-1'>
       <Button
@@ -23,10 +24,7 @@ const MemberAvatars = ({ members }: MemberAvatarsProps) => {
             size='lg'
             radius='full'
             name={member.name}
-            // src={
-            //   member.profileImageUrl ||
-            //   'https://i.pravatar.cc/150?u=a04258114e29026708c'
-            // }
+            // src={member.profileImageUrl}
           />
         ))}
       </AvatarGroup>
