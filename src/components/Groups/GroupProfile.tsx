@@ -1,39 +1,25 @@
 'use client';
 
-import useAppStore from '@/stores/useAppStore';
 import { Group } from '@/types/types';
 import { Button } from '@heroui/react';
 import axios from 'axios';
 import { Settings, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter, useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
-import { useEffect, useMemo, useCallback, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 import useBasePath from '@/hooks/useBasePath';
+import useAppStore from '@/stores/useAppStore';
 
-const GroupProfile = () => {
-  const { groupId } = useParams();
+interface GroupProfileProps {
+  group: Group | null;
+}
+
+const GroupProfile: React.FC<GroupProfileProps> = ({ group }) => {
   const deleteGroup = useAppStore((state) => state.deleteGroup);
   const restoreGroup = useAppStore((state) => state.restoreGroup);
-  const groups = useAppStore((state) => state.groups);
   const router = useRouter();
-
-  const [group, setGroup] = useState<Group | null>(null);
   const basePath = useBasePath();
-
-  const groupData = useMemo(
-    () => groups.find((group) => group.groupId === groupId) || null,
-    [groupId, groups],
-  );
-
-  useEffect(() => {
-    if (groupData) {
-      setGroup(groupData);
-      console.log('Group found');
-    } else {
-      console.log('Group not found in Zustand store');
-    }
-  }, [groupData]);
 
   const handleDelete = useCallback(async () => {
     if (!group) return;
@@ -41,10 +27,10 @@ const GroupProfile = () => {
     const groupToRestore = { ...group };
 
     try {
-      await router.push(`${basePath}/groups`);
+      router.push(`${basePath}/groups`);
       deleteGroup(group.groupId);
       const response = await axios.delete(`/api/groups/${group.groupId}`);
-      console.log('Response:- ', response);
+      console.log('Response:', response);
 
       if (response.status !== 200) {
         throw new Error('Failed to delete group');
