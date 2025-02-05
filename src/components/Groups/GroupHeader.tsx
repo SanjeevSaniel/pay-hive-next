@@ -1,15 +1,22 @@
 'use client';
 
 import { Button } from '@heroui/react';
-// import { Button } from '@/components/ui/button';
 import { ChevronLeft, Plus } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface GroupHeaderProps {
   basePath: string;
 }
 
 const GroupHeader = ({ basePath }: GroupHeaderProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleAddExpense = () => {
+    router.push(`${pathname}/add-expense`);
+  };
+
   return (
     <div className='flex justify-between items-center'>
       <Button
@@ -25,7 +32,8 @@ const GroupHeader = ({ basePath }: GroupHeaderProps) => {
       <Button
         size='md'
         variant='solid'
-        className='rounded-xl'>
+        className='rounded-xl'
+        onPress={handleAddExpense}>
         <Plus />
         Add Expense
       </Button>
