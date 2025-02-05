@@ -12,11 +12,11 @@ export interface FinancialRecordDocument extends Document {
   amount: number;
   date: Date;
   category?: ExpenseCategory;
-  payerId?: string;
+  payerId: string;
   groupId?: string;
   splitMethod?: SplitMethod;
   splitDetails?: SplitDetail[];
-  type?: TransactionType;
+  type: TransactionType;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -59,6 +59,7 @@ const financialRecordSchema = new Schema<FinancialRecordDocument>({
   ],
   type: {
     type: String,
+    required: true,
   },
   createdAt: {
     type: Date,
