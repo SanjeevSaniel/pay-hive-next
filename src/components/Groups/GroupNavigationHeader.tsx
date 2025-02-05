@@ -9,7 +9,7 @@ interface GroupHeaderProps {
   basePath: string;
 }
 
-const GroupHeader = ({ basePath }: GroupHeaderProps) => {
+const GroupNavigationHeader = ({ basePath }: GroupHeaderProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -41,4 +41,4 @@ const GroupHeader = ({ basePath }: GroupHeaderProps) => {
   );
 };
 
-export default GroupHeader;
+export default GroupNavigationHeader;
