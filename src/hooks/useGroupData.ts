@@ -1,38 +1,24 @@
 import { useEffect, useState, useMemo } from 'react';
 import useAppStore from '@/stores/useAppStore';
 import { Group, User } from '@/types/types';
-import { getUsers } from '@/services/userService';
+import useUsers from '@/hooks/useUsers';
 
 const useGroupData = (groupId: string | string[]) => {
   const id = Array.isArray(groupId) ? groupId[0] : groupId;
-  const groups = useAppStore((state) => state.groups); // Get groups from Zustand state
-  const users = useAppStore((state) => state.users); // Get users from Zustand state
-  const setUsers = useAppStore((state) => state.setUsers); // Function to set users in Zustand store
-  const financialRecords = useAppStore((state) => state.financialRecords); // Get financial records from Zustand state
+  const groups = useAppStore((state) => state.groups);
+  const financialRecords = useAppStore((state) => state.financialRecords);
 
   const [group, setGroup] = useState<Group | null>(null);
+  const users = useUsers(); // Fetch users using the custom hook
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await getUsers(); // Fetch users from the API
-        setUsers(response.data); // Update the Zustand store with the fetched data
-      } catch (error) {
-        console.error('Failed to fetch users', error);
-      }
-    };
-
-    if (users.length === 0) {
-      fetchUsers(); // Fetch users if Zustand store is empty
-    }
-
     if (id) {
       const groupData = groups.find((group: Group) => group.groupId === id);
       if (groupData) {
         setGroup(groupData);
       }
     }
-  }, [id, groups, users, setUsers]);
+  }, [id, groups]);
 
   const members = useMemo(
     () =>
