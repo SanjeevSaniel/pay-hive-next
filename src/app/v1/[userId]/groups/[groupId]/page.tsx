@@ -111,10 +111,9 @@ const GroupDetails = () => {
   }
 
   return (
-    <div className='flex flex-col justify-normal gap-4 my-2 p-2 text-stone-600'>
+    <div className='flex flex-col justify-normal gap-4 my-2 p-1 text-stone-600'>
       <GroupHeader basePath={basePath} />
       <GroupInfo />
-      {/* {group && <GroupInfo />} */}
       {group?.memberIds && <MemberAvatars members={members} />}
 
       <Tabs
