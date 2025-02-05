@@ -1,8 +1,8 @@
 'use client';
 
-import GroupHeader from '@/components/Groups/GroupHeader';
-import GroupTabs from '@/components/Groups/GroupTabs';
+import GroupNavigationHeader from '@/components/Groups/GroupNavigationHeader';
 import GroupProfile from '@/components/Groups/GroupProfile';
+import GroupTabs from '@/components/Groups/GroupTabs';
 import MemberAvatars from '@/components/Groups/MemberAvatars';
 import useBasePath from '@/hooks/useBasePath';
 import useGroupData from '@/hooks/useGroupData';
@@ -26,7 +26,7 @@ const GroupDetails = () => {
 
   return (
     <div className='flex flex-col justify-normal gap-4 my-2 p-1 text-stone-600'>
-      <GroupHeader basePath={basePath} />
+      <GroupNavigationHeader basePath={basePath} />
       <GroupProfile group={group} />
       {memberAvatars}
       <GroupTabs
