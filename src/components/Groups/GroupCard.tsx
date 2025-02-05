@@ -6,10 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Boxes, ArrowDownRight } from 'lucide-react';
-import Link from 'next/link';
-import { Group } from '@/types/types';
 import useBasePath from '@/hooks/useBasePath';
+import { Group } from '@/types/types';
+import { ArrowDownRight, Boxes, Ungroup } from 'lucide-react';
+import Link from 'next/link';
 
 interface GroupCardProps {
   group: Group;
@@ -29,13 +29,13 @@ const GroupCard = ({ group }: GroupCardProps) => {
       <Card className='px-2 pb-2 bg-stone-100 text-stone-600 border border-stone-100 drop-shadow rounded-2xl'>
         <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
           <div className='flex justify-center items-center m-2'>
-            <Boxes />
+            {group.groupType === 'default' ? <Ungroup /> : <Boxes />}
           </div>
-          <div className='flex flex-col justify-center space-y-0.5'>
+          <div className='flex flex-col justify-center space-y-0.5 overflow-hidden whitespace-nowrap text-ellipsis'>
             <CardTitle className='flex items-center gap-2 text-lg'>
               {group.groupName}
             </CardTitle>
-            <CardDescription className='flex items-center space-x-2 text-md text-stone-500'>
+            <CardDescription className='flex items-center space-x-2 text-md text-stone-500 '>
               {group.description}
             </CardDescription>
           </div>
