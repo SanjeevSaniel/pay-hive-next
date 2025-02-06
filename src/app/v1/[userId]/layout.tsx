@@ -26,38 +26,58 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const groupsResponse = await getGroups();
-        const usersResponse = await getUsers();
-        const groupTypesResponse = await fetchGroupTypes(); // Fetch group types
-        const financialRecordsResponse = await getFinancialRecords(); // Fetch financial records
+        const [
+          groupsResponse,
+          usersResponse,
+          groupTypesResponse,
+          financialRecordsResponse,
+        ] = await Promise.all([
+          getGroups(),
+          getUsers(),
+          fetchGroupTypes(), // Fetch group types
+          getFinancialRecords(), // Fetch financial records
+        ]);
+
+        console.log('Fetched Groups:', groupsResponse.data);
+        console.log('Fetched Users:', usersResponse.data);
+        console.log('Fetched Group Types:', groupTypesResponse); // Log group types
+        console.log(
+          'Fetched Financial Records:',
+          financialRecordsResponse.data,
+        );
 
         setGroups(groupsResponse.data);
         setUsers(usersResponse.data);
         setGroupTypes(groupTypesResponse); // Store group types in Zustand
         setFinancialRecords(financialRecordsResponse.data); // Store financial records in Zustand
 
-        // Check if the default group exists
-        const defaultGroupExists = groupsResponse.data.some(
-          (group: Group) => group.groupType === 'default',
-        );
+        // Ensure Default Group
+        const ensureDefaultGroup = async (groups: Group[]) => {
+          // Explicitly type 'groups' parameter
+          // Check if the default group exists
+          const defaultGroupExists = groups.some(
+            (group: Group) => group.groupType === 'default',
+          );
 
-        // Create default group if it doesn't exist
-        if (!defaultGroupExists) {
-          // Assuming you have a user ID for the logged-in user
-          const userId = 'defaultUserId'; // Replace this with the actual user ID
-          const newDefaultGroup = createDefaultGroup(userId);
-          try {
-            const response = await axios.post(
-              '/api/groups/create',
-              newDefaultGroup,
-            );
-            addGroup(response.data); // Use addGroup method to add the group
-            setDefaultGroup(response.data);
-            console.log('Default group created:', response.data);
-          } catch (createError) {
-            console.error('Failed to create default group:', createError);
+          // Create default group if it doesn't exist
+          if (!defaultGroupExists) {
+            const userId = 'defaultUserId'; // Replace this with the actual user ID
+            const newDefaultGroup = createDefaultGroup(userId);
+            try {
+              const response = await axios.post(
+                '/api/groups/create',
+                newDefaultGroup,
+              );
+              addGroup(response.data); // Use addGroup method to add the group
+              setDefaultGroup(response.data);
+              console.log('Default group created:', response.data);
+            } catch (createError) {
+              console.error('Failed to create default group:', createError);
+            }
           }
-        }
+        };
+
+        await ensureDefaultGroup(groupsResponse.data); // Check and create default group if needed
       } catch (error) {
         console.error('Failed to fetch data', error);
       }
@@ -72,6 +92,7 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
     setUsers,
     setFinancialRecords,
   ]);
+
 
   return (
     <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-t from-stone-200 via-stone-200 to-stone-50'>
