@@ -106,8 +106,9 @@ const AddGroup = () => {
       </DrawerTrigger>
       <DrawerContent
         aria-labelledby='drawer-title'
-        aria-describedby='drawer-description'>
-        <DrawerHeader>
+        aria-describedby='drawer-description'
+        className='dark dark:text-white'>
+        <DrawerHeader className='dark dark:text-white'>
           <DrawerTitle>New Group Details</DrawerTitle>
           <DrawerDescription>
             Please provide the details to create a new group.
@@ -116,7 +117,7 @@ const AddGroup = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex flex-col gap-5 px-5 pt-2'>
+            className='flex flex-col gap-5 px-5 pt-2 dark:text-white'>
             <FormField
               control={form.control}
               name='groupName'
@@ -159,16 +160,16 @@ const AddGroup = () => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className='text-lg'>
+                      <SelectTrigger className='text-lg text-white'>
                         <SelectValue placeholder='Select a group type' />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className='dark'>
                       {groupTypes.map((groupType) => (
                         <SelectItem
                           key={groupType.typeId}
                           value={groupType.typeId}
-                          className='text-lg text-black'>
+                          className='text-lg'>
                           {groupType.typeName}
                         </SelectItem>
                       ))}
