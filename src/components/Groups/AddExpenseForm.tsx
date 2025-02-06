@@ -118,7 +118,7 @@ const AddExpenseForm = () => {
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}>
-        <ModalContent className='rounded-b-none'>
+        <ModalContent className='dark text-white rounded-b-none'>
           {() => (
             <>
               <ModalHeader className='flex gap-1 justify-center w-full'>
