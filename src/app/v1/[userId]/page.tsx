@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/card';
 import { CircularProgress } from '@heroui/react';
 import { Plus } from 'lucide-react';
+import Header from '@/components/Header';
 
 const categories = [
   {
@@ -46,6 +47,9 @@ const categories = [
 const HomePage = () => {
   return (
     <div>
+      <div className='px-1 top-0 z-30'>
+        <Header />
+      </div>
       <div className='flex justify-between px-3 py-2 my-2'>
         <span className='text-2xl font-extrabold'>Expenses</span>
         <Button
