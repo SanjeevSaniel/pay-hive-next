@@ -57,7 +57,7 @@ export interface FinancialRecord {
   amount: number;
   date: Date;
   category?: ExpenseCategory; // Optional for transactions not classified as expenses
-  payerId: string; // User ID, optional for transactions where the payer is not specified
+  payees: string[]; // Array of User IDs for multiple payees
   groupId?: string; // Group ID (optional for non-group expenses)
   splitMethod?: SplitMethod; // Optional for transactions not split among members
   splitDetails?: SplitDetail[]; // Optional for non-group transactions
@@ -65,6 +65,7 @@ export interface FinancialRecord {
   createdAt: Date;
   updatedAt: Date;
 }
+
 
 export interface RawUser {
   userId: string;
