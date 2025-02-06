@@ -25,7 +25,7 @@ const Navbar = () => {
   ];
 
   return (
-    <Card className='bg-[#f1f1f1] fixed left-10 bottom-2 right-10 drop-shadow-sm rounded-xl backdrop-blur-xl z-30'>
+    <Card className='bg-[#f1f1f1] dark:bg-[#0b0e18] fixed left-16 bottom-2 right-16 drop-shadow-sm rounded-xl backdrop-blur-xl z-30'>
       <CardContent className='flex justify-evenly items-center px-0 py-3'>
         {navItems.map((item) => {
           const isActive =
@@ -39,7 +39,7 @@ const Navbar = () => {
               href={item.href}>
               <div
                 className={`flex flex-col items-center ${
-                  isActive ? 'text-gray-900' : 'text-gray-400'
+                  isActive ? 'text-white' : 'text-gray-400'
                 }`}>
                 <item.icon size={28} />
               </div>
