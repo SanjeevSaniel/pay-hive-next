@@ -1,16 +1,11 @@
 'use client';
 
-import {
-  // ExpenseCategory,
-  FinancialRecord,
-  // SplitMethod,
-  TransactionType,
-} from '@/types/types';
-// import { Listbox, ListboxItem } from '@heroui/listbox';
+import { FinancialRecord, TransactionType } from '@/types/types';
 import { Fragment, ReactNode } from 'react';
 import { Separator } from '../ui/separator';
-import { Chip } from '@heroui/chip';
 import { Calendar } from 'lucide-react';
+import { Card } from '@heroui/card';
+import { clsx } from 'clsx';
 
 interface FinancialRecordsListProps {
   records: FinancialRecord[];
@@ -352,9 +347,9 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
       acc.push(
         <li
           key={month}
-          className='flex items-center p-1 font-bold list-none'>
+          className='flex items-center px-2 py-1 font-bold list-none'>
           <Calendar
-            size={20}
+            size={16}
             className='mr-2'
           />
           <span className='mt-1'>{month}</span>
@@ -364,46 +359,45 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
       acc.push(
         <div
           key={`card-${month}`}
-          className='p-2 bg-stone-100 border rounded-lg'>
-          {groupedRecords[month].map((record, recordIndex) => (
+          className='flex flex-col gap-2 border rounded-lg'>
+          {groupedRecords[month].map((record) => (
             <Fragment key={record.recordId}>
-              <div className='grid grid-cols-3 p-2 rounded-lg'>
+              <Card className='grid grid-cols-3 px-3 py-2 bg-[#1c2429] rounded-xl'>
                 <div className='col-span-2'>
-                  <p className='text-stone-800'>{record.description}</p>
-                  <p className='text-stone-600'>{record.category}</p>
+                  <p className='text-[#f7f9fd] text-md'>{record.description}</p>
+                  <p className='text-[#a6a8ae] text-sm'>{record.category}</p>
                 </div>
                 <div className='flex flex-col items-end'>
-                  {/* <span className='text-wrap'>₹{record.amount}</span> */}
-                  <Chip
-                    color={
-                      record.type === TransactionType.Debit
-                        ? 'danger'
-                        : 'success'
-                    }
-                    variant='light'
-                    className='p-0 text-medium'>{`₹${record.amount}`}</Chip>
+                  <span
+                    className={clsx({
+                      'text-[#f03e6e]': record.type === TransactionType.Debit,
+                      'text-[#75ee30]': record.type === TransactionType.Credit,
+                      'text-md font-bold': true,
+                    })}>
+                    {`₹${record.amount}`}
+                  </span>
 
-                  <span className='mr-1 text-sm text-stone-600'>
+                  <span className='mr-1 text-sm text-[#a6a8ae]'>
                     {formatDate(new Date(record.date))}
                   </span>
                 </div>
-              </div>
-              {recordIndex < groupedRecords[month].length - 1 && (
+              </Card>
+              {/* {recordIndex < groupedRecords[month].length - 1 && (
                 <Separator className='my-2' />
-              )}
+              )} */}
             </Fragment>
           ))}
         </div>,
       );
 
-      if (index < sortedMonths.length - 1) {
-        acc.push(
-          <Separator
-            key={`separator-month-${index}`}
-            className='my-8'
-          />,
-        );
-      }
+      // if (index < sortedMonths.length - 1) {
+      //   acc.push(
+      //     <Separator
+      //       key={`separator-month-${index}`}
+      //       className='my-8'
+      //     />,
+      //   );
+      // }
 
       return acc;
     },
@@ -411,53 +405,9 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
   );
 
   return (
-    <div className=''>
-      <ul className='list-decimal list-inside space-y-2'>
-        {/* {sampleRecords.map((record) => (
-          <li
-            key={record.recordId}
-            className='grid grid-cols-3'>
-            <p className='col-span-2'>{record.description} </p>
-            <div className='flex flex-col items-end'>
-              <span className='text-wrap'>₹{record.amount}</span>
-              <span className='text-xs'>
-                {new Date(record.date).toLocaleDateString()}
-              </span>
-            </div>
-          </li>
-        ))} */}
-        {recordsWithSeparators}
-      </ul>
-
-      {/* <div className='flex flex-col gap-2'>
-        <p className='text-small text-default-500'>
-          Selected value: {selectedValue}
-        </p>
-
-        <ListboxWrapper>
-          <Listbox
-            disallowEmptySelection
-            aria-checked='false'
-            aria-label='Single selection example'
-            selectedKeys={selectedKeys}
-            // selectionMode='single'
-            variant='flat'
-            onSelectionChange={(keys) => setSelectedKeys(keys as Set<string>)}>
-            {records.map((record) => (
-              <ListboxItem
-                key={record.recordId}
-                className='flex justify-end'>
-                <p className='text-wrap'>{record.description}</p>
-                <div className='flex gap-1'>
-                  <span>₹{record.amount}</span>
-                  <span>{new Date(record.date).toLocaleDateString()}</span>
-                </div>
-              </ListboxItem>
-            ))}
-          </Listbox>
-        </ListboxWrapper>
-      </div> */}
-    </div>
+    <ul className='list-decimal list-inside space-y-2'>
+      {recordsWithSeparators}
+    </ul>
   );
 };
 
