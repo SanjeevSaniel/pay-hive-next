@@ -10,12 +10,16 @@ const MemberAvatars = ({ members }: MemberAvatarsProps) => {
 
   return (
     <div className='flex items-center gap-4 px-2 my-1'>
-      <Button
-        isIconOnly
-        size='lg'
-        radius='full'>
-        <Plus size={28} />
-      </Button>
+      <div className='flex flex-col justify-center items-center gap-1'>
+        <Button
+          isIconOnly
+          size='md'
+          radius='full'>
+          <Plus size={24} />
+        </Button>
+        <span className='text-[#cacccf] text-xs'>Add New</span>
+      </div>
+
       <AvatarGroup isBordered>
         {members.map((member) => (
           <Avatar
