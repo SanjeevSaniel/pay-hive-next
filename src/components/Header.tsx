@@ -13,7 +13,7 @@ const Header = () => {
   }
 
   return (
-    <div className='flex justify-between items-center px-6 py-3 bg-[#424141] text-white rounded-xl sticky top-0 z-20'>
+    <div className='flex justify-between items-center px-4 py-3 bg-[#474747] text-white rounded-xl sticky top-0 z-20'>
       <Link
         href={basePath}
         className='flex items-center text-lg font-extrabold'>
@@ -22,7 +22,7 @@ const Header = () => {
       <Link
         href={basePath}
         className='flex items-center text-lg font-extrabold'>
-        <span className='ml-2'>Splitly</span>
+        <span>Splitly</span>
       </Link>
       <Bell size={22} />
     </div>
