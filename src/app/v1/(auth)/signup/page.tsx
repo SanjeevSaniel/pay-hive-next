@@ -5,12 +5,23 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@heroui/react';
+import { neodaFont } from '@/fonts/Neoda/neodaFont';
 
 const SignupPage = () => {
   const router = useRouter();
   const [user, setUser] = useState({ name: '', email: '', password: '' });
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // New state for loading
 
   const onSignup = async () => {
     try {
@@ -20,19 +31,15 @@ const SignupPage = () => {
       console.log('Signup success', response.data);
       router.push('/login');
     } catch (error: unknown) {
-      // Use `unknown` instead of `any`
       console.error('Signup failed', error); // Log the error
 
-      // Handle the error safely
       if (error instanceof Error) {
-        // If the error is an instance of Error, display its message
-        toast.error(error.message);
+        toast.error(error.message); // Display the error message
       } else {
-        // If the error is not an Error object, display a generic message
-        toast.error('Signup failed');
+        toast.error('Signup failed'); // Display a generic message
       }
     } finally {
-      setLoading(false);
+      setLoading(false); // Set loading to false after the request is complete
     }
   };
 
@@ -49,51 +56,79 @@ const SignupPage = () => {
   }, [user]);
 
   return (
-    <div className='flex flex-col items-center justify-center gap-3 min-h-screen py-2'>
-      <h1>{loading ? 'Processing' : 'Signup'}</h1>
-      <hr />
-      <div className='flex flex-col justify-between gap-1'>
-        <label htmlFor='name'>Name</label>
-        <input
-          className='border border-gray-300 p-2 rounded text-black'
-          type='text'
-          id='name'
-          value={user.name}
-          onChange={(e) => setUser({ ...user, name: e.target.value })}
-          placeholder='User Name'
-        />
+    <div className='flex min-h-svh flex-col items-center justify-center gap-6 bg-[#161616] p-6 md:p-10 dark'>
+      <div className='flex w-full max-w-sm flex-col gap-6'>
+        <Link
+          href='/'
+          className='flex items-center gap-2 self-center font-medium text-white'>
+          <span className={`${neodaFont.className} text-2xl mb-1.5`}>S</span>
+          <span className='text-2xl text-[#d1d3d7] font-extrabold'>
+            Splitly.
+          </span>
+        </Link>
+        <Card>
+          <CardHeader className='text-center'>
+            <CardTitle className='text-xl'>Create an account</CardTitle>
+            <CardDescription>
+              Sign up with your email and password
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={onSignup}>
+              <div className='grid gap-6'>
+                <div className='grid gap-2'>
+                  <Label htmlFor='name'>Name</Label>
+                  <Input
+                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    id='name'
+                    type='text'
+                    placeholder='Your Name'
+                    required
+                  />
+                </div>
+                <div className='grid gap-2'>
+                  <Label htmlFor='email'>Email</Label>
+                  <Input
+                    onChange={(e) =>
+                      setUser({ ...user, email: e.target.value })
+                    }
+                    id='email'
+                    type='email'
+                    placeholder='you@example.com'
+                    required
+                  />
+                </div>
+                <div className='grid gap-2'>
+                  <Label htmlFor='password'>Password</Label>
+                  <Input
+                    onChange={(e) =>
+                      setUser({ ...user, password: e.target.value })
+                    }
+                    id='password'
+                    type='password'
+                    required
+                  />
+                </div>
+                <Button
+                  isLoading={loading} // Pass the loading state to the button
+                  disabled={buttonDisabled}
+                  type='submit'
+                  className='w-full'>
+                  Sign up
+                </Button>
+                <div className='flex justify-center gap-2 text-sm '>
+                  Already have an account?
+                  <Link
+                    href='/v1/login'
+                    className='bg-transparent border-none underline underline-offset-4'>
+                    Log in
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
-
-      <div className='flex flex-col justify-between gap-1'>
-        <label htmlFor='email'>Email</label>
-        <input
-          className='border border-gray-300 p-2 rounded text-black'
-          type='email'
-          id='email'
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-          placeholder='Email'
-        />
-      </div>
-
-      <div className='flex flex-col justify-end gap-1'>
-        <label htmlFor='password'>Password</label>
-        <input
-          className='border border-gray-300 p-2 rounded text-black'
-          type='password'
-          id='password'
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          placeholder='Password'
-        />
-      </div>
-
-      <button
-        onClick={onSignup}
-        className='px-2 py-1 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600'>
-        {buttonDisabled ? 'No signup' : 'Signup'}
-      </button>
-      <Link href='/v1/login'>Visit login page</Link>
     </div>
   );
 };

@@ -1,16 +1,18 @@
 'use client';
 
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
+import { Button } from '@heroui/react';
 
 const LogoutButton = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false); // New state for loading
 
   const onLogout = useCallback(async () => {
+    setLoading(true); // Set loading to true
     try {
       const response = await axios.get('/api/users/logout');
       console.log('Logout success', response.data);
@@ -28,14 +30,18 @@ const LogoutButton = () => {
         console.error('An unknown error occurred:', error);
         toast.error('Logout failed');
       }
+    } finally {
+      setLoading(false); // Set loading to false after the request is complete
     }
   }, [router]);
 
   return (
     <Button
-      onClick={onLogout}
+      isLoading={loading} // Pass the loading state to the button
+      onPress={onLogout}
       className='rounded-xl'
-      variant='destructive'>
+      variant='solid'
+      color='danger'>
       <LogOut />
       Logout
     </Button>
