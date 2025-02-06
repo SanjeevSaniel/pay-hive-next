@@ -51,6 +51,8 @@ type Inputs = z.infer<typeof formSchema>;
 const AddGroup = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const addGroup = useAppStore((state) => state.addGroup);
+  const groupTypes = useAppStore((state) => state.groupTypes); // Get group types from the store
+
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -98,9 +100,7 @@ const AddGroup = () => {
           aria-label='New'
           size='md'
           variant='solid'
-          className='rounded-xl'
-          // onPress={() => setIsDrawerOpen(true)} // Use onPress instead of onClick
-        >
+          className='rounded-xl'>
           <Plus /> Add Group
         </Button>
       </DrawerTrigger>
@@ -164,21 +164,14 @@ const AddGroup = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem
-                        value='type1'
-                        className='text-lg'>
-                        Type 1
-                      </SelectItem>
-                      <SelectItem
-                        value='type2'
-                        className='text-lg'>
-                        Type 2
-                      </SelectItem>
-                      <SelectItem
-                        value='type3'
-                        className='text-lg'>
-                        Type 3
-                      </SelectItem>
+                      {groupTypes.map((groupType) => (
+                        <SelectItem
+                          key={groupType.typeId}
+                          value={groupType.typeId}
+                          className='text-lg text-black'>
+                          {groupType.typeName}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -203,8 +196,6 @@ const AddGroup = () => {
                 className='w-full'>
                 Submit
               </Button>
-
-              {/* <DrawerClose asChild></DrawerClose> */}
             </DrawerFooter>
           </form>
         </Form>
