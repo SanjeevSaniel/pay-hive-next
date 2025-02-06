@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import Header from '@/components/Header';
 import Navbar from '@/components/Navbar';
 import useLenis from '@/hooks/useLenis';
 import { Toaster } from 'react-hot-toast';
@@ -86,10 +85,7 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   return (
-    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-tl from-stone-100 to-stone-100'>
-      <div className='px-1 top-0 z-30'>
-        <Header />
-      </div>
+    <div className='grid grid-rows-layout min-h-screen p-2 dark bg-[#0e161e] text-white'>
       <div className='mb-20 overflow-auto'>{children}</div>
       <Navbar />
       <Toaster />
