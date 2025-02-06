@@ -2,7 +2,7 @@
 
 import { FinancialRecord, TransactionType } from '@/types/types';
 import { Fragment, ReactNode } from 'react';
-import { Separator } from '../ui/separator';
+// import { Separator } from '../ui/separator';
 import { Calendar } from 'lucide-react';
 import { Card } from '@heroui/card';
 import { clsx } from 'clsx';
@@ -38,290 +38,6 @@ const formatDate = (date: Date): string => {
 };
 
 const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
-  // const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set(['']));
-
-  // const selectedValue = useMemo(
-  //   () => Array.from(selectedKeys).join(', '),
-  //   [selectedKeys],
-  // );
-
-  // const sampleRecords: FinancialRecord[] = [
-  //   {
-  //     recordId: '1',
-  //     description: 'Grocery shopping at SuperMart',
-  //     amount: 1500,
-  //     date: new Date('2025-01-15'),
-  //     category: ExpenseCategory.Groceries,
-  //     payerId: 'user1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 750 },
-  //       { userId: 'user2', amount: 750 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-15'),
-  //     updatedAt: new Date('2025-01-15'),
-  //   },
-  //   {
-  //     recordId: '2',
-  //     description: 'Dinner at Restaurant',
-  //     amount: 3000,
-  //     date: new Date('2025-02-01'),
-  //     category: ExpenseCategory.DiningOut,
-  //     payerId: 'user2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Percentage,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 1200 },
-  //       { userId: 'user2', amount: 1800 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-02-01'),
-  //     updatedAt: new Date('2025-02-01'),
-  //   },
-  //   {
-  //     recordId: '3',
-  //     description: 'Monthly Rent',
-  //     amount: 25000,
-  //     date: new Date('2025-01-01'),
-  //     category: ExpenseCategory.Bills,
-  //     payerId: 'user1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 12500 },
-  //       { userId: 'user2', amount: 12500 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-01'),
-  //     updatedAt: new Date('2025-01-01'),
-  //   },
-  //   {
-  //     recordId: '4',
-  //     description: 'Utility Bill',
-  //     amount: 5000,
-  //     date: new Date('2025-01-25'),
-  //     category: ExpenseCategory.Bills,
-  //     payerId: 'user2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 2500 },
-  //       { userId: 'user2', amount: 2500 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-25'),
-  //     updatedAt: new Date('2025-01-25'),
-  //   },
-  //   {
-  //     recordId: '5',
-  //     description: 'Movie Night',
-  //     amount: 2000,
-  //     date: new Date('2025-01-20'),
-  //     category: ExpenseCategory.Entertainment,
-  //     payerId: 'user1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 1000 },
-  //       { userId: 'user2', amount: 1000 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-20'),
-  //     updatedAt: new Date('2025-01-20'),
-  //   },
-  //   {
-  //     recordId: '6',
-  //     description: 'Gym Membership',
-  //     amount: 6000,
-  //     date: new Date('2025-01-10'),
-  //     category: ExpenseCategory.HealthFitness,
-  //     payerId: 'user2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 3000 },
-  //       { userId: 'user2', amount: 3000 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-10'),
-  //     updatedAt: new Date('2025-01-10'),
-  //   },
-  //   {
-  //     recordId: '7',
-  //     description: 'Office Supplies',
-  //     amount: 1500,
-  //     date: new Date('2025-01-18'),
-  //     category: ExpenseCategory.Work,
-  //     payerId: 'user1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 750 },
-  //       { userId: 'user2', amount: 750 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-18'),
-  //     updatedAt: new Date('2025-01-18'),
-  //   },
-  //   {
-  //     recordId: '8',
-  //     description: 'Birthday Gift',
-  //     amount: 5000,
-  //     date: new Date('2025-01-05'),
-  //     category: ExpenseCategory.Entertainment,
-  //     payerId: 'user2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 2500 },
-  //       { userId: 'user2', amount: 2500 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-05'),
-  //     updatedAt: new Date('2025-01-05'),
-  //   },
-  //   {
-  //     recordId: '9',
-  //     description: 'Internet Bill',
-  //     amount: 2000,
-  //     date: new Date('2025-01-12'),
-  //     category: ExpenseCategory.Bills,
-  //     payerId: 'user1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 1000 },
-  //       { userId: 'user2', amount: 1000 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-12'),
-  //     updatedAt: new Date('2025-01-12'),
-  //   },
-  //   {
-  //     recordId: '10',
-  //     description: 'Travel Expenses',
-  //     amount: 10000,
-  //     date: new Date('2025-01-22'),
-  //     category: ExpenseCategory.Travel,
-  //     payerId: 'user2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 5000 },
-  //       { userId: 'user2', amount: 5000 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-22'),
-  //     updatedAt: new Date('2025-01-22'),
-  //   },
-  //   {
-  //     recordId: '11',
-  //     description: 'Lunch with Colleagues',
-  //     amount: 1500,
-  //     date: new Date('2025-01-20'),
-  //     category: ExpenseCategory.DiningOut,
-  //     payerId: 'user1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 750 },
-  //       { userId: 'user2', amount: 750 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-20'),
-  //     updatedAt: new Date('2025-01-20'),
-  //   },
-  //   {
-  //     recordId: '12',
-  //     description: 'Taxi Fare',
-  //     amount: 500,
-  //     date: new Date('2025-01-20'),
-  //     category: ExpenseCategory.Travel,
-  //     payerId: 'user2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [
-  //       { userId: 'user1', amount: 250 },
-  //       { userId: 'user2', amount: 250 },
-  //     ],
-  //     type: TransactionType.Debit,
-  //     createdAt: new Date('2025-01-20'),
-  //     updatedAt: new Date('2025-01-20'),
-  //   },
-  //   {
-  //     recordId: '13',
-  //     description: 'Salary Credit',
-  //     amount: 50000,
-  //     date: new Date('2025-01-31'),
-  //     category: ExpenseCategory.Salary,
-  //     payerId: 'employer1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [{ userId: 'user1', amount: 50000 }],
-  //     type: TransactionType.Credit,
-  //     createdAt: new Date('2025-01-31'),
-  //     updatedAt: new Date('2025-01-31'),
-  //   },
-  //   {
-  //     recordId: '14',
-  //     description: 'Freelance Payment',
-  //     amount: 8000,
-  //     date: new Date('2025-01-15'),
-  //     category: ExpenseCategory.Freelance,
-  //     payerId: 'client1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [{ userId: 'user1', amount: 8000 }],
-  //     type: TransactionType.Credit,
-  //     createdAt: new Date('2025-01-15'),
-  //     updatedAt: new Date('2025-01-15'),
-  //   },
-  //   {
-  //     recordId: '15',
-  //     description: 'Bank Interest',
-  //     amount: 500,
-  //     date: new Date('2025-02-01'),
-  //     category: ExpenseCategory.Interest,
-  //     payerId: 'bank1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [{ userId: 'user1', amount: 500 }],
-  //     type: TransactionType.Credit,
-  //     createdAt: new Date('2025-02-01'),
-  //     updatedAt: new Date('2025-02-01'),
-  //   },
-  //   {
-  //     recordId: '16',
-  //     description: 'Cashback',
-  //     amount: 200,
-  //     date: new Date('2025-01-25'),
-  //     category: ExpenseCategory.Cashback,
-  //     payerId: 'store1',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [{ userId: 'user1', amount: 200 }],
-  //     type: TransactionType.Credit,
-  //     createdAt: new Date('2025-01-25'),
-  //     updatedAt: new Date('2025-01-25'),
-  //   },
-  //   {
-  //     recordId: '17',
-  //     description: 'Refund',
-  //     amount: 1500,
-  //     date: new Date('2025-01-20'),
-  //     category: ExpenseCategory.Refund,
-  //     payerId: 'store2',
-  //     groupId: 'group1',
-  //     splitMethod: SplitMethod.Equal,
-  //     splitDetails: [{ userId: 'user1', amount: 1500 }],
-  //     type: TransactionType.Credit,
-  //     createdAt: new Date('2025-01-20'),
-  //     updatedAt: new Date('2025-01-20'),
-  //   },
-  // ];
-
   // Group records by month
   const groupedRecords: GroupedRecords = records.reduce((acc, record) => {
     const month = new Date(record.date).toLocaleString('default', {
@@ -343,7 +59,12 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
   });
 
   const recordsWithSeparators: JSX.Element[] = sortedMonths.reduce(
-    (acc: JSX.Element[], month, index) => {
+    (acc: JSX.Element[], month) => {
+      // Sort transactions within each month by date
+      const sortedRecords = groupedRecords[month].sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+
       acc.push(
         <li
           key={month}
@@ -360,7 +81,7 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
         <div
           key={`card-${month}`}
           className='flex flex-col gap-2 border rounded-lg'>
-          {groupedRecords[month].map((record) => (
+          {sortedRecords.map((record) => (
             <Fragment key={record.recordId}>
               <Card className='grid grid-cols-3 px-3 py-2 bg-[#1c2429] rounded-xl'>
                 <div className='col-span-2'>
