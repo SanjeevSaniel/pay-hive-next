@@ -26,7 +26,7 @@ const GroupCard = ({ group }: GroupCardProps) => {
     <Link
       href={`${basePath}/groups/${group.groupId}`}
       key={group.groupId}>
-      <Card className='px-2 pb-2 bg-stone-100 text-stone-600 border border-stone-100 drop-shadow rounded-2xl'>
+      <Card className='px-2 pb-2 bg-[#242e35] text-white drop-shadow rounded-2xl'>
         <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
           <div className='flex justify-center items-center m-2'>
             {group.groupType === 'default' ? <Ungroup /> : <Boxes />}
@@ -35,7 +35,7 @@ const GroupCard = ({ group }: GroupCardProps) => {
             <CardTitle className='flex items-center gap-2 text-lg'>
               {group.groupName}
             </CardTitle>
-            <CardDescription className='flex items-center space-x-2 text-md text-stone-500 '>
+            <CardDescription className='flex items-center space-x-2 text-md text-[#cacccf]'>
               {group.description}
             </CardDescription>
           </div>
