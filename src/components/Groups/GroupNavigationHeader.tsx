@@ -1,21 +1,21 @@
 'use client';
 
 import { Button } from '@heroui/react';
-import { ChevronLeft, Plus } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import AddExpenseForm from './AddExpenseForm';
 
 interface GroupHeaderProps {
   basePath: string;
 }
 
 const GroupNavigationHeader = ({ basePath }: GroupHeaderProps) => {
-  const router = useRouter();
-  const pathname = usePathname();
+  // const router = useRouter();
+  // const pathname = usePathname();
 
-  const handleAddExpense = () => {
-    router.push(`${pathname}/add-expense`);
-  };
+  // const handleAddExpense = () => {
+  //   router.push(`${pathname}/add-expense`);
+  // };
 
   return (
     <div className='flex justify-between items-center'>
@@ -29,14 +29,16 @@ const GroupNavigationHeader = ({ basePath }: GroupHeaderProps) => {
         <ChevronLeft />
       </Button>
 
-      <Button
+      <AddExpenseForm />
+
+      {/* <Button
         size='md'
         variant='solid'
         className='rounded-xl'
         onPress={handleAddExpense}>
         <Plus />
         Add Expense
-      </Button>
+      </Button> */}
     </div>
   );
 };
