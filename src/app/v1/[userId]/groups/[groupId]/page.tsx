@@ -25,7 +25,7 @@ const GroupDetails = () => {
   }
 
   return (
-    <div className='flex flex-col justify-normal gap-4 my-2 p-1 text-stone-600'>
+    <div className='flex flex-col justify-normal gap-4 my-2 p-1 text-stone-600 relative'>
       <GroupNavigationHeader basePath={basePath} />
       <GroupProfile group={group} />
       {memberAvatars}
