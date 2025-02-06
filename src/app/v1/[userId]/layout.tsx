@@ -86,7 +86,7 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   return (
-    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-tl from-zinc-300 to-zinc-300'>
+    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-tl from-stone-100 to-stone-100'>
       <div className='px-1 top-0 z-30'>
         <Header />
       </div>
