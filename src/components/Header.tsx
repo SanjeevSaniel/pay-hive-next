@@ -4,6 +4,7 @@ import { neodaFont } from '@/fonts/Neoda/neodaFont';
 import { Bell } from 'lucide-react';
 import Link from 'next/link';
 import useBasePath from '@/hooks/useBasePath';
+import { Button } from '@heroui/react';
 
 const Header = () => {
   const basePath = useBasePath(); // Use custom hook
@@ -13,18 +14,21 @@ const Header = () => {
   }
 
   return (
-    <div className='flex justify-between items-center px-4 py-3 bg-[#474747] text-white rounded-xl sticky top-0 z-20'>
+    <div className='flex justify-between items-center px-4 py-3 bg-inherit text-[#d1d3d7] rounded-xl sticky top-0 z-20'>
       <Link
         href={basePath}
-        className='flex items-center text-lg font-extrabold'>
+        className='flex items-center gap-2 text-[#f9ffff] font-extrabold'>
         <span className={`${neodaFont.className} text-xl mb-1.5`}>S</span>
+        <span className='text-xl text-[#d1d3d7]'>Splitly</span>
       </Link>
-      <Link
+      {/* <Link
         href={basePath}
-        className='flex items-center text-lg font-extrabold'>
-        <span>Splitly</span>
-      </Link>
-      <Bell size={22} />
+        className='flex items-center text-lg font-extrabold'></Link> */}
+      <Button
+        isIconOnly
+        className='p-1 rounded-full'>
+        <Bell size={20} />
+      </Button>
     </div>
   );
 };
