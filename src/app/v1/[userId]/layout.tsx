@@ -38,14 +38,6 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
           getFinancialRecords(), // Fetch financial records
         ]);
 
-        console.log('Fetched Groups:', groupsResponse.data);
-        console.log('Fetched Users:', usersResponse.data);
-        console.log('Fetched Group Types:', groupTypesResponse); // Log group types
-        console.log(
-          'Fetched Financial Records:',
-          financialRecordsResponse.data,
-        );
-
         setGroups(groupsResponse.data);
         setUsers(usersResponse.data);
         setGroupTypes(groupTypesResponse); // Store group types in Zustand
