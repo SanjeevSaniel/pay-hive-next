@@ -132,6 +132,27 @@ const AddExpenseForm = () => {
                   <div className='grid grid-cols-1 gap-2 w-full'>
                     <Input
                       isRequired
+                      label='Amount'
+                      labelPlacement='outside'
+                      name='amount'
+                      placeholder='Enter amount'
+                      startContent={
+                        <div className='pointer-events-none flex items-center'>
+                          <span className='text-default-400 text-lg'>₹</span>
+                        </div>
+                      }
+                      size='lg'
+                      type='number'
+                      validate={(value) => {
+                        if (Number(value) <= 0) {
+                          return 'Amount must be greater than 0';
+                        }
+                        return null;
+                      }}
+                    />
+
+                    <Input
+                      isRequired
                       label='Description'
                       labelPlacement='inside'
                       name='description'
@@ -140,20 +161,6 @@ const AddExpenseForm = () => {
                       validate={(value) => {
                         if (value.length < 3) {
                           return 'Description must be at least 3 characters long';
-                        }
-                        return null;
-                      }}
-                    />
-                    <Input
-                      isRequired
-                      label='Amount'
-                      labelPlacement='inside'
-                      name='amount'
-                      placeholder='Enter amount'
-                      type='number'
-                      validate={(value) => {
-                        if (Number(value) <= 0) {
-                          return 'Amount must be greater than 0';
                         }
                         return null;
                       }}
