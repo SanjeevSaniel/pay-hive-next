@@ -1,6 +1,5 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-// Interface for GroupType Document extending Mongoose Document
 export interface GroupTypeDocument extends Document {
   typeId: string;
   typeName: string;
@@ -12,16 +11,16 @@ export interface GroupTypeDocument extends Document {
 const groupTypeSchema = new Schema<GroupTypeDocument>({
   typeId: {
     type: String,
-    unique: true,
     required: true,
+    unique: true,
   },
   typeName: {
     type: String,
-    required: [true, 'Please provide the group type name'],
+    required: true,
   },
   description: {
     type: String,
-    required: [true, 'Please provide a description for the group type'],
+    required: true,
   },
   createdDate: {
     type: Date,
