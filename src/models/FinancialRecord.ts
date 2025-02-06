@@ -4,7 +4,7 @@ import {
   SplitMethod,
   SplitDetail,
   TransactionType,
-} from '@/types/types'; // Import necessary types
+} from '@/types/types';
 
 export interface FinancialRecordDocument extends Document {
   recordId: string;
@@ -12,7 +12,7 @@ export interface FinancialRecordDocument extends Document {
   amount: number;
   date: Date;
   category?: ExpenseCategory;
-  payerId: string;
+  payees: string[]; // Ensure the payees field is included
   groupId?: string;
   splitMethod?: SplitMethod;
   splitDetails?: SplitDetail[];
@@ -42,9 +42,11 @@ const financialRecordSchema = new Schema<FinancialRecordDocument>({
   category: {
     type: String,
   },
-  payerId: {
-    type: String,
-  },
+  payees: [
+    {
+      type: String,
+    },
+  ], // Add payees field as an array of strings
   groupId: {
     type: String,
   },
