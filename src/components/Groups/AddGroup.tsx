@@ -107,7 +107,7 @@ const AddGroup = () => {
       <DrawerContent
         aria-labelledby='drawer-title'
         aria-describedby='drawer-description'
-        className='dark dark:text-white'>
+        className='dark bg-[#10161d] dark:text-white'>
         <DrawerHeader className='dark dark:text-white'>
           <DrawerTitle>New Group Details</DrawerTitle>
           <DrawerDescription>
@@ -193,9 +193,9 @@ const AddGroup = () => {
               <Button
                 size='md'
                 type='submit'
-                variant='solid'
+                variant='flat'
                 className='w-full'>
-                Submit
+                Save
               </Button>
             </DrawerFooter>
           </form>
