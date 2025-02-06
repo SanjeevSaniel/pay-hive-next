@@ -85,10 +85,9 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
     setFinancialRecords,
   ]);
 
-
   return (
-    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-t from-stone-200 via-stone-200 to-stone-50'>
-      <div className='top-0 z-30'>
+    <div className='grid grid-rows-layout min-h-screen p-2 bg-gradient-to-tl from-zinc-300 to-zinc-300'>
+      <div className='px-1 top-0 z-30'>
         <Header />
       </div>
       <div className='mb-20 overflow-auto'>{children}</div>
