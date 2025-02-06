@@ -55,11 +55,13 @@ const GroupProfile: React.FC<GroupProfileProps> = ({ group }) => {
   }
 
   return (
-    <div className='p-2'>
+    <div className='p-2 text-[#d1d3d7]'>
       {group ? (
         <>
           <div className='flex justify-between items-center gap-1 mb-4'>
-            <h1 className='text-3xl font-bold'>{group.groupName}</h1>
+            <h1 className='text-3xl text-[#cacccf] font-bold'>
+              {group.groupName}
+            </h1>
             <div className='flex space-x-2'>
               <Button
                 isIconOnly
