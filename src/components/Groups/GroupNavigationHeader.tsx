@@ -18,7 +18,7 @@ const GroupNavigationHeader = ({ basePath }: GroupHeaderProps) => {
   // };
 
   return (
-    <div className='flex justify-between items-center'>
+    <div className='flex justify-between items-center sticky top-2'>
       <Button
         isIconOnly
         as={Link}
