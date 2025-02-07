@@ -109,7 +109,8 @@ export const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
 };
 
 const AddExpenseForm = () => {
-  const { groupId } = useParams();
+  const { userId, groupId } = useParams();
+  const currentUserId = userId; // Fetch userId from params
   const resolvedGroupId = Array.isArray(groupId) ? groupId[0] : groupId; // Ensure groupId is a string
   const router = useRouter();
   const basePath = useBasePath();
@@ -138,6 +139,13 @@ const AddExpenseForm = () => {
   // };
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
+  const sortedMembers = [
+    ...members.filter((member) => member.userId === currentUserId),
+    ...members
+      .filter((member) => member.userId !== currentUserId)
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  ];
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -205,7 +213,9 @@ const AddExpenseForm = () => {
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        hideCloseButton={true}>
+        scrollBehavior='inside'
+        hideCloseButton={true}
+        size='full'>
         <ModalContent className='dark text-white rounded-b-none'>
           {() => (
             <>
@@ -226,11 +236,13 @@ const AddExpenseForm = () => {
                         value={groupSelected}
                         onChange={(value: string[]) => setGroupSelected(value)} // Properly type the onChange handler
                       >
-                        {members.map((member) => (
+                        {sortedMembers.map((member) => (
                           <CustomCheckbox
                             key={member.userId}
                             value={member.userId}>
-                            {member.name}
+                            {member.userId === currentUserId
+                              ? 'You'
+                              : member.name}
                           </CustomCheckbox>
                         ))}
                       </CheckboxGroup>
@@ -273,13 +285,32 @@ const AddExpenseForm = () => {
                         return null;
                       }}
                     />
-                    <Input
-                      isRequired
-                      label='Date'
-                      labelPlacement='inside'
-                      name='date'
-                      type='date'
-                    />
+
+                    <div className='flex gap-2'>
+                      <Input
+                        isRequired
+                        label='Date'
+                        labelPlacement='inside'
+                        name='date'
+                        type='date'
+                      />
+
+                      <Select
+                        isRequired
+                        label='Category'
+                        labelPlacement='inside'
+                        name='category'
+                        placeholder='Select category'>
+                        {Object.values(ExpenseCategory).map((category) => (
+                          <SelectItem
+                            key={category}
+                            value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
+
                     {/* Payee */}
                     {/* <div className='flex items-center'>
                       <Switch
@@ -320,20 +351,6 @@ const AddExpenseForm = () => {
                       </Select>
                     </div> */}
 
-                    <Select
-                      isRequired
-                      label='Category'
-                      labelPlacement='inside'
-                      name='category'
-                      placeholder='Select category'>
-                      {Object.values(ExpenseCategory).map((category) => (
-                        <SelectItem
-                          key={category}
-                          value={category}>
-                          {category}
-                        </SelectItem>
-                      ))}
-                    </Select>
                     <Select
                       isRequired
                       label='Transaction Type'
