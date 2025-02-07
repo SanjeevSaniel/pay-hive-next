@@ -21,7 +21,7 @@ const MemberAvatars = ({ members }: MemberAvatarsProps) => {
           radius='full'>
           <Plus size={24} />
         </Button>
-        <span className='text-[#cacccf] text-xs'>Add New</span>
+        <span className='text-[#cacccf] text-xs'>Add</span>
       </div>
 
       <AvatarGroup isBordered>
