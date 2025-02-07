@@ -1,3 +1,5 @@
+import React from 'react';
+import { useParams } from 'next/navigation';
 import { User } from '@/types/types';
 import { Avatar, AvatarGroup, Button } from '@heroui/react';
 import { Plus } from 'lucide-react';
@@ -7,6 +9,8 @@ interface MemberAvatarsProps {
 }
 
 const MemberAvatars = ({ members }: MemberAvatarsProps) => {
+  const params = useParams();
+  const currentUserId = params.userId;
 
   return (
     <div className='flex items-center gap-4 px-2 my-1'>
@@ -27,7 +31,7 @@ const MemberAvatars = ({ members }: MemberAvatarsProps) => {
             isBordered
             size='lg'
             radius='full'
-            name={member.name}
+            name={member.userId === currentUserId ? 'You' : member.name}
             // src={member.profileImageUrl}
           />
         ))}
