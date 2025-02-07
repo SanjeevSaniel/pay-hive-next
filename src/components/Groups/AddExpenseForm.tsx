@@ -6,6 +6,7 @@ import useAppStore from '@/stores/useAppStore';
 import { ExpenseCategory, SplitMethod, TransactionType } from '@/types/types';
 import {
   Button,
+  CheckboxGroup,
   Form,
   Input,
   Modal,
@@ -15,14 +16,97 @@ import {
   ModalHeader,
   Select,
   SelectItem,
-  Switch,
+  // Switch,
   useDisclosure,
 } from '@heroui/react';
 import axios from 'axios';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { FaUser, FaUserFriends } from 'react-icons/fa';
+// import { useState } from 'react';
+// import { FaUser, FaUserFriends } from 'react-icons/fa';
+import React from 'react';
+import {
+  useCheckbox,
+  Chip,
+  VisuallyHidden,
+  tv,
+  CheckboxProps,
+} from '@heroui/react';
+
+export const CustomCheckbox = (props: CheckboxProps) => {
+  const checkbox = tv({
+    slots: {
+      base: 'border-default hover:bg-default-200',
+      content: 'text-default-500 text-sm',
+    },
+    variants: {
+      isSelected: {
+        true: {
+          base: 'border-green-500 bg-green-500 hover:bg-green-600 hover:border-green-600',
+          content: 'text-primary-foreground pl-1',
+        },
+      },
+      isFocusVisible: {
+        true: {
+          base: 'outline-none ring-2 ring-focus ring-offset-2 ring-offset-background',
+        },
+      },
+    },
+  });
+
+  const {
+    children,
+    isSelected,
+    isFocusVisible,
+    getBaseProps,
+    getLabelProps,
+    getInputProps,
+  } = useCheckbox({
+    ...props,
+  });
+
+  const styles = checkbox({ isSelected, isFocusVisible });
+
+  return (
+    <label {...getBaseProps()}>
+      <VisuallyHidden>
+        <input {...getInputProps()} />
+      </VisuallyHidden>
+      <Chip
+        classNames={{
+          base: styles.base(),
+          content: styles.content(),
+        }}
+        color='default'
+        startContent={isSelected ? <CheckIcon className='ml-1' /> : null}
+        variant='faded'
+        {...getLabelProps()} // Ensure we spread getLabelProps() without overriding props
+        ref={undefined} // Ensure ref is correctly typed or removed
+      >
+        {children ? children : isSelected ? 'Enabled' : 'Disabled'}
+      </Chip>
+    </label>
+  );
+};
+
+export const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
+  return (
+    <svg
+      aria-hidden='true'
+      fill='none'
+      focusable='false'
+      height='1em'
+      stroke='currentColor'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      strokeWidth={2}
+      viewBox='0 0 24 24'
+      width='1em'
+      {...props}>
+      <polyline points='20 6 9 17 4 12' />
+    </svg>
+  );
+};
 
 const AddExpenseForm = () => {
   const { groupId } = useParams();
@@ -34,22 +118,24 @@ const AddExpenseForm = () => {
   const deleteFinancialRecord = useAppStore(
     (state) => state.deleteFinancialRecord,
   );
-  const [isMultiple, setIsMultiple] = useState(false);
 
-  const toggleSelectionMode = () => {
-    setIsMultiple(!isMultiple);
+  const [groupSelected, setGroupSelected] = React.useState<string[]>([]);
+  // const [isMultiple, setIsMultiple] = useState(false);
 
-    // Reset payees value in the form
-    const formElement = document.querySelector('form') as HTMLFormElement;
-    if (formElement) {
-      const payeesField = formElement.elements.namedItem(
-        'payees',
-      ) as HTMLSelectElement;
-      if (payeesField) {
-        payeesField.selectedIndex = -1;
-      }
-    }
-  };
+  // const toggleSelectionMode = () => {
+  //   setIsMultiple(!isMultiple);
+
+  //   // Reset payees value in the form
+  //   const formElement = document.querySelector('form') as HTMLFormElement;
+  //   if (formElement) {
+  //     const payeesField = formElement.elements.namedItem(
+  //       'payees',
+  //     ) as HTMLSelectElement;
+  //     if (payeesField) {
+  //       payeesField.selectedIndex = -1;
+  //     }
+  //   }
+  // };
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -63,7 +149,8 @@ const AddExpenseForm = () => {
       amount: parseFloat(formData.get('amount') as string), // Ensure amount is a number
       date: new Date(formData.get('date') as string), // Convert date string to Date object
       category: formData.get('category') as ExpenseCategory, // Cast category to ExpenseCategory
-      payees: formData.getAll('payees') as string[], // Handle multiple payees
+      // payees: formData.getAll('payees') as string[], // Handle multiple payees
+      payees: groupSelected, // Sync with checkbox selection
       groupId: resolvedGroupId,
       type: formData.get('type') as TransactionType, // Cast type to TransactionType
     };
@@ -117,7 +204,8 @@ const AddExpenseForm = () => {
       </Button>
       <Modal
         isOpen={isOpen}
-        onOpenChange={onOpenChange}>
+        onOpenChange={onOpenChange}
+        hideCloseButton={true}>
         <ModalContent className='dark text-white rounded-b-none'>
           {() => (
             <>
@@ -130,10 +218,31 @@ const AddExpenseForm = () => {
                   validationBehavior='native'
                   onSubmit={onSubmit}>
                   <div className='grid grid-cols-1 gap-2 w-full'>
+                    <div className='flex flex-col gap-1 w-full'>
+                      <CheckboxGroup
+                        className='gap-1'
+                        label='Paid By'
+                        orientation='horizontal'
+                        value={groupSelected}
+                        onChange={(value: string[]) => setGroupSelected(value)} // Properly type the onChange handler
+                      >
+                        {members.map((member) => (
+                          <CustomCheckbox
+                            key={member.userId}
+                            value={member.userId}>
+                            {member.name}
+                          </CustomCheckbox>
+                        ))}
+                      </CheckboxGroup>
+
+                      <p className='mt-4 ml-1 text-default-500'>
+                        Selected: {groupSelected.join(', ')}
+                      </p>
+                    </div>
                     <Input
                       isRequired
                       label='Amount'
-                      labelPlacement='outside'
+                      labelPlacement='inside'
                       name='amount'
                       placeholder='Enter amount'
                       startContent={
@@ -150,7 +259,6 @@ const AddExpenseForm = () => {
                         return null;
                       }}
                     />
-
                     <Input
                       isRequired
                       label='Description'
@@ -165,7 +273,6 @@ const AddExpenseForm = () => {
                         return null;
                       }}
                     />
-
                     <Input
                       isRequired
                       label='Date'
@@ -173,9 +280,8 @@ const AddExpenseForm = () => {
                       name='date'
                       type='date'
                     />
-
                     {/* Payee */}
-                    <div className='flex items-center'>
+                    {/* <div className='flex items-center'>
                       <Switch
                         defaultSelected={isMultiple}
                         size='lg'
@@ -202,7 +308,8 @@ const AddExpenseForm = () => {
                         name='payees' // Ensure the name attribute is 'payees'
                         placeholder={`Select ${
                           isMultiple ? 'payees' : 'payer'
-                        }`}>
+                        }`}
+                        value={groupSelected}>
                         {members.map((member) => (
                           <SelectItem
                             key={member.userId}
@@ -211,7 +318,7 @@ const AddExpenseForm = () => {
                           </SelectItem>
                         ))}
                       </Select>
-                    </div>
+                    </div> */}
 
                     <Select
                       isRequired
@@ -227,7 +334,6 @@ const AddExpenseForm = () => {
                         </SelectItem>
                       ))}
                     </Select>
-
                     <Select
                       isRequired
                       label='Transaction Type'
@@ -242,7 +348,6 @@ const AddExpenseForm = () => {
                         </SelectItem>
                       ))}
                     </Select>
-
                     <Select
                       label='Split Method'
                       labelPlacement='inside'
@@ -255,7 +360,6 @@ const AddExpenseForm = () => {
                         </SelectItem>
                       ))}
                     </Select>
-
                     <Input
                       label='Split Details'
                       labelPlacement='inside'
@@ -266,12 +370,12 @@ const AddExpenseForm = () => {
                   </div>
 
                   <ModalFooter className='w-full flex justify-around'>
-                    {/* <Button
+                    <Button
                       color='danger'
                       variant='light'
                       onPress={onClose}>
                       Cancel
-                    </Button> */}
+                    </Button>
                     <Button
                       type='submit'
                       color='primary'

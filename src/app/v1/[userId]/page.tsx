@@ -1,7 +1,6 @@
 'use client';
 
 import TabsContainer from '@/components/TabsContainer';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,9 +8,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { CircularProgress } from '@heroui/react';
 import { Plus } from 'lucide-react';
 import Header from '@/components/Header';
+import Link from 'next/link';
+import useAppStore from '@/stores/useAppStore';
+import { Button, CircularProgress } from '@heroui/react';
 
 const categories = [
   {
@@ -45,16 +46,19 @@ const categories = [
 ];
 
 const HomePage = () => {
+  const financialRecords = useAppStore((state) => state.financialRecords);
+
   return (
     <div>
       <div className='px-1 top-0 z-30'>
         <Header />
       </div>
+
       <div className='flex justify-between px-3 py-2 my-2'>
         <span className='text-2xl font-extrabold'>Expenses</span>
         <Button
-          asChild
-          size='icon'
+          // size='icon'
+          isIconOnly
           variant='ghost'
           className='p-0'
           aria-label='Add Expense'>
@@ -105,6 +109,35 @@ const HomePage = () => {
           </Card>
         ))}
       </div>
+
+      <div>
+        <div className='flex justify-between p-4'>
+          <h1>Transactions</h1>
+          <Link
+            href='/v1'
+            className='text-sm'>
+            View All
+          </Link>
+        </div>
+
+        <div className='flex flex-col gap-2 p-2'>
+          {financialRecords.map((record) => (
+            <Card key={record.recordId}>
+              <CardHeader className='flex justify-between items-center'>
+                <CardTitle>
+                  <div className='flex justify-between items-center w-full'>
+                    <div>{record.description}</div>
+                    <div>{record.amount}</div>
+                  </div>
+                </CardTitle>
+
+                {/* <div className='flex flex-col justify-end'></div> */}
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+      </div>
+
       <TabsContainer />
     </div>
   );

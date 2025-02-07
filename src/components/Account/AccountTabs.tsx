@@ -74,7 +74,7 @@ const AccountTabs: React.FC<AccountTabsProps> = ({ basePath }) => {
           key={tab.key}
           href={`${basePath}/account${tab.path}`}
           passHref>
-          <Card className='px-2 pb-2 bg-stone-100 text-stone-800 border-stone-100 drop-shadow rounded-2xl'>
+          <Card className='px-2 pb-2 bg-[#242e35] text-white border-none drop-shadow rounded-2xl'>
             <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
               <div className='flex justify-center items-center m-2'>
                 <tab.icon />
@@ -83,7 +83,7 @@ const AccountTabs: React.FC<AccountTabsProps> = ({ basePath }) => {
                 <CardTitle className='flex items-center gap-2 text-lg'>
                   {tab.label}
                 </CardTitle>
-                <CardDescription className='flex items-center space-x-2 text-md text-stone-600'>
+                <CardDescription className='flex items-center space-x-2 text-md text-[#cacccf]'>
                   {tab.description}
                 </CardDescription>
               </div>
