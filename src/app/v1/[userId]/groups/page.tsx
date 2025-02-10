@@ -28,7 +28,7 @@ const GroupsPage = () => {
   ]);
 
   return (
-    <div className='flex flex-col gap-0 py-4 w-full relative'>
+    <div className='flex flex-col gap-2 py-4 w-full relative'>
       <TotalSpend />
       <GroupHeaderSection groupsCount={groups.length} />
       <GroupList groups={groups} />
