@@ -126,7 +126,7 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
   );
 
   return (
-    <ul className='list-decimal list-inside space-y-2'>
+    <ul className='list-decimal list-inside space-y-2 p-2'>
       {recordsWithSeparators}
     </ul>
   );
