@@ -114,8 +114,6 @@ const AddExpenseForm = () => {
   const { userId, groupId } = useParams();
   const currentUserId = userId;
   const resolvedGroupId = Array.isArray(groupId) ? groupId[0] : groupId;
-  // const router = useRouter();
-  // const basePath = useBasePath();
   const members = useGroupMembers(resolvedGroupId);
   const addFinancialRecord = useAppStore((state) => state.addFinancialRecord);
   const deleteFinancialRecord = useAppStore(
@@ -131,8 +129,9 @@ const AddExpenseForm = () => {
     SplitMethod.Equal,
   );
   const [splitDetails, setSplitDetails] = useState<SplitDetail[]>([]);
-  const [selectedSplitMethod, setSelectedSplitMethod] =
-    useState<SplitMethod>(SplitMethod.Equal);
+  const [selectedSplitMethod, setSelectedSplitMethod] = useState<SplitMethod>(
+    SplitMethod.Equal,
+  );
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -144,20 +143,23 @@ const AddExpenseForm = () => {
   ];
 
   const handleAmountPaidChange = (userId: string, amount: number) => {
-  const updatedAmounts = { ...amountPaidByPayees, [userId]: amount || 0 };
-  setAmountPaidByPayees(updatedAmounts);
+    const updatedAmounts = { ...amountPaidByPayees, [userId]: amount || 0 };
+    setAmountPaidByPayees(updatedAmounts);
 
-  const totalPaid = Object.values(updatedAmounts).reduce((sum, val) => sum + val, 0);
+    const totalPaid = Object.values(updatedAmounts).reduce(
+      (sum, val) => sum + val,
+      0,
+    );
 
-  if (selectedSplitMethod === SplitMethod.Equal) {
-    const share = totalPaid / sortedMembers.length;
-    const details = sortedMembers.map((member) => ({
-      userId: member.userId,
-      amount: (updatedAmounts[member.userId] || 0) - share,
-    }));
-    setSplitDetails(details);
-  }
-};
+    if (selectedSplitMethod === SplitMethod.Equal) {
+      const share = totalPaid / sortedMembers.length;
+      const details = sortedMembers.map((member) => ({
+        userId: member.userId,
+        amount: (updatedAmounts[member.userId] || 0) - share,
+      }));
+      setSplitDetails(details);
+    }
+  };
 
   const renderAmountPaidInputs = () => {
     return (
@@ -182,25 +184,28 @@ const AddExpenseForm = () => {
   };
 
   const handleSplitMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  const method = e.target.value as SplitMethod;
-  setSelectedSplitMethod(method);
-  setSplitMethod(method);
+    const method = e.target.value as SplitMethod;
+    setSelectedSplitMethod(method);
+    setSplitMethod(method);
 
-  const totalPaid = Object.values(amountPaidByPayees).reduce((sum, val) => sum + val, 0);
-
-  if (method === SplitMethod.Equal) {
-    const share = totalPaid / sortedMembers.length;
-    const details = sortedMembers.map((member) => ({
-      userId: member.userId,
-      amount: (amountPaidByPayees[member.userId] || 0) - share,
-    }));
-    setSplitDetails(details);
-  } else {
-    setSplitDetails(
-      sortedMembers.map((member) => ({ userId: member.userId, amount: 0 })),
+    const totalPaid = Object.values(amountPaidByPayees).reduce(
+      (sum, val) => sum + val,
+      0,
     );
-  }
-};
+
+    if (method === SplitMethod.Equal) {
+      const share = totalPaid / sortedMembers.length;
+      const details = sortedMembers.map((member) => ({
+        userId: member.userId,
+        amount: (amountPaidByPayees[member.userId] || 0) - share,
+      }));
+      setSplitDetails(details);
+    } else {
+      setSplitDetails(
+        sortedMembers.map((member) => ({ userId: member.userId, amount: 0 })),
+      );
+    }
+  };
 
   const renderSplitMethodInputs = () => {
     if (!sortedMembers.length) return null;
@@ -275,42 +280,45 @@ const AddExpenseForm = () => {
   };
 
   const validateSplitDetails = () => {
-  const totalPaid = Object.values(amountPaidByPayees).reduce((sum, val) => sum + val, 0);
+    const totalPaid = Object.values(amountPaidByPayees).reduce(
+      (sum, val) => sum + val,
+      0,
+    );
 
-  if (!totalPaid) return false;
+    if (!totalPaid) return false;
 
-  switch (splitMethod) {
-    case SplitMethod.Equal:
-      const share = totalPaid / sortedMembers.length;
-      const equalSplitDetails = sortedMembers.map((member) => ({
-        userId: member.userId,
-        amount: (amountPaidByPayees[member.userId] || 0) - share,
-      }));
-      setSplitDetails(equalSplitDetails);
-      return true;
+    switch (splitMethod) {
+      case SplitMethod.Equal:
+        const share = totalPaid / sortedMembers.length;
+        const equalSplitDetails = sortedMembers.map((member) => ({
+          userId: member.userId,
+          amount: (amountPaidByPayees[member.userId] || 0) - share,
+        }));
+        setSplitDetails(equalSplitDetails);
+        return true;
 
-    case SplitMethod.Percentage:
-      const totalPercentage = splitDetails.reduce((sum, detail) => {
-        const percentage =
-          ((detail.amount + (amountPaidByPayees[detail.userId] || 0)) /
-          totalPaid *
-          100);
-        return sum + percentage;
-      }, 0);
-      return Math.abs(totalPercentage - 100) < 0.01;
+      case SplitMethod.Percentage:
+        const totalPercentage = splitDetails.reduce((sum, detail) => {
+          const percentage =
+            ((detail.amount + (amountPaidByPayees[detail.userId] || 0)) /
+              totalPaid) *
+            100;
+          return sum + percentage;
+        }, 0);
+        return Math.abs(totalPercentage - 100) < 0.01;
 
-    case SplitMethod.Custom:
-      const totalShares = splitDetails.reduce(
-        (sum, detail) =>
-          sum + detail.amount + (amountPaidByPayees[detail.userId] || 0),
-        0,
-      );
-      return Math.abs(totalShares - totalPaid) < 0.01;
+      case SplitMethod.Custom:
+        const totalShares = splitDetails.reduce(
+          (sum, detail) =>
+            sum + detail.amount + (amountPaidByPayees[detail.userId] || 0),
+          0,
+        );
+        return Math.abs(totalShares - totalPaid) < 0.01;
 
-    default:
-      return false;
-  }
-};
+      default:
+        return false;
+    }
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -398,8 +406,7 @@ const AddExpenseForm = () => {
       updatedAt: new Date(),
     };
 
-    console.log("Expense Data: ", expenseData);
-    
+    console.log('Expense Data: ', expenseData);
 
     try {
       addFinancialRecord(expenseData);
@@ -410,160 +417,147 @@ const AddExpenseForm = () => {
     }
   };
 
- return (
-   <>
-     <Button
-       size='md'
-       variant='solid'
-       className='rounded-xl'
-       onPress={onOpen}>
-       <Plus />
-       Add Expense
-     </Button>
-     <Modal
-       isOpen={isOpen}
-       onOpenChange={onOpenChange}
-       scrollBehavior='inside'
-       hideCloseButton={true}
-       size='full'>
-       <ModalContent className='dark text-white rounded-b-none'>
-         {() => (
-           <>
-             <ModalHeader className='flex gap-1 justify-center w-full'>
-               Add Group Expense
-             </ModalHeader>
-             <ModalBody>
-               <form
-                 className='w-full'
-                 onSubmit={onSubmit}>
-                 <div className='grid grid-cols-1 gap-2 w-full'>
-                   <CheckboxGroup
-                     className='gap-1'
-                     label='Paid By'
-                     orientation='horizontal'
-                     value={groupSelected}
-                     onChange={(value: string[]) => setGroupSelected(value)}>
-                     {sortedMembers.map((member) => (
-                       <CustomCheckbox
-                         key={member.userId}
-                         value={member.userId}>
-                         {member.userId === currentUserId ? 'You' : member.name}
-                       </CustomCheckbox>
-                     ))}
-                   </CheckboxGroup>
+  return (
+    <>
+      <Button
+        size='md'
+        variant='solid'
+        className='rounded-xl'
+        onPress={onOpen}>
+        <Plus />
+        Add Expense
+      </Button>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        scrollBehavior='inside'
+        hideCloseButton={true}
+        size='full'>
+        <ModalContent className='dark text-white rounded-b-none'>
+          {() => (
+            <>
+              <ModalHeader className='flex gap-1 justify-center w-full'>
+                Add Group Expense
+              </ModalHeader>
+              <ModalBody>
+                <form
+                  className='w-full'
+                  onSubmit={onSubmit}>
+                  <div className='grid grid-cols-1 gap-2 w-full'>
+                    <CheckboxGroup
+                      className='gap-1'
+                      label='Paid By'
+                      orientation='horizontal'
+                      value={groupSelected}
+                      onChange={(value: string[]) => setGroupSelected(value)}>
+                      {sortedMembers.map((member) => (
+                        <CustomCheckbox
+                          key={member.userId}
+                          value={member.userId}>
+                          {member.userId === currentUserId
+                            ? 'You'
+                            : member.name}
+                        </CustomCheckbox>
+                      ))}
+                    </CheckboxGroup>
 
-                   <p className='mt-4 ml-1 text-default-500'>
-                     Selected: {groupSelected.join(', ')}
-                   </p>
+                    <p className='mt-4 ml-1 text-default-500'>
+                      Selected: {groupSelected.join(', ')}
+                    </p>
 
-                   {renderAmountPaidInputs()}
+                    {renderAmountPaidInputs()}
 
-                   <Input
-                     isRequired
-                     label='Amount'
-                     labelPlacement='inside'
-                     name='amount'
-                     placeholder='Enter amount'
-                     startContent={
-                       <div className='pointer-events-none flex items-center'>
-                         <span className='text-default-400 text-lg'>₹</span>
-                       </div>
-                     }
-                     size='lg'
-                     type='number'
-                   />
+                    <Input
+                      isRequired
+                      label='Description'
+                      labelPlacement='inside'
+                      name='description'
+                      placeholder='Enter description'
+                      type='text'
+                    />
 
-                   <Input
-                     isRequired
-                     label='Description'
-                     labelPlacement='inside'
-                     name='description'
-                     placeholder='Enter description'
-                     type='text'
-                   />
+                    <div className='flex gap-2'>
+                      <Input
+                        isRequired
+                        label='Date'
+                        labelPlacement='inside'
+                        name='date'
+                        type='date'
+                      />
 
-                   <div className='flex gap-2'>
-                     <Input
-                       isRequired
-                       label='Date'
-                       labelPlacement='inside'
-                       name='date'
-                       type='date'
-                     />
+                      <Select
+                        isRequired
+                        label='Category'
+                        labelPlacement='inside'
+                        name='category'
+                        placeholder='Select category'>
+                        {Object.values(ExpenseCategory).map((category) => (
+                          <SelectItem
+                            key={category}
+                            value={category}>
+                            {category}
+                          </SelectItem>
+                        ))}
+                      </Select>
+                    </div>
 
-                     <Select
-                       isRequired
-                       label='Category'
-                       labelPlacement='inside'
-                       name='category'
-                       placeholder='Select category'>
-                       {Object.values(ExpenseCategory).map((category) => (
-                         <SelectItem
-                           key={category}
-                           value={category}>
-                           {category}
-                         </SelectItem>
-                       ))}
-                     </Select>
-                   </div>
+                    <Select
+                      isRequired
+                      label='Transaction Type'
+                      labelPlacement='inside'
+                      name='type'
+                      placeholder='Select Type'>
+                      {Object.values(TransactionType).map((type) => (
+                        <SelectItem
+                          key={type}
+                          value={type}>
+                          {type}
+                        </SelectItem>
+                      ))}
+                    </Select>
 
-                   <Select
-                     isRequired
-                     label='Transaction Type'
-                     labelPlacement='inside'
-                     name='type'
-                     placeholder='Select Type'>
-                     {Object.values(TransactionType).map((type) => (
-                       <SelectItem
-                         key={type}
-                         value={type}>
-                         {type}
-                       </SelectItem>
-                     ))}
-                   </Select>
+                    <Select
+                      label='Split Method'
+                      labelPlacement='inside'
+                      name='splitMethod'
+                      value={selectedSplitMethod}
+                      onChange={handleSplitMethodChange}
+                      placeholder='Select split method'>
+                      {Object.values(SplitMethod).map((method) => (
+                        <SelectItem
+                          key={method}
+                          value={method}>
+                          {method}
+                        </SelectItem>
+                      ))}
+                    </Select>
 
-                   <Select
-                     label='Split Method'
-                     labelPlacement='inside'
-                     name='splitMethod'
-                     value={selectedSplitMethod}
-                     onChange={handleSplitMethodChange}
-                     placeholder='Select split method'>
-                     {Object.values(SplitMethod).map((method) => (
-                       <SelectItem
-                         key={method}
-                         value={method}>
-                         {method}
-                       </SelectItem>
-                     ))}
-                   </Select>
+                    {renderSplitMethodInputs()}
+                  </div>
 
-                   {renderSplitMethodInputs()}
-                 </div>
-
-                 <ModalFooter className='w-full flex justify-around'>
-                   <Button
-                     color='danger'
-                     variant='light'
-                     onPress={onClose}>
-                     Cancel
-                   </Button>
-                   <Button
-                     type='submit'
-                     color='primary'
-                     variant='solid'
-                     className='w-full'>
-                     Save
-                   </Button>
-                 </ModalFooter>
-               </form>
-             </ModalBody>
-           </>
-         )}
-       </ModalContent>
-     </Modal>
-   </>
- );
-}
+                  <ModalFooter className='w-full flex justify-around'>
+                    <Button
+                      color='danger'
+                      variant='light'
+                      onPress={onClose}>
+                      Cancel
+                    </Button>
+                    <Button
+                      type='submit'
+                      color='primary'
+                      variant='solid'
+                      className='w-full'>
+                      Save
+                    </Button>
+                  </ModalFooter>
+                </form>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </>
+  );
+};
 
 export default AddExpenseForm;

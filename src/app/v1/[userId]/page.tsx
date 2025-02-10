@@ -1,5 +1,7 @@
 'use client';
 
+import { AppleCardsCarouselDemo } from '@/components/AppleCardsCarouselDemo';
+import Header from '@/components/Header';
 import TabsContainer from '@/components/TabsContainer';
 import {
   Card,
@@ -8,11 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Plus } from 'lucide-react';
-import Header from '@/components/Header';
-import Link from 'next/link';
-import useAppStore from '@/stores/useAppStore';
 import { Button, CircularProgress } from '@heroui/react';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
 
 const categories = [
   {
@@ -46,12 +46,16 @@ const categories = [
 ];
 
 const HomePage = () => {
-  const financialRecords = useAppStore((state) => state.financialRecords);
+  // const financialRecords = useAppStore((state) => state.financialRecords);
 
   return (
     <div>
       <div className='px-1 top-0 z-30'>
         <Header />
+      </div>
+
+      <div>
+        <AppleCardsCarouselDemo />
       </div>
 
       <div className='flex justify-between px-3 py-2 my-2'>
@@ -120,7 +124,7 @@ const HomePage = () => {
           </Link>
         </div>
 
-        <div className='flex flex-col gap-2 p-2'>
+        {/* <div className='flex flex-col gap-2 p-2'>
           {financialRecords.map((record) => (
             <Card key={record.recordId}>
               <CardHeader className='flex justify-between items-center'>
@@ -131,11 +135,10 @@ const HomePage = () => {
                   </div>
                 </CardTitle>
 
-                {/* <div className='flex flex-col justify-end'></div> */}
               </CardHeader>
             </Card>
           ))}
-        </div>
+        </div> */}
       </div>
 
       <TabsContainer />
