@@ -1,13 +1,21 @@
 'use client';
 
-import useBasePath from '@/hooks/useBasePath';
+// import useBasePath from '@/hooks/useBasePath';
 import useGroupMembers from '@/hooks/useGroupMembers';
 import useAppStore from '@/stores/useAppStore';
-import { ExpenseCategory, SplitMethod, TransactionType } from '@/types/types';
+import {
+  ExpenseCategory,
+  FinancialRecord,
+  // Payee,
+  SplitDetail,
+  SplitMethod,
+  SplitRule,
+  TransactionType,
+} from '@/types/types';
 import {
   Button,
   CheckboxGroup,
-  Form,
+  // Form,
   Input,
   Modal,
   ModalBody,
@@ -16,22 +24,17 @@ import {
   ModalHeader,
   Select,
   SelectItem,
-  // Switch,
   useDisclosure,
-} from '@heroui/react';
-import axios from 'axios';
-import { Plus } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
-// import { useState } from 'react';
-// import { FaUser, FaUserFriends } from 'react-icons/fa';
-import React from 'react';
-import {
   useCheckbox,
   Chip,
   VisuallyHidden,
   tv,
   CheckboxProps,
 } from '@heroui/react';
+// import axios from 'axios';
+import { Plus } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import React, { useState } from 'react';
 
 export const CustomCheckbox = (props: CheckboxProps) => {
   const checkbox = tv({
@@ -80,9 +83,8 @@ export const CustomCheckbox = (props: CheckboxProps) => {
         color='default'
         startContent={isSelected ? <CheckIcon className='ml-1' /> : null}
         variant='faded'
-        {...getLabelProps()} // Ensure we spread getLabelProps() without overriding props
-        ref={undefined} // Ensure ref is correctly typed or removed
-      >
+        {...getLabelProps()}
+        ref={undefined}>
         {children ? children : isSelected ? 'Enabled' : 'Disabled'}
       </Chip>
     </label>
@@ -110,33 +112,27 @@ export const CheckIcon = (props: React.SVGProps<SVGSVGElement>) => {
 
 const AddExpenseForm = () => {
   const { userId, groupId } = useParams();
-  const currentUserId = userId; // Fetch userId from params
-  const resolvedGroupId = Array.isArray(groupId) ? groupId[0] : groupId; // Ensure groupId is a string
-  const router = useRouter();
-  const basePath = useBasePath();
+  const currentUserId = userId;
+  const resolvedGroupId = Array.isArray(groupId) ? groupId[0] : groupId;
+  // const router = useRouter();
+  // const basePath = useBasePath();
   const members = useGroupMembers(resolvedGroupId);
   const addFinancialRecord = useAppStore((state) => state.addFinancialRecord);
   const deleteFinancialRecord = useAppStore(
     (state) => state.deleteFinancialRecord,
   );
 
-  const [groupSelected, setGroupSelected] = React.useState<string[]>([]);
-  // const [isMultiple, setIsMultiple] = useState(false);
+  const [amountPaidByPayees, setAmountPaidByPayees] = useState<
+    Record<string, number>
+  >({});
 
-  // const toggleSelectionMode = () => {
-  //   setIsMultiple(!isMultiple);
-
-  //   // Reset payees value in the form
-  //   const formElement = document.querySelector('form') as HTMLFormElement;
-  //   if (formElement) {
-  //     const payeesField = formElement.elements.namedItem(
-  //       'payees',
-  //     ) as HTMLSelectElement;
-  //     if (payeesField) {
-  //       payeesField.selectedIndex = -1;
-  //     }
-  //   }
-  // };
+  const [groupSelected, setGroupSelected] = useState<string[]>([]);
+  const [splitMethod, setSplitMethod] = useState<SplitMethod>(
+    SplitMethod.Equal,
+  );
+  const [splitDetails, setSplitDetails] = useState<SplitDetail[]>([]);
+  const [selectedSplitMethod, setSelectedSplitMethod] =
+    useState<SplitMethod>(SplitMethod.Equal);
 
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
@@ -147,268 +143,427 @@ const AddExpenseForm = () => {
       .sort((a, b) => a.name.localeCompare(b.name)),
   ];
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleAmountPaidChange = (userId: string, amount: number) => {
+  const updatedAmounts = { ...amountPaidByPayees, [userId]: amount || 0 };
+  setAmountPaidByPayees(updatedAmounts);
 
-    const formData = new FormData(e.currentTarget);
+  const totalPaid = Object.values(updatedAmounts).reduce((sum, val) => sum + val, 0);
 
-    const expenseData = {
-      description: formData.get('description') as string,
-      amount: parseFloat(formData.get('amount') as string), // Ensure amount is a number
-      date: new Date(formData.get('date') as string), // Convert date string to Date object
-      category: formData.get('category') as ExpenseCategory, // Cast category to ExpenseCategory
-      // payees: formData.getAll('payees') as string[], // Handle multiple payees
-      payees: groupSelected, // Sync with checkbox selection
-      groupId: resolvedGroupId,
-      type: formData.get('type') as TransactionType, // Cast type to TransactionType
-    };
+  if (selectedSplitMethod === SplitMethod.Equal) {
+    const share = totalPaid / sortedMembers.length;
+    const details = sortedMembers.map((member) => ({
+      userId: member.userId,
+      amount: (updatedAmounts[member.userId] || 0) - share,
+    }));
+    setSplitDetails(details);
+  }
+};
 
-    console.log('Expense Form Data:', expenseData);
+  const renderAmountPaidInputs = () => {
+    return (
+      <div className='flex flex-col gap-2'>
+        {groupSelected.map((userId) => (
+          <Input
+            key={userId}
+            label={`Amount Paid by ${
+              sortedMembers.find((m) => m.userId === userId)?.name || userId
+            }`}
+            required
+            labelPlacement='inside'
+            placeholder='Enter amount'
+            type='number'
+            onChange={(e) =>
+              handleAmountPaidChange(userId, parseFloat(e.target.value))
+            }
+          />
+        ))}
+      </div>
+    );
+  };
 
-    // Generate a temporary ID for the new financial record
-    const tempId = `temp-${Date.now()}`;
-    const createdAt = new Date();
-    const updatedAt = createdAt;
+  const handleSplitMethodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const method = e.target.value as SplitMethod;
+  setSelectedSplitMethod(method);
+  setSplitMethod(method);
 
-    const tempRecord = {
-      ...expenseData,
-      recordId: tempId,
-      createdAt,
-      updatedAt,
-    };
+  const totalPaid = Object.values(amountPaidByPayees).reduce((sum, val) => sum + val, 0);
 
-    // Add the temporary financial record to the Zustand store
-    addFinancialRecord(tempRecord);
+  if (method === SplitMethod.Equal) {
+    const share = totalPaid / sortedMembers.length;
+    const details = sortedMembers.map((member) => ({
+      userId: member.userId,
+      amount: (amountPaidByPayees[member.userId] || 0) - share,
+    }));
+    setSplitDetails(details);
+  } else {
+    setSplitDetails(
+      sortedMembers.map((member) => ({ userId: member.userId, amount: 0 })),
+    );
+  }
+};
 
-    try {
-      const response = await axios.post('/api/financial-records', expenseData);
-      console.log('Expense saved:', response.data);
-      // Update the temporary record with the actual record ID from the response
-      deleteFinancialRecord(tempId);
-      addFinancialRecord(response.data);
-      router.push(`${basePath}/groups/${resolvedGroupId}`);
-    } catch (error) {
-      console.error('Failed to save expense:', error);
-      // Remove the temporary financial record from the Zustand store if an error occurs
-      deleteFinancialRecord(tempId);
-    } finally {
-      onClose();
+  const renderSplitMethodInputs = () => {
+    if (!sortedMembers.length) return null;
+
+    const totalPaid = Object.values(amountPaidByPayees).reduce(
+      (sum, val) => sum + val,
+      0,
+    );
+
+    switch (selectedSplitMethod) {
+      case SplitMethod.Percentage:
+        return (
+          <div className='flex flex-col gap-2'>
+            {sortedMembers.map((member) => (
+              <Input
+                key={member.userId}
+                label={`Percentage for ${member.name || member.userId}`}
+                required
+                labelPlacement='inside'
+                placeholder='Enter percentage'
+                type='number'
+                onChange={(e) => {
+                  const percentage = parseFloat(e.target.value);
+                  const updatedDetails = splitDetails.map((detail) =>
+                    detail.userId === member.userId
+                      ? {
+                          ...detail,
+                          amount:
+                            (percentage / 100) * totalPaid -
+                            amountPaidByPayees[member.userId],
+                        }
+                      : detail,
+                  );
+                  setSplitDetails(updatedDetails);
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      case SplitMethod.Custom:
+        return (
+          <div className='flex flex-col gap-2'>
+            {sortedMembers.map((member) => (
+              <Input
+                key={member.userId}
+                label={`Amount for ${member.name || member.userId}`}
+                labelPlacement='inside'
+                placeholder='Enter amount'
+                type='number'
+                onChange={(e) => {
+                  const customAmount = parseFloat(e.target.value);
+                  const updatedDetails = splitDetails.map((detail) =>
+                    detail.userId === member.userId
+                      ? {
+                          ...detail,
+                          amount:
+                            customAmount - amountPaidByPayees[member.userId],
+                        }
+                      : detail,
+                  );
+                  setSplitDetails(updatedDetails);
+                }}
+              />
+            ))}
+          </div>
+        );
+
+      default:
+        return null;
     }
   };
 
-  // const handleNavigationBack = () => {
-  //   router.push(`${basePath}/groups/${resolvedGroupId}`);
-  // };
+  const validateSplitDetails = () => {
+  const totalPaid = Object.values(amountPaidByPayees).reduce((sum, val) => sum + val, 0);
 
-  return (
-    <>
-      <Button
-        size='md'
-        variant='solid'
-        className='rounded-xl'
-        onPress={onOpen}>
-        <Plus />
-        Add Expense
-      </Button>
-      <Modal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        scrollBehavior='inside'
-        hideCloseButton={true}
-        size='full'>
-        <ModalContent className='dark text-white rounded-b-none'>
-          {() => (
-            <>
-              <ModalHeader className='flex gap-1 justify-center w-full'>
-                Add Group Expense
-              </ModalHeader>
-              <ModalBody>
-                <Form
-                  className='w-full'
-                  validationBehavior='native'
-                  onSubmit={onSubmit}>
-                  <div className='grid grid-cols-1 gap-2 w-full'>
-                    <div className='flex flex-col gap-1 w-full'>
-                      <CheckboxGroup
-                        className='gap-1'
-                        label='Paid By'
-                        orientation='horizontal'
-                        value={groupSelected}
-                        onChange={(value: string[]) => setGroupSelected(value)} // Properly type the onChange handler
-                      >
-                        {sortedMembers.map((member) => (
-                          <CustomCheckbox
-                            key={member.userId}
-                            value={member.userId}>
-                            {member.userId === currentUserId
-                              ? 'You'
-                              : member.name}
-                          </CustomCheckbox>
-                        ))}
-                      </CheckboxGroup>
+  if (!totalPaid) return false;
 
-                      <p className='mt-4 ml-1 text-default-500'>
-                        Selected: {groupSelected.join(', ')}
-                      </p>
-                    </div>
-                    <Input
-                      isRequired
-                      label='Amount'
-                      labelPlacement='inside'
-                      name='amount'
-                      placeholder='Enter amount'
-                      startContent={
-                        <div className='pointer-events-none flex items-center'>
-                          <span className='text-default-400 text-lg'>₹</span>
-                        </div>
-                      }
-                      size='lg'
-                      type='number'
-                      validate={(value) => {
-                        if (Number(value) <= 0) {
-                          return 'Amount must be greater than 0';
-                        }
-                        return null;
-                      }}
-                    />
-                    <Input
-                      isRequired
-                      label='Description'
-                      labelPlacement='inside'
-                      name='description'
-                      placeholder='Enter description'
-                      type='text'
-                      validate={(value) => {
-                        if (value.length < 3) {
-                          return 'Description must be at least 3 characters long';
-                        }
-                        return null;
-                      }}
-                    />
+  switch (splitMethod) {
+    case SplitMethod.Equal:
+      const share = totalPaid / sortedMembers.length;
+      const equalSplitDetails = sortedMembers.map((member) => ({
+        userId: member.userId,
+        amount: (amountPaidByPayees[member.userId] || 0) - share,
+      }));
+      setSplitDetails(equalSplitDetails);
+      return true;
 
-                    <div className='flex gap-2'>
-                      <Input
-                        isRequired
-                        label='Date'
-                        labelPlacement='inside'
-                        name='date'
-                        type='date'
-                      />
+    case SplitMethod.Percentage:
+      const totalPercentage = splitDetails.reduce((sum, detail) => {
+        const percentage =
+          ((detail.amount + (amountPaidByPayees[detail.userId] || 0)) /
+          totalPaid *
+          100);
+        return sum + percentage;
+      }, 0);
+      return Math.abs(totalPercentage - 100) < 0.01;
 
-                      <Select
-                        isRequired
-                        label='Category'
-                        labelPlacement='inside'
-                        name='category'
-                        placeholder='Select category'>
-                        {Object.values(ExpenseCategory).map((category) => (
-                          <SelectItem
-                            key={category}
-                            value={category}>
-                            {category}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    </div>
+    case SplitMethod.Custom:
+      const totalShares = splitDetails.reduce(
+        (sum, detail) =>
+          sum + detail.amount + (amountPaidByPayees[detail.userId] || 0),
+        0,
+      );
+      return Math.abs(totalShares - totalPaid) < 0.01;
 
-                    {/* Payee */}
-                    {/* <div className='flex items-center'>
-                      <Switch
-                        defaultSelected={isMultiple}
-                        size='lg'
-                        color='secondary'
-                        className='rotate-90'
-                        isSelected={isMultiple}
-                        onValueChange={toggleSelectionMode}
-                        thumbIcon={({ isSelected, className }) =>
-                          isSelected ? (
-                            <FaUserFriends
-                              className={`${className} -rotate-90`}
-                            />
-                          ) : (
-                            <FaUser className={`${className} -rotate-90`} />
-                          )
-                        }
-                      />
-
-                      <Select
-                        isRequired
-                        selectionMode={isMultiple ? 'multiple' : 'single'}
-                        label={isMultiple ? 'Payees' : 'Payer ID'}
-                        labelPlacement='inside'
-                        name='payees' // Ensure the name attribute is 'payees'
-                        placeholder={`Select ${
-                          isMultiple ? 'payees' : 'payer'
-                        }`}
-                        value={groupSelected}>
-                        {members.map((member) => (
-                          <SelectItem
-                            key={member.userId}
-                            value={member.userId}>
-                            {member.name}
-                          </SelectItem>
-                        ))}
-                      </Select>
-                    </div> */}
-
-                    <Select
-                      isRequired
-                      label='Transaction Type'
-                      labelPlacement='inside'
-                      name='type'
-                      placeholder='Select Type'>
-                      {Object.values(TransactionType).map((type) => (
-                        <SelectItem
-                          key={type}
-                          value={type}>
-                          {type}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                    <Select
-                      label='Split Method'
-                      labelPlacement='inside'
-                      name='splitMethod'>
-                      {Object.values(SplitMethod).map((method) => (
-                        <SelectItem
-                          key={method}
-                          value={method}>
-                          {method}
-                        </SelectItem>
-                      ))}
-                    </Select>
-                    <Input
-                      label='Split Details'
-                      labelPlacement='inside'
-                      name='splitDetails'
-                      placeholder='Enter split details'
-                      type='text'
-                    />
-                  </div>
-
-                  <ModalFooter className='w-full flex justify-around'>
-                    <Button
-                      color='danger'
-                      variant='light'
-                      onPress={onClose}>
-                      Cancel
-                    </Button>
-                    <Button
-                      type='submit'
-                      color='primary'
-                      variant='solid'
-                      className='w-full'>
-                      Save
-                    </Button>
-                  </ModalFooter>
-                </Form>
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal>
-    </>
-  );
+    default:
+      return false;
+  }
 };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (groupSelected.length === 0) {
+      alert('Please select at least one person who paid');
+      return;
+    }
+
+    const totalPaid = Object.values(amountPaidByPayees).reduce(
+      (sum, val) => sum + val,
+      0,
+    );
+
+    if (totalPaid <= 0) {
+      alert('Total paid amount must be greater than 0');
+      return;
+    }
+
+    if (!validateSplitDetails()) {
+      alert('Split amounts do not match the total paid amount');
+      return;
+    }
+
+    const formData = new FormData(e.currentTarget);
+    const description = formData.get('description') as string;
+    const date = formData.get('date') as string;
+    const category = formData.get('category') as ExpenseCategory;
+    const type = formData.get('type') as TransactionType;
+
+    if (!description || !date || !category || !type) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    // Generate splitRules based on splitMethod
+    const splitRules: SplitRule = {
+      type: splitMethod,
+      values: [],
+    };
+
+    switch (splitMethod) {
+      case SplitMethod.Equal:
+        const equalShare = totalPaid / sortedMembers.length;
+        splitRules.values = sortedMembers.map((member) => ({
+          userId: member.userId,
+          amount: equalShare,
+        }));
+        break;
+
+      case SplitMethod.Percentage:
+        splitRules.values = splitDetails.map((detail) => ({
+          userId: detail.userId,
+          percentage:
+            ((detail.amount + (amountPaidByPayees[detail.userId] || 0)) /
+              totalPaid) *
+            100,
+        }));
+        break;
+
+      case SplitMethod.Custom:
+        splitRules.values = splitDetails.map((detail) => ({
+          userId: detail.userId,
+          amount: detail.amount + (amountPaidByPayees[detail.userId] || 0),
+        }));
+        break;
+    }
+
+    const expenseData: FinancialRecord = {
+      recordId: `temp-${Date.now()}`,
+      description,
+      amount: totalPaid,
+      date: new Date(date),
+      category,
+      payees: groupSelected.map((userId) => ({
+        userId,
+        paidAmount: amountPaidByPayees[userId] || 0,
+      })),
+      groupId: resolvedGroupId,
+      type,
+      splitMethod,
+      splitRules,
+      splitDetails,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    console.log("Expense Data: ", expenseData);
+    
+
+    try {
+      addFinancialRecord(expenseData);
+      onClose();
+    } catch (error) {
+      console.error('Failed to save expense:', error);
+      deleteFinancialRecord(expenseData.recordId);
+    }
+  };
+
+ return (
+   <>
+     <Button
+       size='md'
+       variant='solid'
+       className='rounded-xl'
+       onPress={onOpen}>
+       <Plus />
+       Add Expense
+     </Button>
+     <Modal
+       isOpen={isOpen}
+       onOpenChange={onOpenChange}
+       scrollBehavior='inside'
+       hideCloseButton={true}
+       size='full'>
+       <ModalContent className='dark text-white rounded-b-none'>
+         {() => (
+           <>
+             <ModalHeader className='flex gap-1 justify-center w-full'>
+               Add Group Expense
+             </ModalHeader>
+             <ModalBody>
+               <form
+                 className='w-full'
+                 onSubmit={onSubmit}>
+                 <div className='grid grid-cols-1 gap-2 w-full'>
+                   <CheckboxGroup
+                     className='gap-1'
+                     label='Paid By'
+                     orientation='horizontal'
+                     value={groupSelected}
+                     onChange={(value: string[]) => setGroupSelected(value)}>
+                     {sortedMembers.map((member) => (
+                       <CustomCheckbox
+                         key={member.userId}
+                         value={member.userId}>
+                         {member.userId === currentUserId ? 'You' : member.name}
+                       </CustomCheckbox>
+                     ))}
+                   </CheckboxGroup>
+
+                   <p className='mt-4 ml-1 text-default-500'>
+                     Selected: {groupSelected.join(', ')}
+                   </p>
+
+                   {renderAmountPaidInputs()}
+
+                   <Input
+                     isRequired
+                     label='Amount'
+                     labelPlacement='inside'
+                     name='amount'
+                     placeholder='Enter amount'
+                     startContent={
+                       <div className='pointer-events-none flex items-center'>
+                         <span className='text-default-400 text-lg'>₹</span>
+                       </div>
+                     }
+                     size='lg'
+                     type='number'
+                   />
+
+                   <Input
+                     isRequired
+                     label='Description'
+                     labelPlacement='inside'
+                     name='description'
+                     placeholder='Enter description'
+                     type='text'
+                   />
+
+                   <div className='flex gap-2'>
+                     <Input
+                       isRequired
+                       label='Date'
+                       labelPlacement='inside'
+                       name='date'
+                       type='date'
+                     />
+
+                     <Select
+                       isRequired
+                       label='Category'
+                       labelPlacement='inside'
+                       name='category'
+                       placeholder='Select category'>
+                       {Object.values(ExpenseCategory).map((category) => (
+                         <SelectItem
+                           key={category}
+                           value={category}>
+                           {category}
+                         </SelectItem>
+                       ))}
+                     </Select>
+                   </div>
+
+                   <Select
+                     isRequired
+                     label='Transaction Type'
+                     labelPlacement='inside'
+                     name='type'
+                     placeholder='Select Type'>
+                     {Object.values(TransactionType).map((type) => (
+                       <SelectItem
+                         key={type}
+                         value={type}>
+                         {type}
+                       </SelectItem>
+                     ))}
+                   </Select>
+
+                   <Select
+                     label='Split Method'
+                     labelPlacement='inside'
+                     name='splitMethod'
+                     value={selectedSplitMethod}
+                     onChange={handleSplitMethodChange}
+                     placeholder='Select split method'>
+                     {Object.values(SplitMethod).map((method) => (
+                       <SelectItem
+                         key={method}
+                         value={method}>
+                         {method}
+                       </SelectItem>
+                     ))}
+                   </Select>
+
+                   {renderSplitMethodInputs()}
+                 </div>
+
+                 <ModalFooter className='w-full flex justify-around'>
+                   <Button
+                     color='danger'
+                     variant='light'
+                     onPress={onClose}>
+                     Cancel
+                   </Button>
+                   <Button
+                     type='submit'
+                     color='primary'
+                     variant='solid'
+                     className='w-full'>
+                     Save
+                   </Button>
+                 </ModalFooter>
+               </form>
+             </ModalBody>
+           </>
+         )}
+       </ModalContent>
+     </Modal>
+   </>
+ );
+}
 
 export default AddExpenseForm;

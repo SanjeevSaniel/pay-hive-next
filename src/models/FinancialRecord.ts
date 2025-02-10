@@ -3,6 +3,7 @@ import {
   ExpenseCategory,
   SplitMethod,
   SplitDetail,
+  SplitRule,
   TransactionType,
 } from '@/types/types';
 
@@ -12,10 +13,11 @@ export interface FinancialRecordDocument extends Document {
   amount: number;
   date: Date;
   category?: ExpenseCategory;
-  payees: string[]; // Ensure the payees field is included
+  payees: { userId: string; paidAmount: number }[]; // Updated payees field
   groupId?: string;
   splitMethod?: SplitMethod;
   splitDetails?: SplitDetail[];
+  splitRules?: SplitRule; // Optional split rules for splitting logic
   type: TransactionType;
   createdAt: Date;
   updatedAt: Date;
@@ -44,9 +46,10 @@ const financialRecordSchema = new Schema<FinancialRecordDocument>({
   },
   payees: [
     {
-      type: String,
+      userId: { type: String, required: true },
+      paidAmount: { type: Number, required: true },
     },
-  ], // Add payees field as an array of strings
+  ], // Updated payees field as an array of objects with userId and paidAmount
   groupId: {
     type: String,
   },
@@ -59,9 +62,21 @@ const financialRecordSchema = new Schema<FinancialRecordDocument>({
       amount: Number,
     },
   ],
+  splitRules: {
+    type: {
+      type: String,
+    },
+    values: [
+      {
+        userId: String,
+        amount: Number,
+        percentage: Number,
+      },
+    ],
+  },
   type: {
     type: String,
-    required: true,
+    // required: true,
   },
   createdAt: {
     type: Date,

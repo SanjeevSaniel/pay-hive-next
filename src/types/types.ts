@@ -51,21 +51,34 @@ export interface SplitDetail {
   amount: number;
 }
 
+export interface Payee {
+  userId: string;
+  paidAmount: number; // Amount paid by the payee
+}
+
+export interface SplitRule {
+  type: SplitMethod;
+  values: Array<{
+    userId: string;
+    [key: string]: number | string; // for percentage or amount
+  }>;
+}
+
 export interface FinancialRecord {
   recordId: string;
   description: string;
   amount: number;
   date: Date;
   category?: ExpenseCategory; // Optional for transactions not classified as expenses
-  payees: string[]; // Array of User IDs for multiple payees
+  payees: Payee[]; // Array of Payee objects for multiple payees with paid amounts
   groupId?: string; // Group ID (optional for non-group expenses)
   splitMethod?: SplitMethod; // Optional for transactions not split among members
+  splitRules?: SplitRule;
   splitDetails?: SplitDetail[]; // Optional for non-group transactions
-  type: TransactionType; // Optional for expenses, required for transactions
+  type?: TransactionType; // Optional for expenses, required for transactions
   createdAt: Date;
   updatedAt: Date;
 }
-
 
 export interface RawUser {
   userId: string;
