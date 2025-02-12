@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import useAppStore from '@/stores/useAppStore';
-import TotalGroupSpendCard from '@/components/Groups/TotalGroupSpendCard';
+import TotalGroupSpendCard from '@/components/groups/TotalGroupSpendCard';
 
 const TotalSpend = () => {
   const financialRecords = useAppStore((state) => state.financialRecords);

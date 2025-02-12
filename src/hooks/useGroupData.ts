@@ -1,6 +1,11 @@
 import { useEffect, useState, useMemo } from 'react';
 import useAppStore from '@/stores/useAppStore';
-import { Group, User } from '@/types/types';
+import {
+  Group,
+  User,
+  FinancialRecord,
+  TransactionCategory,
+} from '@/types/types';
 import useUsers from '@/hooks/useUsers';
 
 const useGroupData = (groupId: string | string[]) => {
@@ -35,7 +40,18 @@ const useGroupData = (groupId: string | string[]) => {
     [financialRecords, id],
   );
 
-  return { group, members, groupRecords };
+  const totalExpenses = useMemo(
+    () =>
+      groupRecords
+        .filter(
+          (record: FinancialRecord) =>
+            record.transactionCategory === TransactionCategory.EXPENSE,
+        )
+        .reduce((acc, record) => acc + record.amount, 0),
+    [groupRecords],
+  );
+
+  return { group, members, groupRecords, totalExpenses };
 };
 
 export default useGroupData;

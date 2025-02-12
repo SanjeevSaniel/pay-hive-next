@@ -39,11 +39,11 @@ export enum SplitMethod {
   Custom = 'Custom',
 }
 
-export enum TransactionType {
-  Debit = 'debit',
-  Credit = 'credit',
-  Settlement = 'settlement',
-  Transfer = 'transfer',
+export enum TransactionCategory {
+  EXPENSE = 'expense', // Regular group expenses
+  SETTLEMENT = 'settlement', // Settlements between group members
+  PAYMENT = 'payment', // Direct payments between members
+  DEBT_SETTLEMENT = 'debt_settlement', // Settling existing debts
 }
 
 export interface SplitDetail {
@@ -75,9 +75,27 @@ export interface FinancialRecord {
   splitMethod?: SplitMethod; // Optional for transactions not split among members
   splitRules?: SplitRule;
   splitDetails?: SplitDetail[]; // Optional for non-group transactions
-  type?: TransactionType; // Optional for expenses, required for transactions
+  transactionCategory: TransactionCategory; // Optional for expenses, required for transactions
+  // For settlements, we might want to track the related expense
+  relatedRecordId?: string; // Optional field to link related transactions
   createdAt: Date;
   updatedAt: Date;
+}
+
+// Interface for settlement-specific data
+export interface SettlementRecord extends FinancialRecord {
+  transactionCategory: TransactionCategory.SETTLEMENT;
+  fromUserId: string;
+  toUserId: string;
+  originalExpenseIds?: string[]; // References to original expenses being settled
+}
+
+// Interface for payment-specific data
+export interface PaymentRecord extends FinancialRecord {
+  transactionCategory: TransactionCategory.PAYMENT;
+  fromUserId: string;
+  toUserId: string;
+  note?: string;
 }
 
 export interface RawUser {
