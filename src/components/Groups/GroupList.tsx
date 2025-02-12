@@ -1,7 +1,7 @@
 'use client';
 
 import useAppStore from '@/stores/useAppStore';
-import GroupCard from '@/components/Groups/GroupCard';
+import GroupCard from '@/components/groups/GroupCard';
 import { useEffect, useMemo } from 'react';
 import { Group } from '@/types/types';
 
@@ -17,7 +17,7 @@ const filterDefaultGroup = (groups: Group[]) => {
   return groups.filter((group) => group.groupType !== 'default');
 };
 
-const GroupList: React.FC<GroupListProps> = ({ groups }) => {
+const GroupList = ({ groups }: GroupListProps) => {
   const defaultGroup = useAppStore((state) => state.defaultGroup);
   const setDefaultGroup = useAppStore((state) => state.setDefaultGroup);
 
@@ -38,7 +38,7 @@ const GroupList: React.FC<GroupListProps> = ({ groups }) => {
   );
 
   return (
-    <div className='grid grid-cols-1 gap-2 p-2'>
+    <div className='grid grid-cols-1 gap-3 p-2'>
       {defaultGroup && (
         <GroupCard
           key={defaultGroup.groupId}
