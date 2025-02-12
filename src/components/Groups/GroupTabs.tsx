@@ -1,6 +1,6 @@
-import GroupActivities from '@/components/Groups/GroupActivities';
-import GroupSummary from '@/components/Groups/GroupSummary';
-import GroupTransactions from '@/components/Groups/GroupTransactions';
+import GroupActivities from '@/components/groups/GroupActivities';
+import GroupSummary from '@/components/groups/GroupSummary';
+import GroupTransactions from '@/components/groups/GroupTransactions';
 import { FinancialRecord, Group } from '@/types/types';
 import { Tab, Tabs } from '@heroui/tabs';
 import { Card, CardBody } from '@heroui/card';
@@ -54,14 +54,14 @@ const GroupTabs: React.FC<GroupTabsProps> = ({ group, groupRecords }) => {
       selectedKey={selected}
       onSelectionChange={handleSelectionChange}
       size='md'
-      className='flex justify-evenly mb-0'>
+      className='flex justify-evenly mb-0 flex-wrap'>
       {(item) => (
         <Tab
           key={item.id}
           title={
             <div className='flex items-center space-x-1'>
               {item.icon}
-              <span>{item.label}</span>
+              <span className='text-md'>{item.label}</span>
             </div>
           }
           className='w-full py-0'>
