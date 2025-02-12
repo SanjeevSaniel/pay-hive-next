@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Component, House, ListTree, User } from 'lucide-react';
 import Account from './Account/AccountCards';
 import Expenses from './Expenses';
-import Groups from './groups/Groups';
+import Groups from './Groups/Groups';
 import Home from './home/Home';
 
 const TabsContainer = () => {

@@ -18,15 +18,15 @@ interface GroupCardProps {
 const GroupCard = ({ group }: GroupCardProps) => {
   const basePath = useBasePath(); // Use custom hook
 
-  if (!basePath) {
-    return <div>Loading...</div>; // Display loading indicator until basePath is available
-  }
+  // if (!basePath) {
+  //   return <div>Loading...</div>; // Display loading indicator until basePath is available
+  // }
 
   return (
     <Link
       href={`${basePath}/groups/${group.groupId}`}
       key={group.groupId}>
-      <Card className='px-2 pb-2 bg-[#242e35] text-white drop-shadow rounded-2xl'>
+      <Card className='px-2 pb-2 bg-[#1b2227] text-white drop-shadow rounded-2xl'>
         <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
           <div className='flex justify-center items-center m-2'>
             {group.groupType === 'default' ? <Ungroup /> : <Boxes />}

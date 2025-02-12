@@ -1,7 +1,7 @@
 'use client';
 
 import useAppStore from '@/stores/useAppStore';
-import GroupCard from '@/components/groups/GroupCard';
+import GroupCard from '@/components/Groups/GroupCard';
 import { useEffect, useMemo } from 'react';
 import { Group } from '@/types/types';
 

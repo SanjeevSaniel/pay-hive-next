@@ -1,6 +1,6 @@
-import GroupActivities from '@/components/groups/GroupActivities';
-import GroupSummary from '@/components/groups/GroupSummary';
-import GroupTransactions from '@/components/groups/GroupTransactions';
+import GroupActivities from '@/components/Groups/GroupActivities';
+import GroupSummary from '@/components/Groups/GroupSummary';
+import GroupTransactions from '@/components/Groups/GroupTransactions';
 import { FinancialRecord, Group } from '@/types/types';
 import { Tab, Tabs } from '@heroui/tabs';
 import { Card, CardBody } from '@heroui/card';

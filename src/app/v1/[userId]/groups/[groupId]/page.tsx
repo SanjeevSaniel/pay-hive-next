@@ -1,9 +1,9 @@
 'use client';
 
-import GroupNavigationHeader from '@/components/groups/GroupNavigationHeader';
-import GroupProfile from '@/components/groups/GroupProfile';
-import GroupTabs from '@/components/groups/GroupTabs';
-import MemberAvatars from '@/components/groups/MemberAvatars';
+import GroupNavigationHeader from '@/components/Groups/GroupNavigationHeader';
+import GroupProfile from '@/components/Groups/GroupProfile';
+import GroupTabs from '@/components/Groups/GroupTabs';
+import MemberAvatars from '@/components/Groups/MemberAvatars';
 import useBasePath from '@/hooks/useBasePath';
 import useGroupData from '@/hooks/useGroupData';
 import { useParams } from 'next/navigation';
