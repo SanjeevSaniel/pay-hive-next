@@ -25,8 +25,8 @@ const Navbar = () => {
   ];
 
   return (
-    <Card className='bg-[#f1f1f1] dark:bg-[#0b0e18] fixed left-16 bottom-2 right-16 drop-shadow-xl rounded-xl backdrop-blur-xl z-30'>
-      <CardContent className='flex justify-evenly items-center px-0 py-3'>
+    <Card className='bg-[#f1f1f1] dark:bg-[#0b0e18] fixed left-12 bottom-2 right-12 drop-shadow-xl rounded-xl backdrop-blur-xl z-30'>
+      <CardContent className='grid grid-cols-4 px-0 py-3'>
         {navItems.map((item) => {
           const isActive =
             item.href === basePath
@@ -41,7 +41,8 @@ const Navbar = () => {
                 className={`flex flex-col items-center ${
                   isActive ? 'text-white' : 'text-gray-400'
                 }`}>
-                <item.icon size={28} />
+                <item.icon size={22} />
+                <span className='text-xs capitalize'>{item.key}</span>
               </div>
             </Link>
           );

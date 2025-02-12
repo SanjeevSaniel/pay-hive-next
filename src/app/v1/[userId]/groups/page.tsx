@@ -3,9 +3,9 @@
 import { useEffect } from 'react';
 import useFetchGroupsAndRecords from '@/hooks/useFetchGroupsAndRecords';
 import useAppStore from '@/stores/useAppStore';
-import TotalSpend from '@/components/Groups/TotalSpend';
-import GroupHeaderSection from '@/components/Groups/GroupHeaderSection';
-import GroupList from '@/components/Groups/GroupList';
+import TotalSpend from '@/components/groups/TotalSpend';
+import GroupHeaderSection from '@/components/groups/GroupHeaderSection';
+import GroupList from '@/components/groups/GroupList';
 
 const GroupsPage = () => {
   const { fetchGroups, fetchFinancialRecords } = useFetchGroupsAndRecords();
@@ -31,7 +31,9 @@ const GroupsPage = () => {
     <div className='flex flex-col gap-2 py-4 w-full relative'>
       <TotalSpend />
       <GroupHeaderSection groupsCount={groups.length} />
+      {/* <Suspense fallback={<Loading />}> */}
       <GroupList groups={groups} />
+      {/* </Suspense> */}
     </div>
   );
 };

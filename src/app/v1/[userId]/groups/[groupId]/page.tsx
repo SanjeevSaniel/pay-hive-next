@@ -1,9 +1,9 @@
 'use client';
 
-import GroupNavigationHeader from '@/components/Groups/GroupNavigationHeader';
-import GroupProfile from '@/components/Groups/GroupProfile';
-import GroupTabs from '@/components/Groups/GroupTabs';
-import MemberAvatars from '@/components/Groups/MemberAvatars';
+import GroupNavigationHeader from '@/components/groups/GroupNavigationHeader';
+import GroupProfile from '@/components/groups/GroupProfile';
+import GroupTabs from '@/components/groups/GroupTabs';
+import MemberAvatars from '@/components/groups/MemberAvatars';
 import useBasePath from '@/hooks/useBasePath';
 import useGroupData from '@/hooks/useGroupData';
 import { useParams } from 'next/navigation';
@@ -13,7 +13,7 @@ const GroupDetails = () => {
   const { groupId } = useParams();
   const basePath = useBasePath(); // Use custom hook
 
-  const { group, members, groupRecords } = useGroupData(groupId);
+  const { group, members, groupRecords, totalExpenses } = useGroupData(groupId);
 
   const memberAvatars = useMemo(
     () => group?.memberIds && <MemberAvatars members={members} />,
@@ -25,10 +25,16 @@ const GroupDetails = () => {
   }
 
   return (
-    <div className='flex flex-col justify-normal gap-4 my-2 p-1 text-stone-600 relative'>
+    <div className='flex flex-col justify-normal gap-4 my-2 p-2 text-stone-600 relative'>
       <GroupNavigationHeader basePath={basePath} />
       <GroupProfile group={group} />
       {memberAvatars}
+
+      <div className='grid w-full justify-center items-center gap-1 px-2 py-4 bg-[#ddb2b2] text-stone-900 rounded-xl'>
+        <p className='text-center text-3xl font-semibold'>₹{totalExpenses}</p>
+        <p className='text-md font-semibold'>Total Amount</p>
+      </div>
+
       <GroupTabs
         group={group}
         groupRecords={groupRecords}
