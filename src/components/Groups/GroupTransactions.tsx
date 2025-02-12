@@ -1,6 +1,6 @@
 'use client';
 
-import { FinancialRecord, TransactionType } from '@/types/types';
+import { FinancialRecord, TransactionCategory } from '@/types/types';
 import { Fragment, ReactNode } from 'react';
 // import { Separator } from '../ui/separator';
 import { Calendar } from 'lucide-react';
@@ -35,6 +35,20 @@ const formatDate = (date: Date): string => {
       day: 'numeric',
     });
   }
+};
+
+import {
+  GiExpense,
+  GiReceiveMoney,
+  GiPayMoney,
+  GiMoneyStack,
+} from 'react-icons/gi';
+
+export const Transaction_Icons = {
+  [TransactionCategory.EXPENSE]: <GiExpense />,
+  [TransactionCategory.SETTLEMENT]: <GiReceiveMoney />,
+  [TransactionCategory.PAYMENT]: <GiPayMoney />,
+  [TransactionCategory.DEBT_SETTLEMENT]: <GiMoneyStack />,
 };
 
 const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
@@ -83,24 +97,39 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
           className='flex flex-col gap-2 border rounded-lg'>
           {sortedRecords.map((record) => (
             <Fragment key={record.recordId}>
-              <Card className='grid grid-cols-3 px-3 py-2 bg-[#1c2429] rounded-xl'>
-                <div className='col-span-2'>
-                  <p className='text-[#f7f9fd] text-md'>{record.description}</p>
-                  <p className='text-[#a6a8ae] text-sm'>{record.category}</p>
+              <Card className='grid grid-cols-6 py-2 bg-[#1c2429] rounded-xl'>
+                <div className='flex justify-center items-center'>
+                  {Transaction_Icons[record.transactionCategory]}
                 </div>
-                <div className='flex flex-col items-end'>
+                <div className='col-span-4'>
+                  <p className='text-[#f7f9fd] text-md font-bold capitalize text-wrap'>
+                    {record.description}
+                  </p>
+                  <p className='text-[#a6a8ae] text-sm'>
+                    {formatDate(new Date(record.date))}
+                  </p>
+                </div>
+                <div className='flex flex-col justify-center items-end px-2'>
                   <span
                     className={clsx({
-                      'text-[#f03e6e]': record.type === TransactionType.Debit,
-                      'text-[#75ee30]': record.type === TransactionType.Credit,
+                      'text-[#f03e6e]':
+                        record.transactionCategory ===
+                        TransactionCategory.EXPENSE,
+                      'text-[#75ee30]':
+                        record.transactionCategory ===
+                          TransactionCategory.SETTLEMENT ||
+                        record.transactionCategory ===
+                          TransactionCategory.PAYMENT ||
+                        record.transactionCategory ===
+                          TransactionCategory.DEBT_SETTLEMENT,
                       'text-md font-bold': true,
                     })}>
                     {`₹${record.amount}`}
                   </span>
 
-                  <span className='mr-1 text-sm text-[#a6a8ae]'>
+                  {/* <span className='mr-1 text-sm text-[#a6a8ae]'>
                     {formatDate(new Date(record.date))}
-                  </span>
+                  </span> */}
                 </div>
               </Card>
               {/* {recordIndex < groupedRecords[month].length - 1 && (
@@ -126,7 +155,7 @@ const GroupTransactions = ({ records }: FinancialRecordsListProps) => {
   );
 
   return (
-    <ul className='list-decimal list-inside space-y-2 p-2'>
+    <ul className='list-decimal list-inside space-y-2 p-1'>
       {recordsWithSeparators}
     </ul>
   );
