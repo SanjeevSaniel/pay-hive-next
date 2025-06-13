@@ -82,7 +82,6 @@ body {
   }
 }
 
-
 /* Add this CSS for CheckIcon positioning */
 .check-icon {
   position: absolute;
@@ -92,4 +91,9 @@ body {
   background-color: white;
   border-radius: 50%;
   padding: 2px;
+}
+
+.default-group-card {
+  background-color: #614051;
+  border: 1px solid #2F4F4F;
 }

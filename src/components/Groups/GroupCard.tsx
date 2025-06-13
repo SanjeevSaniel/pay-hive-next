@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/card';
 import useBasePath from '@/hooks/useBasePath';
 import { Group } from '@/types/types';
+import clsx from 'clsx';
 import { ArrowDownRight, Boxes, Ungroup } from 'lucide-react';
 import Link from 'next/link';
 
@@ -26,7 +27,13 @@ const GroupCard = ({ group }: GroupCardProps) => {
     <Link
       href={`${basePath}/groups/${group.groupId}`}
       key={group.groupId}>
-      <Card className='px-2 pb-2 bg-[#1b2227] text-white drop-shadow rounded-2xl'>
+      <Card
+        className={clsx(
+          'px-2 pb-2 bg-[#1b2227] text-white drop-shadow rounded-2xl',
+          {
+            'default-group-card': group.groupType === 'default',
+          },
+        )}>
         <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
           <div className='flex justify-center items-center m-2'>
             {group.groupType === 'default' ? <Ungroup /> : <Boxes />}

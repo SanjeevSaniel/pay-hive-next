@@ -12,6 +12,7 @@ import useAppStore from '@/stores/useAppStore';
 import { Group } from '@/types/types';
 import axios from 'axios';
 import { createDefaultGroup } from '@/utils/groupUtils'; // Import the function
+import Header from '@/components/Header';
 
 const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   useLenis();
@@ -85,10 +86,16 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   return (
-    <div className='grid grid-rows-layout min-h-screen p-2 dark bg-[#0e161e] text-white'>
-      <div className='mb-20 overflow-auto'>{children}</div>
-      <Navbar />
-      <Toaster />
+    <div className='min-h-screen p-2 dark bg-[#0e161e] text-white'>
+      <div className='md:w-[80%] mx-auto grid grid-rows-layout'>
+        <Header />
+        <div className=' h-fit md:mx-auto mb-20 grid grid-cols-4 overflow-auto'>
+          <div className='col-span-1 w-full'>1</div>
+          <div className='col-span-3'>{children}</div>
+        </div>
+        <Navbar />
+        <Toaster />
+      </div>
     </div>
   );
 };

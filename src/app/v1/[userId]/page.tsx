@@ -50,13 +50,11 @@ const HomePage = () => {
 
   return (
     <div>
-      <div className='px-1 top-0 z-30'>
+      {/* <div className='px-1 top-0 z-30'>
         <Header />
-      </div>
+      </div> */}
 
-      <div>
-        <AppleCardsCarouselDemo />
-      </div>
+      <AppleCardsCarouselDemo />
 
       <div className='flex justify-between px-3 py-2 my-2'>
         <span className='text-2xl font-extrabold'>Expenses</span>
