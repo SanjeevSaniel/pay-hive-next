@@ -3,7 +3,7 @@
 import { Button } from '@heroui/react';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import AddExpenseForm from '@/components/Transactions/AddExpenseForm';
+import AddExpenseForm from '../Transactions/AddExpenseForm';
 
 interface GroupHeaderProps {
   basePath: string;
