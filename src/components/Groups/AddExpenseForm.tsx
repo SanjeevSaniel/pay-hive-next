@@ -378,7 +378,7 @@ const AddExpenseForm = () => {
         paidAmount: amountPaidByPayees[userId] || 0,
       })),
       groupId: resolvedGroupId,
-      type,
+      transactionCategory: type,
       splitMethod,
       splitDetails,
       createdAt: new Date(),

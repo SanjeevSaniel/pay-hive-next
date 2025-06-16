@@ -1,7 +1,6 @@
 'use client';
 
 import { AppleCardsCarouselDemo } from '@/components/AppleCardsCarouselDemo';
-import Header from '@/components/Header';
 import TabsContainer from '@/components/TabsContainer';
 import {
   Card,
