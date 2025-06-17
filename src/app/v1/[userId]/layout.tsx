@@ -1,18 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
+import Header from '@/components/Header';
 import Navbar from '@/components/Navbar';
+import Sidebar from '@/components/Sidebar';
 import useLenis from '@/hooks/useLenis';
-import { Toaster } from 'react-hot-toast';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
 import { fetchGroupTypes } from '@/services/groupTypeService';
 import { getUsers } from '@/services/userService';
 import useAppStore from '@/stores/useAppStore';
 import { Group } from '@/types/types';
-import axios from 'axios';
 import { createDefaultGroup } from '@/utils/groupUtils'; // Import the function
-import Header from '@/components/Header';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   useLenis();
@@ -89,8 +90,10 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
     <div className='min-h-screen p-2 dark bg-[#0e161e] text-white'>
       <div className='md:w-[80%] mx-auto grid grid-rows-layout'>
         <Header />
-        <div className=' h-fit md:mx-auto mb-20 grid grid-cols-4 overflow-auto'>
-          <div className='col-span-1 w-full'>1</div>
+        <div className=' h-fit w-full mb-20 grid grid-cols-4 overflow-auto relative'>
+          <div className='col-span-1 w-full'>
+            <Sidebar />
+          </div>
           <div className='col-span-3'>{children}</div>
         </div>
         <Navbar />
