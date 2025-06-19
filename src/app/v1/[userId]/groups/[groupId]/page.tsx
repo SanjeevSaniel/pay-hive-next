@@ -10,7 +10,9 @@ import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 
 const GroupDetails = () => {
-  const { groupId } = useParams();
+  // const { groupId } = useParams();
+  const params = useParams();
+  const groupId = typeof params.groupId === 'string' ? params.groupId : '';
   const basePath = useBasePath(); // Use custom hook
 
   const { group, members, groupRecords, totalExpenses } = useGroupData(groupId);
