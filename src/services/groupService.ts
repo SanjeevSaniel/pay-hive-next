@@ -15,7 +15,7 @@ export const getUsersByIds = (userIds: string[], users: User[]): User[] => {
 
 export const getGroupById = (groupId: string) => {
   const { groups } = useAppStore.getState();
-  return groups.find((group: Group) => group.groupId === groupId);
+  return groups.find((group: Group) => group.id === groupId);
 };
 
 export const createGroup = async (group: Group) => {
