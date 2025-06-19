@@ -1,8 +1,6 @@
 'use client';
 
-import Header from '@/components/Header';
 import Navbar from '@/components/Navbar';
-import Sidebar from '@/components/Sidebar';
 import useLenis from '@/hooks/useLenis';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
@@ -87,18 +85,19 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   return (
-    <div className='min-h-screen p-2 dark bg-[#0e161e] text-white'>
-      <div className='md:w-[80%] mx-auto grid grid-rows-layout'>
-        <Header />
-        <div className=' h-fit w-full mb-20 grid grid-cols-4 overflow-auto relative'>
-          <div className='col-span-1 w-full'>
+    <div className='dark bg-[#1b1b1f] text-white'>
+      <div className=''>{children}</div>
+      {/* <div className='grid grid-rows-layout'> */}
+      {/* <Header /> */}
+      {/* <div className=' h-fit w-full mb-20 grid grid-cols-4 overflow-auto relative'>
+        <div className='col-span-1 w-full'>
             <Sidebar />
           </div>
-          <div className='col-span-3'>{children}</div>
-        </div>
-        <Navbar />
-        <Toaster />
-      </div>
+        <div className='col-span-3'>{children}</div>
+      </div> */}
+      <Navbar />
+      <Toaster />
+      {/* </div> */}
     </div>
   );
 };

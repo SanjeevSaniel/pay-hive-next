@@ -98,6 +98,12 @@ body {
   }
 }
 
+body {
+  max-width: 100%;
+  transition-behavior: normal;
+  transition-duration: 0.5s;
+}
+
 /* Add this CSS for CheckIcon positioning */
 .check-icon {
   position: absolute;

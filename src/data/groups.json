@@ -1,7 +1,7 @@
 [
     {
-        "groupId": "group1",
-        "groupName": "Friends",
+        "id": "group1",
+        "title": "Friends",
         "description": "Expenses with Friends",
         "owedAmount": 1500,
         "borrowedAmount": 0,
@@ -15,8 +15,8 @@
         ]
     },
     {
-        "groupId": "group2",
-        "groupName": "Family",
+        "id": "group2",
+        "title": "Family",
         "description": "Family expenses",
         "owedAmount": 1000,
         "borrowedAmount": 500,
@@ -29,8 +29,8 @@
         ]
     },
     {
-        "groupId": "group3",
-        "groupName": "Colleagues",
+        "id": "group3",
+        "title": "Colleagues",
         "description": "Work-related expenses",
         "owedAmount": 250,
         "borrowedAmount": 100,
@@ -43,8 +43,8 @@
         ]
     },
     {
-        "groupId": "group4",
-        "groupName": "Travel Buddies",
+        "id": "group4",
+        "title": "Travel Buddies",
         "description": "Travel expenses",
         "owedAmount": 800,
         "borrowedAmount": 300,
@@ -57,8 +57,8 @@
         ]
     },
     {
-        "groupId": "group5",
-        "groupName": "Neighbors",
+        "id": "group5",
+        "title": "Neighbors",
         "description": "Neighborhood activities",
         "owedAmount": 450,
         "borrowedAmount": 150,
@@ -71,8 +71,8 @@
         ]
     },
     {
-        "groupId": "group6",
-        "groupName": "Study Group",
+        "id": "group6",
+        "title": "Study Group",
         "description": "Study-related expenses",
         "owedAmount": 600,
         "borrowedAmount": 250,
@@ -85,8 +85,8 @@
         ]
     },
     {
-        "groupId": "group7",
-        "groupName": "Sports Team",
+        "id": "group7",
+        "title": "Sports Team",
         "description": "Sports activities",
         "owedAmount": 700,
         "borrowedAmount": 200,
@@ -99,8 +99,8 @@
         ]
     },
     {
-        "groupId": "group8",
-        "groupName": "Gym Buddies",
+        "id": "group8",
+        "title": "Gym Buddies",
         "description": "Fitness expenses",
         "owedAmount": 300,
         "borrowedAmount": 100,
@@ -113,8 +113,8 @@
         ]
     },
     {
-        "groupId": "group9",
-        "groupName": "Project Team",
+        "id": "group9",
+        "title": "Project Team",
         "description": "Project-related expenses",
         "owedAmount": 550,
         "borrowedAmount": 300,
@@ -127,8 +127,8 @@
         ]
     },
     {
-        "groupId": "group10",
-        "groupName": "Startup Team",
+        "id": "group10",
+        "title": "Startup Team",
         "description": "Startup expenses",
         "owedAmount": 1000,
         "borrowedAmount": 700,
@@ -141,8 +141,8 @@
         ]
     },
     {
-        "groupId": "group11",
-        "groupName": "Community Volunteers",
+        "id": "group11",
+        "title": "Community Volunteers",
         "description": "Community service expenses",
         "owedAmount": 400,
         "borrowedAmount": 150,
@@ -155,8 +155,8 @@
         ]
     },
     {
-        "groupId": "group12",
-        "groupName": "Club Members",
+        "id": "group12",
+        "title": "Club Members",
         "description": "Club activities",
         "owedAmount": 750,
         "borrowedAmount": 200,
@@ -169,8 +169,8 @@
         ]
     },
     {
-        "groupId": "group13",
-        "groupName": "Reading Circle",
+        "id": "group13",
+        "title": "Reading Circle",
         "description": "Book club expenses",
         "owedAmount": 350,
         "borrowedAmount": 100,
@@ -183,8 +183,8 @@
         ]
     },
     {
-        "groupId": "group14",
-        "groupName": "Conference Attendees",
+        "id": "group14",
+        "title": "Conference Attendees",
         "description": "Conference expenses",
         "owedAmount": 900,
         "borrowedAmount": 600,
@@ -197,8 +197,8 @@
         ]
     },
     {
-        "groupId": "group15",
-        "groupName": "Craft Enthusiasts",
+        "id": "group15",
+        "title": "Craft Enthusiasts",
         "description": "Craft activities",
         "owedAmount": 200,
         "borrowedAmount": 50,

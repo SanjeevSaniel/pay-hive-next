@@ -1,20 +1,13 @@
 import type { Metadata } from 'next';
-import { Comfortaa } from 'next/font/google';
+import { ABeeZee } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
 import '@mantine/core/styles.css';
 
-import {
-  ColorSchemeScript,
-  MantineProvider,
-  mantineHtmlProps,
-} from '@mantine/core';
-
-const comfortaa = Comfortaa({
-  weight: ['400', '700'], // specify the weights you need
-  subsets: ['latin'], // specify the subsets you need
-  display: 'swap',
+export const aBeeZee = ABeeZee({
+  subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -30,15 +23,10 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      {...mantineHtmlProps}>
-      <head>
-        <ColorSchemeScript />
-      </head>
-      <body className={`${comfortaa.className} antialiased min-h-screen`}>
-        <MantineProvider>
-          <Providers>{children}</Providers>
-          <Toaster />
-        </MantineProvider>
+      suppressHydrationWarning={true}>
+      <body className={`${aBeeZee.className}`}>
+        <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );

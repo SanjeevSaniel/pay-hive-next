@@ -135,8 +135,9 @@ export interface NotificationPreferences {
 }
 
 export interface Group {
-  groupId: string;
-  groupName: string;
+  id: string;
+  title: string;
+  url?: string;
   description: string;
   groupType: string;
   createdDate: string;

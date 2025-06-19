@@ -25,7 +25,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <Card className='bg-[#f1f1f1] sticky top-0 drop-shadow-xl rounded-xl backdrop-blur-xl z-30'>
+    <Card className='sticky top-0 drop-shadow-xl rounded-xl backdrop-blur-xl z-30'>
       {/* <Card className='bg-[#f1f1f1] dark:bg-[#0b0e18] sticky top-0 drop-shadow-xl rounded-xl backdrop-blur-xl z-30'> */}
       <CardContent className='flex flex-col md:gap-8 px-2 py-3'>
         {navItems.map((item) => {
