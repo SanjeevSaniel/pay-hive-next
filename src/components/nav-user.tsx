@@ -5,6 +5,7 @@ import {
   Bell,
   ChevronsUpDown,
   CreditCard,
+  Loader2,
   LogOut,
   Sparkles,
 } from 'lucide-react';
@@ -25,11 +26,126 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import LogoutButton from './Auth/LogoutButton';
-import { useCallback, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
+import toast from 'react-hot-toast';
+import { Button } from './ui/button';
+
+interface LogoutButtonProps {
+  className?: string;
+  onLogoutStart?: () => void;
+  onLogoutEnd?: () => void;
+  redirectTo?: string;
+}
+
+export function LogoutButton({
+  className,
+  onLogoutStart,
+  onLogoutEnd,
+  redirectTo = '/v1/login',
+}: LogoutButtonProps) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleLogout = useCallback(async () => {
+    setLoading(true);
+    onLogoutStart?.();
+
+    try {
+      const response = await axios.get('/api/users/logout');
+      console.log('Logout success', response.data);
+      toast.success('Logout successful');
+      router.push(redirectTo);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Logout failed:', error.message);
+        toast.error(`Logout failed: ${error.message}`);
+      } else {
+        console.error('An unknown error occurred:', error);
+        toast.error('Logout failed');
+      }
+    } finally {
+      setLoading(false);
+      onLogoutEnd?.();
+    }
+  }, [router, redirectTo, onLogoutStart, onLogoutEnd]);
+
+  return (
+    <DropdownMenuItem
+      onClick={handleLogout}
+      disabled={loading}
+      className={className}>
+      {loading ? (
+        <Loader2 className='h-4 w-4 animate-spin' />
+      ) : (
+        <LogOut className='h-4 w-4' />
+      )}
+      <span className='ml-2'>{loading ? 'Logging out...' : 'Log out'}</span>
+    </DropdownMenuItem>
+  );
+}
+
+// Alternative standalone button version
+export function LogoutButtonStandalone({
+  className,
+  onLogoutStart,
+  onLogoutEnd,
+  redirectTo = '/v1/login',
+  variant = 'outline',
+  size = 'default',
+}: LogoutButtonProps & {
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
+}) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleLogout = useCallback(async () => {
+    setLoading(true);
+    onLogoutStart?.();
+
+    try {
+      const response = await axios.get('/api/users/logout');
+      console.log('Logout success', response.data);
+      toast.success('Logout successful');
+      router.push(redirectTo);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Logout failed:', error.message);
+        toast.error(`Logout failed: ${error.message}`);
+      } else {
+        console.error('An unknown error occurred:', error);
+        toast.error('Logout failed');
+      }
+    } finally {
+      setLoading(false);
+      onLogoutEnd?.();
+    }
+  }, [router, redirectTo, onLogoutStart, onLogoutEnd]);
+
+  return (
+    <Button
+      onClick={handleLogout}
+      disabled={loading}
+      variant={variant}
+      size={size}
+      className={className}>
+      {loading ? (
+        <Loader2 className='h-4 w-4 animate-spin' />
+      ) : (
+        <LogOut className='h-4 w-4' />
+      )}
+      <span className='ml-2'>{loading ? 'Logging out...' : 'Log out'}</span>
+    </Button>
+  );
+}
 
 export function NavUser({
   user,
@@ -41,32 +157,16 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  const router = useRouter();
-  const [loading, setLoading] = useState(false); // New state for loading
 
-  const onLogout = useCallback(async () => {
-    setLoading(true); // Set loading to true
-    try {
-      const response = await axios.get('/api/users/logout');
-      console.log('Logout success', response.data);
-      toast.success('Logout successful');
-      router.push('/v1/login');
-    } catch (error: unknown) {
-      // error is now `unknown`
-      // Check if the error is an instance of Error
-      if (error instanceof Error) {
-        // Now TypeScript knows `error` is of type `Error`, so we can safely access `error.message`
-        console.error('Logout failed:', error.message);
-        toast.error(`Logout failed: ${error.message}`);
-      } else {
-        // Handle cases where the error is not an Error object (e.g., strings, numbers, etc.)
-        console.error('An unknown error occurred:', error);
-        toast.error('Logout failed');
-      }
-    } finally {
-      setLoading(false); // Set loading to false after the request is complete
-    }
-  }, [router]);
+  // Generate initials from name for fallback
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((word) => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
     <SidebarMenu>
@@ -81,7 +181,9 @@ export function NavUser({
                   src={user.avatar}
                   alt={user.name}
                 />
-                <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+                <AvatarFallback className='rounded-lg'>
+                  {getInitials(user.name)}
+                </AvatarFallback>
               </Avatar>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-medium'>{user.name}</span>
@@ -102,7 +204,9 @@ export function NavUser({
                     src={user.avatar}
                     alt={user.name}
                   />
-                  <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+                  <AvatarFallback className='rounded-lg'>
+                    {getInitials(user.name)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className='grid flex-1 text-left text-sm leading-tight'>
                   <span className='truncate font-medium'>{user.name}</span>
@@ -133,11 +237,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={onLogout}>
-              <LogOut />
-              Log out
-              {/* <LogoutButton /> */}
-            </DropdownMenuItem>
+            <LogoutButton />
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
