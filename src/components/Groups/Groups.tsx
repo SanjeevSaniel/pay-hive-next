@@ -45,7 +45,7 @@ const Groups = () => {
       <div className='grid grid-cols-1 gap-2 p-2'>
         {groups.map((group, index) => (
           <Link
-            href={`/v1/groups/${group.groupId}`}
+            href={`/v1/groups/${group.id}`}
             key={index}>
             <Card className='border border-gray-200 shadow-none rounded-2xl'>
               <CardHeader className='grid grid-cols-[auto_1fr_auto] gap-2 p-2'>
@@ -54,7 +54,7 @@ const Groups = () => {
                 </div>
                 <div className='flex flex-col justify-center space-y-0.5'>
                   <CardTitle className='flex items-center gap-2'>
-                    <span>{group.groupName}</span>
+                    <span>{group.title}</span>
                   </CardTitle>
                   <CardDescription className='flex items-center space-x-2'></CardDescription>
                 </div>
