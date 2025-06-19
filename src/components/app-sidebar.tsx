@@ -1,9 +1,6 @@
 'use client';
 
-import * as React from 'react';
 import {
-  BookOpen,
-  Bot,
   Command,
   Frame,
   Group,
@@ -12,9 +9,9 @@ import {
   Map,
   PieChart,
   Send,
-  Settings2,
   SquareTerminal,
 } from 'lucide-react';
+import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
 import { NavProjects } from '@/components/nav-projects';
@@ -29,8 +26,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import useAppStore from '@/stores/useAppStore';
 import useFetchGroupsAndRecords from '@/hooks/useFetchGroupsAndRecords';
+import useAppStore from '@/stores/useAppStore';
 import { useEffect } from 'react';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
