@@ -18,7 +18,7 @@ const useGroupData = (groupId: string | string[]) => {
 
   useEffect(() => {
     if (id) {
-      const groupData = groups.find((group: Group) => group.groupId === id);
+      const groupData = groups.find((group: Group) => group.id === id);
       if (groupData) {
         setGroup(groupData);
       }

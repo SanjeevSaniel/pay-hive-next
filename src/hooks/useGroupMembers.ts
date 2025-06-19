@@ -16,7 +16,7 @@ const useGroupMembers = (groupId: string | string[] | undefined) => {
     if (resolvedGroupId) {
       // Retrieve the group information using the groupId from the Zustand store
       const groupData = getGroups.find(
-        (group: Group) => group.groupId === resolvedGroupId,
+        (group: Group) => group.id === resolvedGroupId,
       );
       if (groupData) {
         // Retrieve the users associated with the memberIds
