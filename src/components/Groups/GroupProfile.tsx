@@ -28,8 +28,8 @@ const GroupProfile: React.FC<GroupProfileProps> = ({ group }) => {
 
     try {
       router.push(`${basePath}/groups`);
-      deleteGroup(group.groupId);
-      const response = await axios.delete(`/api/groups/${group.groupId}`);
+      deleteGroup(group.id);
+      const response = await axios.delete(`/api/groups/${group.id}`);
       console.log('Response:', response);
 
       if (response.status !== 200) {
@@ -46,8 +46,8 @@ const GroupProfile: React.FC<GroupProfileProps> = ({ group }) => {
   }, [group, basePath, deleteGroup, restoreGroup, router]);
 
   const settingsLink = useMemo(
-    () => `${basePath}/groups/${group?.groupId}/settings`,
-    [basePath, group?.groupId],
+    () => `${basePath}/groups/${group?.id}/settings`,
+    [basePath, group?.id],
   );
 
   if (!basePath) {
@@ -59,9 +59,7 @@ const GroupProfile: React.FC<GroupProfileProps> = ({ group }) => {
       {group ? (
         <>
           <div className='flex justify-between items-center gap-1 mb-4'>
-            <h1 className='text-3xl text-[#cacccf] font-bold'>
-              {group.groupName}
-            </h1>
+            <h1 className='text-3xl text-[#cacccf] font-bold'>{group.title}</h1>
             <div className='flex space-x-2'>
               <Button
                 isIconOnly

@@ -41,13 +41,13 @@ const GroupList = ({ groups }: GroupListProps) => {
     <div className='grid grid-cols-1 gap-3 p-2'>
       {defaultGroup && (
         <GroupCard
-          key={defaultGroup.groupId}
+          key={defaultGroup.id}
           group={defaultGroup}
         />
       )}
       {sortedGroups.map((group) => (
         <GroupCard
-          key={group.groupId}
+          key={group.id}
           group={group}
         />
       ))}

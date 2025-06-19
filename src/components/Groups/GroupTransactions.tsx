@@ -1,7 +1,7 @@
 'use client';
 
 import { FinancialRecord, TransactionCategory } from '@/types/types';
-import { Fragment, ReactNode } from 'react';
+import { Fragment, JSX, ReactNode } from 'react';
 // import { Separator } from '../ui/separator';
 import { Calendar } from 'lucide-react';
 import { Card } from '@heroui/card';
