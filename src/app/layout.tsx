@@ -5,7 +5,7 @@ import { Providers } from './providers';
 import { Toaster } from 'react-hot-toast';
 import '@mantine/core/styles.css';
 
-export const aBeeZee = ABeeZee({
+const aBeeZee = ABeeZee({
   subsets: ['latin'],
   weight: '400',
 });
