@@ -1,6 +1,6 @@
 'use client';
 
-import { AppleCardsCarouselDemo } from '@/components/AppleCardsCarouselDemo';
+// import { AppleCardsCarouselDemo } from '@/components/AppleCardsCarouselDemo';
 import TabsContainer from '@/components/TabsContainer';
 import {
   Card,
@@ -53,7 +53,7 @@ const HomePage = () => {
         <Header />
       </div> */}
 
-      <AppleCardsCarouselDemo />
+      {/* <AppleCardsCarouselDemo /> */}
 
       <div className='flex justify-between px-3 py-2 my-2'>
         <span className='text-2xl font-extrabold'>Expenses</span>
