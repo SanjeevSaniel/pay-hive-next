@@ -25,8 +25,8 @@ const GroupCard = ({ group }: GroupCardProps) => {
 
   return (
     <Link
-      href={`${basePath}/groups/${group.groupId}`}
-      key={group.groupId}>
+      href={`${basePath}/groups/${group.id}`}
+      key={group.id}>
       <Card
         className={clsx(
           'px-2 pb-2 bg-[#1b2227] text-white drop-shadow rounded-2xl',
@@ -40,7 +40,7 @@ const GroupCard = ({ group }: GroupCardProps) => {
           </div>
           <div className='flex flex-col justify-center space-y-0.5 overflow-hidden whitespace-nowrap text-ellipsis'>
             <CardTitle className='flex items-center gap-2 text-lg'>
-              {group.groupName}
+              {group.title}
             </CardTitle>
             <CardDescription className='flex items-center space-x-2 text-md text-[#cacccf]'>
               {group.description}
