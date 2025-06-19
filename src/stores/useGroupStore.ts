@@ -29,7 +29,7 @@ export const useGroupStore: StateCreator<
     })),
   deleteGroup: (groupId) =>
     set((state) => ({
-      groups: state.groups.filter((group) => group.groupId !== groupId),
+      groups: state.groups.filter((group) => group.id !== groupId),
     })),
   setDefaultGroup: (defaultGroup) => set(() => ({ defaultGroup })),
   restoreGroup: (group) =>
