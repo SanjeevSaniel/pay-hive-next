@@ -25,6 +25,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import LogoutButton from './Auth/LogoutButton';
+import { useCallback, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 export function NavUser({
   user,
@@ -36,6 +41,32 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false); // New state for loading
+
+  const onLogout = useCallback(async () => {
+    setLoading(true); // Set loading to true
+    try {
+      const response = await axios.get('/api/users/logout');
+      console.log('Logout success', response.data);
+      toast.success('Logout successful');
+      router.push('/v1/login');
+    } catch (error: unknown) {
+      // error is now `unknown`
+      // Check if the error is an instance of Error
+      if (error instanceof Error) {
+        // Now TypeScript knows `error` is of type `Error`, so we can safely access `error.message`
+        console.error('Logout failed:', error.message);
+        toast.error(`Logout failed: ${error.message}`);
+      } else {
+        // Handle cases where the error is not an Error object (e.g., strings, numbers, etc.)
+        console.error('An unknown error occurred:', error);
+        toast.error('Logout failed');
+      }
+    } finally {
+      setLoading(false); // Set loading to false after the request is complete
+    }
+  }, [router]);
 
   return (
     <SidebarMenu>
@@ -102,9 +133,10 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={onLogout}>
               <LogOut />
               Log out
+              {/* <LogoutButton /> */}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
