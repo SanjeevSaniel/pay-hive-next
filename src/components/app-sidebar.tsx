@@ -203,8 +203,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar
       variant='inset'
+      className='bg-[#1C1C1C] text-white'
       {...props}>
-      <SidebarHeader>
+      <SidebarHeader className='bg-[#1C1C1C] text-white'>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton

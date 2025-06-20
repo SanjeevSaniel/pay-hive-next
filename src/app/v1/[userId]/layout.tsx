@@ -85,7 +85,7 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   return (
-    <div className='dark bg-[#1b1b1f] text-white'>
+    <div className='dark bg-[#1C1C1C] text-white'>
       <div className=''>{children}</div>
       {/* <div className='grid grid-rows-layout'> */}
       {/* <Header /> */}
