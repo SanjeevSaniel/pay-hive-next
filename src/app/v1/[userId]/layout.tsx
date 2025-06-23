@@ -1,6 +1,21 @@
 'use client';
 
+import { AppSidebar } from '@/components/app-sidebar';
 import Navbar from '@/components/Navbar';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb';
+import { Separator } from '@/components/ui/separator';
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
 import useLenis from '@/hooks/useLenis';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
@@ -13,7 +28,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 
-const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
+const AppLayout = ({ children }: { children: React.ReactNode }) => {
   useLenis();
   const addGroup = useAppStore((state) => state.addGroup);
   const setGroups = useAppStore((state) => state.setGroups);
@@ -86,15 +101,36 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className='dark bg-[#1C1C1C] text-white'>
-      <div className=''>{children}</div>
-      {/* <div className='grid grid-rows-layout'> */}
-      {/* <Header /> */}
-      {/* <div className=' h-fit w-full mb-20 grid grid-cols-4 overflow-auto relative'>
-        <div className='col-span-1 w-full'>
-            <Sidebar />
-          </div>
-        <div className='col-span-3'>{children}</div>
-      </div> */}
+      <SidebarProvider>
+        <AppSidebar />
+
+        <SidebarInset className='bg-transparent relative'>
+          <header className='flex h-16 shrink-0 items-center gap-2 sticky top-0 z-10 bg-opaque backdrop-blur-sm'>
+            <div className='flex items-center gap-2 px-4'>
+              <SidebarTrigger className='-ml-1' />
+              <Separator
+                orientation='vertical'
+                className='mr-2 data-[orientation=vertical]:h-4'
+              />
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem className='hidden md:block'>
+                    <BreadcrumbLink href='#'>
+                      Building Your Application
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator className='hidden md:block' />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+          </header>
+          <div className=''>{children}</div>
+        </SidebarInset>
+      </SidebarProvider>
+
       <Navbar />
       <Toaster />
       {/* </div> */}
@@ -102,4 +138,4 @@ const AppPageLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default AppPageLayout;
+export default AppLayout;
