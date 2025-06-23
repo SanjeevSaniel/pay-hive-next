@@ -16,7 +16,6 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import useLenis from '@/hooks/useLenis';
 import { getFinancialRecords } from '@/services/financialRecordService';
 import { getGroups } from '@/services/groupService';
 import { fetchGroupTypes } from '@/services/groupTypeService';
@@ -29,7 +28,6 @@ import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  useLenis();
   const addGroup = useAppStore((state) => state.addGroup);
   const setGroups = useAppStore((state) => state.setGroups);
   const setGroupTypes = useAppStore((state) => state.setGroupTypes);
@@ -104,8 +102,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
       <SidebarProvider>
         <AppSidebar />
 
-        <SidebarInset className='bg-transparent relative'>
-          <header className='flex h-16 shrink-0 items-center gap-2 sticky top-0 z-10 bg-opaque backdrop-blur-sm'>
+        <SidebarInset className='bg-transparent relative flex flex-col '>
+          <header className='flex h-10 shrink-0 items-center gap-2 sticky top-2 z-10 bg-opaque backdrop-blur-sm'>
             <div className='flex items-center gap-2 px-4'>
               <SidebarTrigger className='-ml-1' />
               <Separator
@@ -127,7 +125,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
               </Breadcrumb>
             </div>
           </header>
-          <div className=''>{children}</div>
+          <div className='flex-1 overflow-auto relative'>{children}</div>
         </SidebarInset>
       </SidebarProvider>
 
