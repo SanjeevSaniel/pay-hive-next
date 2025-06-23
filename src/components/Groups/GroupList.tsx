@@ -9,17 +9,17 @@ interface GroupListProps {
   groups: Group[];
 }
 
-const getDefaultGroup = (groups: Group[]) => {
-  return groups.find((group: Group) => group.groupType === 'default') || null;
-};
-
-const filterDefaultGroup = (groups: Group[]) => {
-  return groups.filter((group) => group.groupType !== 'default');
-};
-
 const GroupList = ({ groups }: GroupListProps) => {
   const defaultGroup = useAppStore((state) => state.defaultGroup);
   const setDefaultGroup = useAppStore((state) => state.setDefaultGroup);
+
+  const getDefaultGroup = (groups: Group[]) => {
+    return groups.find((group: Group) => group.groupType === 'default') || null;
+  };
+
+  const filterDefaultGroup = (groups: Group[]) => {
+    return groups.filter((group) => group.groupType !== 'default');
+  };
 
   useEffect(() => {
     const defaultGroupData = getDefaultGroup(groups);
@@ -28,26 +28,24 @@ const GroupList = ({ groups }: GroupListProps) => {
     }
   }, [groups, setDefaultGroup]);
 
-  const sortedGroups = useMemo(
-    () =>
-      filterDefaultGroup(groups).sort(
-        (a, b) =>
-          new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
-      ),
-    [groups],
-  );
+  const sortedGroups = useMemo(() => {
+    return filterDefaultGroup(groups).sort(
+      (a, b) =>
+        new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime(),
+    );
+  }, [groups]);
 
   return (
     <div className='grid grid-cols-1 gap-3 p-2'>
       {defaultGroup && (
         <GroupCard
-          key={defaultGroup.id}
+          key={`default-${defaultGroup.id || 'default'}`}
           group={defaultGroup}
         />
       )}
-      {sortedGroups.map((group) => (
+      {sortedGroups.map((group, index) => (
         <GroupCard
-          key={group.id}
+          key={group.id || `group-${index}`}
           group={group}
         />
       ))}
