@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
+
 const Home = () => {
   return (
     <div className='flex flex-col justify-center items-center gap-4 min-h-screen'>
