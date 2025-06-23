@@ -11,7 +11,7 @@ const TotalGroupSpendCard = ({ totalSpend }: TotalGroupSpendCardProps) => {
   return (
     <Card
       isBlurred
-      className='grid grid-cols-[auto_1fr] gap-0 p-3 border-none bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600/60 dark:bg-default-100/50 backdrop-blur-md'
+      className='grid grid-cols-[auto_1fr] gap-0 p-3 border-none bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800/60 dark:bg-default-100/50 backdrop-blur-md'
       shadow='sm'>
       <div className='flex items-center justify-center pl-2 pr-4 py-4'>
         <Sigma
