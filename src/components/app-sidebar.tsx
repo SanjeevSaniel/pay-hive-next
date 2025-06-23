@@ -29,7 +29,6 @@ import {
 import useFetchGroupsAndRecords from '@/hooks/useFetchGroupsAndRecords';
 import useAppStore from '@/stores/useAppStore';
 import { useEffect } from 'react';
-import { useParams } from 'next/navigation';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { fetchGroups } = useFetchGroupsAndRecords();
